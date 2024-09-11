@@ -1,0 +1,42 @@
+// .card-login {
+// 	display: flex;
+// 	justify-content: center;
+// 	align-items: center;
+// 	height: 100%;
+//   }
+  
+// .center-elements {
+// 	display: flex;
+// 	flex-direction: column;
+// 	align-items: center;
+// 	text-align: center;
+// }
+
+// .login-button { margin-top: 20px; align-self: center; }
+
+// ion-input { margin-top: 4px; }
+
+.custom-input-primary { --highlight-color: #f6c426; }
+.custom-button-primary {
+	--border-color: #f6c426;
+	--color: #f6c426;
+
+	--background-hover: #f6c426;
+	--background-hover-opacity: 100%;
+	--color-hover: black;
+}
+
+ion-content {
+	--padding-top: 20px
+	--padding-bottom: 20px
+	--padding-start: 20px
+	--padding-end: 20px
+}
+
+ion-item {
+	--inner-padding-start: 0px;
+	--inner-padding-end: 0px;
+	--padding-start: 0px;
+	--padding-end: 0px;
+	--padding-bottom: 10px;
+}
