@@ -12,6 +12,7 @@ import { ToastService } from '../servicios/toast.service';
 export class LoginPage implements OnInit {
 
 	public usuario: Usuario
+	// public paletteToggle: boolean = true
 
 	constructor(private toastService: ToastService, private ruta: Router) {
 		this.usuario = new Usuario("", "", "", "", "", "", "", NivelEducacional.findNivelEducacional(1)!, undefined)
@@ -19,7 +20,14 @@ export class LoginPage implements OnInit {
 		this.usuario.password = "1234"
 	}
 
-	ngOnInit() {}
+	ngOnInit() {
+		// const prefersDark = window.matchMedia("(prefers-color-scheme: dark)")
+		// this.initializeDarkPalette(prefersDark.matches)
+		// prefersDark.addEventListener("change", (mediaQuery) => this.initializeDarkPalette(mediaQuery.matches))
+	}
+
+	// initializeDarkPalette(isDark: any) { this.paletteToggle = isDark; this.toggleDarkPalette(isDark) }
+	// toggleDarkPalette(shouldAdd: any) { document.documentElement.classList.toggle("ion-palette-dark", shouldAdd) }
 
 	public login() {
 		if (this.usuario) {

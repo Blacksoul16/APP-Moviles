@@ -1,10 +1,19 @@
-ion-tab-button {
-	// --color: #132CAA;
-	--color: #939393;
-	--color-selected: #F1B634;
+ion-toggle {
+	margin-top: 3px;
+	margin-bottom: 3px;
 }
 
+.custom-tab-primary { --color: #939393; --color-selected: #F1B634; }
+.custom-tab-secondary { --color: #939393; --color-selected: #132CAA; }
+
 .custom-input-primary { --highlight-color: #F1B634; }
+.custom-input-secondary { --highlight-color: #132CAA; }
+.custom-input-danger { --highlight-color: #F63926; }
+
+// .custom-toggle-primary { --handle-background-checked: #F1B634; }
+// .custom-toggle-secondary { --track-background: #132CAA; --track-background-checked: #132CAA; }
+// .custom-toggle-danger { --track-background: #F63926; --track-background-checked: #F63926; }
+
 .custom-button-primary {
 	--border-color: #F1B634;
 	--color: #F1B634;
@@ -17,13 +26,12 @@ ion-tab-button {
 	--color: #132CAA;
 	--background-hover: #132CAA;
 	--background-hover-opacity: 100%;
-	--color-hover: black;
+	--color-hover: white;
 }
-
 .custom-button-danger {
-	--border-color: #f63926;
-	--color: #f63926;
-	--background-hover: #f63926;
+	--border-color: #F63926;
+	--color: #F63926;
+	--background-hover: #F63926;
 	--background-hover-opacity: 100%; 
 	--color-hover: black;
 }

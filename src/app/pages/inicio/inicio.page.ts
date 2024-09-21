@@ -16,6 +16,7 @@ export class InicioPage implements OnInit {
 	public usuario: Usuario
 	public tabSeleccionada: string = "inicio"
 	public salut: string = ""
+	public paletteToggle: boolean = true
 
 	/* COSAS RELACIONADAS A LA LECTURA DE QR */
 	@ViewChild("video")
@@ -46,12 +47,20 @@ export class InicioPage implements OnInit {
 	seleccionarTab(tab: string) {this.tabSeleccionada = tab }
 	getSalut(): string {
 		const h = new Date().getHours()
-		if (h < 12) { return "Buenos días" }
+		if (h >= 5 && h < 12) { return "Buenos días" }
 		else if (h >= 12 && h < 18) { return "Buenas tardes" }
 		else { return "Buenas noches" }
 	}
 
-  	ngOnInit() {}
+  	ngOnInit() {
+		const prefersDark = window.matchMedia("(prefers-color-scheme: dark)")
+		this.initializeDarkPalette(prefersDark.matches)
+		prefersDark.addEventListener("change", (mediaQuery) => this.initializeDarkPalette(mediaQuery.matches))
+	}
+
+	initializeDarkPalette(isDark: any) { this.paletteToggle = isDark; this.toggleDarkPalette(isDark) }
+	toggleChange(e: any) { this.toggleDarkPalette(e.detail.checked) }
+	toggleDarkPalette(shouldAdd: any) { document.documentElement.classList.toggle("ion-palette-dark", shouldAdd) }
 
 	/* COSAS RELACIONADAS A LA LECTURA DE QR */
 	public seleccionarArchivo(e: Event) {
@@ -98,7 +107,6 @@ export class InicioPage implements OnInit {
 			}
 			return false
 		}
-
 	}
 
 	public procesarIMG(img: HTMLImageElement): void { this.procesarQR(img) }
