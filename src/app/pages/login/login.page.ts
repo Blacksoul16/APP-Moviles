@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { NavigationExtras, Router } from '@angular/router';
-import { ToastController } from '@ionic/angular';
 import { NivelEducacional } from 'src/app/model/nivel-educacional';
 import { Usuario } from 'src/app/model/usuario';
+import { ToastService } from '../servicios/toast.service';
 
 @Component({
 	selector: 'app-login',
@@ -13,7 +13,7 @@ export class LoginPage implements OnInit {
 
 	public usuario: Usuario
 
-	constructor(private toastController: ToastController, private ruta: Router) {
+	constructor(private toastService: ToastService, private ruta: Router) {
 		this.usuario = new Usuario("", "", "", "", "", "", "", NivelEducacional.findNivelEducacional(1)!, undefined)
 		this.usuario.cuenta = "sgarday"
 		this.usuario.password = "1234"
@@ -32,7 +32,7 @@ export class LoginPage implements OnInit {
 						usuario: user
 					}
 				}
-				this.showMsg("Bienvenido al sistema")
+				this.toastService.showMsg("Inicio de sesión exitoso", 1000, "success")
 				this.ruta.navigate(["inicio"], extras)
 			}
 		}
@@ -41,35 +41,10 @@ export class LoginPage implements OnInit {
 	public validarUsuario(usuario: Usuario): boolean {
 		const msgError = usuario.validarCuenta()
 		if (msgError) {
-			this.showMsg(msgError)
+			this.toastService.showMsg(msgError, 4000, "danger")
 			return false
 		}
 		return true
 	}
-
-	async showMsg(msg: string, tiempo: number = 5000) {
-		const toast = await this.toastController.create({
-			message: msg,
-			duration: tiempo
-		})
-		toast.present()
-	}
-
-
-//   login() {
-// 	if (this.nombre == "test" && this.password == "test") {
-// 	  const extras: NavigationExtras = {
-// 		state: {
-// 		  cuenta: this.cuenta
-// 		}
-// 	  }
-
-// 	  this.ruta.navigate(["inicio"], extras)
-
-// 	  alert("Correcto.")
-// 	} else {
-// 	  alert("Incorrecto.")
-// 	}
-//   }
 
 }

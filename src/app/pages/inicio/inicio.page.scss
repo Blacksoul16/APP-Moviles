@@ -1,0 +1,29 @@
+ion-tab-button {
+	// --color: #132CAA;
+	--color: #939393;
+	--color-selected: #F1B634;
+}
+
+.custom-input-primary { --highlight-color: #F1B634; }
+.custom-button-primary {
+	--border-color: #F1B634;
+	--color: #F1B634;
+	--background-hover: #F1B634;
+	--background-hover-opacity: 100%;
+	--color-hover: black;
+}
+.custom-button-secondary {
+	--border-color: #132CAA;
+	--color: #132CAA;
+	--background-hover: #132CAA;
+	--background-hover-opacity: 100%;
+	--color-hover: black;
+}
+
+.custom-button-danger {
+	--border-color: #f63926;
+	--color: #f63926;
+	--background-hover: #f63926;
+	--background-hover-opacity: 100%; 
+	--color-hover: black;
+}

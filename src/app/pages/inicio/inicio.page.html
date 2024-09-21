@@ -4,43 +4,148 @@
 			<ion-title class="ion-text-center">¿A dónde vamos?</ion-title>
 		</ion-toolbar>
 	</ion-header>
-	<ion-content class="ion-padding">This is the menu content.</ion-content>
+	<ion-content class="ion-padding">
+		<ion-grid style="display: flex; flex-direction: column; justify-content: center; align-items: center; height: 100%;">
+			<ion-row>
+				<ion-button fill="outline" size="default" class="custom-button-primary" style="width: 12rem;">
+					<ion-icon slot="start" name="school-outline"></ion-icon>Mi clase
+				</ion-button>
+			</ion-row>
+			<hr>
+			<ion-row>
+				<ion-button fill="outline" size="default" class="custom-button-primary" style="width: 12rem;">
+					<ion-icon slot="start" name="bar-chart-outline"></ion-icon>Mis datos
+				</ion-button>
+			</ion-row>
+			<hr>
+			<ion-row>
+				<ion-button fill="outline" size="default" class="custom-button-primary" style="width: 12rem;">
+					<ion-icon slot="start" name="settings-outline"></ion-icon>Ajustes
+				</ion-button>
+			</ion-row>
+			<hr>
+			<ion-row>
+				<ion-button fill="outline" size="default" class="custom-button-danger" style="width: 12rem;">
+					<ion-icon slot="start" name="log-out-outline"></ion-icon>Cerrar sesión
+				</ion-button>
+			</ion-row>
+		</ion-grid>
+	</ion-content>
 </ion-menu>
 
 <div class="ion-page" id="main-content">
-	<ion-header>
-		<ion-toolbar>
-			<!-- <ion-buttons slot="end">
-				<ion-menu-button color="warning"></ion-menu-button>
-			</ion-buttons> -->
-			<ion-title class="ion-text-center">¡Hola, {{usuario.nombre}} {{usuario.apellido}}!</ion-title>
-		</ion-toolbar>
-		<ion-toolbar>
-			<ion-searchbar placeholder="Buscar...?"></ion-searchbar>
-		</ion-toolbar>
-	</ion-header>
-	<ion-content class="ion-padding ion-text-center">
-		<ion-img src="../../../assets/img/test.png" alt="Manden ayuda"></ion-img>
-		<h5>Onta tu QR bro?</h5>
-	</ion-content>
 	<ion-footer>
 		<ion-toolbar>
 			<ion-tabs>
-				<ion-tab-bar slot="bottom,top">
-					<ion-tab-button tab="tab2" color="warning">
-						<ion-icon name="calendar-clear-outline"></ion-icon>
-						<ion-label>Horario</ion-label>
+				<ion-tab-bar slot="bottom">
+					<!-- Tabs -->
+					<ion-tab-button [selected]="tabSeleccionada === 'qr'" (click)="seleccionarTab('qr')">
+						<ion-icon name="qr-code-outline"></ion-icon>
+						<ion-label>Escanear QR</ion-label>
 					</ion-tab-button>
-					<ion-tab-button tab="tab1">
-						<ion-icon name="home-outline" color="warning"></ion-icon>
+
+					<ion-tab-button [selected]="tabSeleccionada === 'inicio'" (click)="seleccionarTab('inicio')">
+						<ion-icon name="home-outline"></ion-icon>
 						<ion-label>Inicio</ion-label>
 					</ion-tab-button>
-					<ion-tab-button tab="tab3" color="warning">
+
+					<ion-tab-button (click)="togglearMenuLateral()">
 						<ion-icon name="menu-outline"></ion-icon>
 						<ion-label>Menú</ion-label>
 					</ion-tab-button>
+
 				</ion-tab-bar>
 			</ion-tabs>
 		</ion-toolbar>
 	</ion-footer>
+
+	<!-- Contenidos de los tabs -->
+	<!-- Sección inicio -->
+	<ion-content *ngIf="tabSeleccionada === 'inicio'">
+		<ion-header>
+			<ion-toolbar>
+				<ion-grid>
+					<ion-row>
+						<ion-col>
+							<img src="../../../assets/img/duocuc_sec.svg" alt="duocuc_logo" style="width: 8rem; margin-left: 16px; margin-right: 16px;">
+						</ion-col>
+						<ion-col style="display: flex; justify-content: center;">
+							<ion-title style="color: #a9a9a9">Sistema de asistencia Duoc UC</ion-title>
+						</ion-col>
+					</ion-row>
+				</ion-grid>
+			</ion-toolbar>
+			<!-- <ion-toolbar>
+				<ion-searchbar placeholder="Buscar...?"></ion-searchbar>
+			</ion-toolbar> -->
+		</ion-header>
+		<hr>
+		<div style="display: flex; justify-content: center; border-color: #717171; border-style: solid; border-radius: 15px; width: 30rem; margin: 0 auto;">
+			<ion-title class="ion-text-center" style="margin-top: 5px; margin-bottom: 5px;">¡{{ salut }}, <ion-text color="warning">{{usuario.nombre}} {{usuario.apellido}}</ion-text>!</ion-title>
+		</div>
+		<hr>
+	</ion-content>
+
+	<!-- Sección QR -->
+	<ion-content *ngIf="tabSeleccionada === 'qr'">
+		<ion-header>
+			<ion-toolbar>
+				<ion-grid>
+					<ion-row>
+						<ion-col>
+							<img src="../../../assets/img/duocuc_sec.svg" alt="duocuc_logo" style="width: 8rem; margin-left: 16px; margin-right: 16px;">
+						</ion-col>
+						<ion-col style="display: flex; justify-content: center;">
+							<ion-title style="color: #a9a9a9">Sistema de asistencia Duoc UC</ion-title>
+						</ion-col>
+					</ion-row>
+				</ion-grid>
+			</ion-toolbar>
+		</ion-header>
+		<hr>
+		<div style="display: flex; flex-direction: column; justify-content: center;">
+			<div style="display: flex; justify-content: center;">
+				<ion-button (click)="fileInput.click()" fill="outline" shape="round" class="custom-button-primary">
+					<ion-icon slot="start" name="arrow-up-circle-outline"></ion-icon>Subir un QR
+				</ion-button>
+				<input type="file" #fileInput accept="image/*" style="display: none;" (change)="seleccionarArchivo($event)">
+
+				<ion-button *ngIf="!escaneando" (click)="initScan()" fill="outline" shape="round" class="custom-button-primary">
+					<ion-icon slot="start" name="videocam-outline"></ion-icon>Escanear QR
+				</ion-button>
+		
+				<ion-button *ngIf="escaneando" (click)="stopScan()" fill="outline" shape="round" class="custom-button-danger">
+					<ion-icon slot="start" name="stop-circle-outline"></ion-icon>Detener escaneo
+				</ion-button>
+			</div>
+			<div style="display: flex; justify-content: center;">
+				<ion-button (click)="limpiarDatosQR()" fill="outline" shape="round" class="custom-button-danger" [disabled]="!datosQR">
+					<ion-icon slot="start" name="trash-outline"></ion-icon>Limpiar datos QR
+				</ion-button>
+			</div>
+			<hr>
+			<video #video [hidden]="!escaneando" width="100%"></video>
+			<canvas #canvas hidden></canvas>
+	
+			<div style="display: flex; justify-content: center;">
+				<ion-card style="width: 40rem;">
+					<ion-card-header class="ion-text-center">
+						<ion-card-title>Datos del Código QR</ion-card-title>
+					</ion-card-header>
+					<ion-card-content class="ion-text-center">
+						<h2 *ngIf="!datosQR">Aún no hay datos escaneados.</h2>
+						<h2 *ngIf="!datosQR">Prueba a subir un QR o usar la cámara de tu dispositivo para escanear uno.</h2>
+						<!-- <h2 *ngIf="datosQR">{{ datosQR }}</h2> -->
+						<table *ngIf="datosQR" style="width: 100%; border-collapse: collapse; border-radius: 8px;">
+							<tr *ngFor="let i of datosQRKeys">
+								<td style="border: 1px solid #F1B634; padding: 8px;">{{ i.k }}</td>
+								<td style="border: 1px solid #F1B634; padding: 8px;">{{ i.v }}</td>
+							</tr>
+						</table>
+					</ion-card-content>
+				 </ion-card>
+			</div>
+		</div>
+	</ion-content>
+
 </div>
