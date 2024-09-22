@@ -86,5 +86,5 @@ export class Usuario extends Persona {
 			new Usuario("sgarday", "s.garday@duocuc.cl", "1234", "¿Cuál es tu color favorito?", "Negro", "Seth", "Garday", NivelEducacional.findNivelEducacional(5)!, new Date(2000, 2, 4)),
 		]
 	}
-	
+
 }

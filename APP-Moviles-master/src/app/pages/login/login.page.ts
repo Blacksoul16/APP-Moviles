@@ -15,17 +15,9 @@ export class LoginPage implements OnInit {
 	// public paletteToggle: boolean = true
 
 	constructor(private toastService: ToastService, private ruta: Router) {
-		const nav = this.ruta.getCurrentNavigation();
-		
-		if (nav && nav.extras.state && nav.extras.state["usuario"]) {
-			this.usuario = nav.extras.state["usuario"];
-			console.log("Usuario recuperado del estado de navegación:", this.usuario);
-		} else {
-			this.usuario = new Usuario("", "", "", "", "", "", "", NivelEducacional.findNivelEducacional(1)!, undefined);
-			this.usuario.cuenta = "sgarday";
-			this.usuario.password = "1234";
-		}
-
+		this.usuario = new Usuario("", "", "", "", "", "", "", NivelEducacional.findNivelEducacional(1)!, undefined)
+		this.usuario.cuenta = "sgarday"
+		this.usuario.password = "1234"
 	}
 
 	ngOnInit() {
@@ -41,6 +33,7 @@ export class LoginPage implements OnInit {
 		if (this.usuario) {
 			if (!this.validarUsuario(this.usuario)) return
 			const user: Usuario | undefined = this.usuario.buscarUsuarioValido(this.usuario.cuenta, this.usuario.password)
+
 			if (user) {
 				const extras: NavigationExtras = {
 					state: {
@@ -61,7 +54,5 @@ export class LoginPage implements OnInit {
 		}
 		return true
 	}
-
-	
 
 }

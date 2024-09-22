@@ -162,25 +162,6 @@ export class InicioPage implements OnInit {
 		this.datosQRKeys = []
 	}
 
-	public listaNivelesEducacionales = NivelEducacional.getNivelesEducacionales();
-
-	public actualizarNivelEducacional(event: any) {
-		this.usuario.nivelEducacional = NivelEducacional.findNivelEducacional(event.detail.value)!;
-	}
-	  
-	public guardarCambios() {
-		if (this.usuario) {
-			console.log("Datos actualizados del usuario:", this.usuario);
-			this.toastService.showMsg("Cambios guardados correctamente.", 2000, "success");
-		} else {
-			this.toastService.showMsg("Error al guardar los cambios. Usuario no encontrado.", 2000, "danger");
-		}
-	}
-
-	public cerrarSesion() {
-		this.ruta.navigate(['login'], {
-		  state: { user: this.usuario }
-		});
-	}
+	
 
 }
