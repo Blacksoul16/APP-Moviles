@@ -48,7 +48,7 @@ export class RecuperarPage implements OnInit {
 			return
 		}
 		this.toastService.showMsg("Respuesta correcta.", 1500, "success")
-		this.alertService.showAlert("Esta es tu contraseña", "", `${this.usuario.password}`, [{text: "¡Gracias!", cssClass: "custom-button-primary"}])
+		this.alertService.showAlert("Tu contraseña", "", `${this.usuario.password}`)
 	}
 
 	public seleccionarTab(tab: string): void { this.tab = tab }

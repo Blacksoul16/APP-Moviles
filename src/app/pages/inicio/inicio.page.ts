@@ -26,13 +26,14 @@ export class InicioPage implements OnInit {
 	public escaneando = false
 	public datosQR: any = ""
 	public datosQRKeys: any[] = []
+	/* FIN COSAS RELACIONADAS AL QR */
 
 	constructor(private rutaActivada: ActivatedRoute, private ruta: Router, private menu: MenuController, private toastService: ToastService) {
 		this.usuario = new Usuario("", "", "", "", "", "", "", NivelEducacional.findNivelEducacional(1)!, undefined)
 		this.rutaActivada.queryParams.subscribe(params => {
 			const nav = this.ruta.getCurrentNavigation()
 			if (nav) {
-				if (nav.extras.state) {
+				if (nav.extras.state && nav.extras.state["usuario"]) {
 					this.usuario = nav.extras.state["usuario"]
 					return
 				}
@@ -61,6 +62,8 @@ export class InicioPage implements OnInit {
 	initializeDarkPalette(isDark: any) { this.paletteToggle = isDark; this.toggleDarkPalette(isDark) }
 	toggleChange(e: any) { this.toggleDarkPalette(e.detail.checked) }
 	toggleDarkPalette(shouldAdd: any) { document.documentElement.classList.toggle("ion-palette-dark", shouldAdd) }
+
+
 
 	/* COSAS RELACIONADAS A LA LECTURA DE QR */
 	public seleccionarArchivo(e: Event) {
@@ -144,7 +147,7 @@ export class InicioPage implements OnInit {
 		const objetoDatosQR = JSON.parse(datosQR)
 		this.datosQR = objetoDatosQR
 		this.datosQRKeys = Object.keys(objetoDatosQR).map(k => {
-			return { k: this.formatearKey(k), v: objetoDatosQR[k]}
+			return { k: this.formatearKey(k), v: objetoDatosQR[k] }
 		})
 	}
 
@@ -157,11 +160,34 @@ export class InicioPage implements OnInit {
 		return r
 	}
 
-	public limpiarDatosQR(): void {
-		this.datosQR = null
-		this.datosQRKeys = []
+	public limpiarDatosQR(): void { this.datosQR = null; this.datosQRKeys = [] }
+	/* FIN DE COSAS RELACIONADAS AL QR */
+
+
+
+	/* Sección mis datos */
+	public listaNivelesEducacionales = NivelEducacional.getNivelesEducacionales();
+	public actualizarNivelEducacional(event: any) { this.usuario.nivelEducacional = NivelEducacional.findNivelEducacional(event.detail.value)!; }
+	  
+	public guardarCambios() {
+		if (this.usuario) {
+			const listaUsuarios = Usuario.getListaUsuarios()
+			const i = listaUsuarios.findIndex(u => u.cuenta === this.usuario.cuenta)
+			if (i !== -1) {
+				listaUsuarios[i] = this.usuario
+				Usuario.guardarListaUsuarios(listaUsuarios)
+			}
+			console.log("Datos actualizados del usuario:", this.usuario);
+			this.toastService.showMsg("Cambios guardados correctamente.", 2000, "success");
+		} else {
+			this.toastService.showMsg("Error al guardar los cambios. Usuario no encontrado.", 2000, "danger");
+		}
 	}
 
-	
+	public cerrarSesion() {
+		this.ruta.navigate(['login'], {
+			state: { user: this.usuario }
+		})
+	}
 
 }
