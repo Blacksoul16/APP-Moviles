@@ -1,0 +1,22 @@
+.custom-input-primary { --highlight-color: #F1B634; }
+
+ion-input { margin-top: 4px; }
+ion-content {
+	--padding-top: 20px
+	--padding-bottom: 20px
+	--padding-start: 20px
+	--padding-end: 20px
+}
+
+ion-item {
+	--inner-padding-start: 0px;
+	--inner-padding-end: 0px;
+	--padding-start: 0px;
+	--padding-end: 0px;
+	--padding-bottom: 10px;
+}
+
+ion-badge {
+	--padding-end: 20px;
+	--padding-start: 20px;
+}

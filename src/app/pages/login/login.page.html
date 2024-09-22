@@ -14,10 +14,10 @@
 
 			<ion-card-content>
 				<ion-item>
-					<ion-input [(ngModel)]="usuario.cuenta" [clearInput]="true" class="custom-input-primary" type="text" labelPlacement="floating" fill="outline" label="Usuario" placeholder="Cuenta"></ion-input>
+					<ion-input [(ngModel)]="usuario.cuenta" [clearInput]="true" class="custom-input-primary" type="text" labelPlacement="floating" fill="outline" label="Usuario" placeholder="Ej: u.suario123"></ion-input>
 				</ion-item>
 				<ion-item>
-					<ion-input [(ngModel)]="usuario.password" class="custom-input-primary" type="password" labelPlacement="floating" fill="outline" label="Contraseña" placeholder="Contraseña"></ion-input>
+					<ion-input [(ngModel)]="usuario.password" class="custom-input-primary" type="password" labelPlacement="floating" fill="outline" label="Contraseña" placeholder="Ej: contraseñaSegura8"></ion-input>
 				</ion-item>
 				<div style="display: flex; justify-content: center; margin-top: 20px;">
 					<ion-button (click)="login()" fill="outline" size="default" class="custom-button-primary">

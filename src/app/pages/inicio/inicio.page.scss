@@ -13,25 +13,3 @@ ion-toggle {
 // .custom-toggle-primary { --handle-background-checked: #F1B634; }
 // .custom-toggle-secondary { --track-background: #132CAA; --track-background-checked: #132CAA; }
 // .custom-toggle-danger { --track-background: #F63926; --track-background-checked: #F63926; }
-
-.custom-button-primary {
-	--border-color: #F1B634;
-	--color: #F1B634;
-	--background-hover: #F1B634;
-	--background-hover-opacity: 100%;
-	--color-hover: black;
-}
-.custom-button-secondary {
-	--border-color: #132CAA;
-	--color: #132CAA;
-	--background-hover: #132CAA;
-	--background-hover-opacity: 100%;
-	--color-hover: white;
-}
-.custom-button-danger {
-	--border-color: #F63926;
-	--color: #F63926;
-	--background-hover: #F63926;
-	--background-hover-opacity: 100%; 
-	--color-hover: black;
-}
