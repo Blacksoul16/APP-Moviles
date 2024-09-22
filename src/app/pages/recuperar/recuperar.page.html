@@ -1,0 +1,68 @@
+
+<div class="ion-page" id="main-content">
+	<ion-header>
+		<ion-toolbar>
+			<ion-grid>
+				<ion-row>
+					<ion-col>
+						<img src="../../../assets/img/duocuc_sec.svg" alt="duocuc_logo" style="width: 8rem; margin-left: 16px; margin-right: 16px;">
+					</ion-col>
+					<ion-col style="display: flex; justify-content: center;">
+						<ion-title style="color: #a9a9a9">Sistema de asistencia</ion-title>
+					</ion-col>
+				</ion-row>
+			</ion-grid>
+		</ion-toolbar>
+	</ion-header>
+	
+	<!-- Contenidos de los tabs -->
+	<!-- Sección validar correo -->
+	<ion-content *ngIf="tab === 'validarCorreo'">
+		
+    <div style="display: flex; justify-content: center; align-items: center; height: 100%;">
+      <ion-card style="width: 30rem; border-radius: 8px;">
+        <hr><hr><hr>
+        <ion-card-title class="ion-text-center">Recuperar Contraeña</ion-card-title>
+        <hr>
+        <ion-card-subtitle class="ion-text-center"><ion-text color="warning"> Paso 1: </ion-text> Ingresa tu correo</ion-card-subtitle>
+        <ion-card-content style="display: flex; justify-content: center; flex-direction: column; align-items: center;">
+          <ion-input [(ngModel)]="correo" class="custom-input-primary ion-text-center" type="text" placeholder="Ingresa tu correo" ></ion-input>
+          <hr><hr>
+          <ion-button style="width: 12rem; " (click)="validarCorreo()" class="custom-button-primary" fill="outline" shape="round">
+            validar Correo
+          </ion-button>
+            
+          
+        </ion-card-content>
+        <hr><hr><hr>
+      </ion-card>
+    </div>
+		
+	</ion-content>
+
+	<!-- Sección validar pregunta secreta -->
+	
+  <ion-content *ngIf="tab === 'validarPreguntaSecreta'">
+    <div style="display: flex; justify-content: center; align-items: center; height: 100%;">
+      <ion-card style="width: 30rem; border-radius: 8px;">
+        <hr><hr><hr>
+        <ion-card-title class="ion-text-center">Recuperar Contraeña</ion-card-title>
+        <hr>
+        <ion-card-subtitle class="ion-text-center"> <ion-text color="warning">Paso 2:</ion-text> responde a la pregunta secreta <ion-text color="warning">{{usuario.nombre}} {{usuario.apellido}}</ion-text></ion-card-subtitle>
+        <hr>
+        <h1 class="ion-text-center">{{usuario.preguntaSecreta}}</h1>
+        <ion-card-content style="display: flex; justify-content: center; flex-direction: column; align-items: center;">
+          <ion-input [(ngModel)]="respuestaSecreta" class="custom-input-primary ion-text-center" type="text" placeholder="Ingresa tu respuesta secreta 🤫"></ion-input>
+          <hr><hr>
+          <hr>
+          <ion-button  style="width: 18rem;" class="custom-button-primary" (click)="validarRespuesta()" fill="outline" shape="round">
+            Recuperar Contraseña
+          </ion-button>
+        </ion-card-content>
+      </ion-card>
+
+    </div>
+
+	</ion-content>
+
+</div>

@@ -1,0 +1,34 @@
+<ion-content class="ion-padding-vertical background-container">
+	<div style="display: flex; flex-direction: column; justify-content: center; align-items: center;">
+		<img src="../../../assets/img/duocuc.svg" alt="duocuc_logo" style="width: 25rem; margin-top: 32px; margin-bottom: 32px;">
+		<ion-badge color="dark">Sistema de asistencia</ion-badge>
+	</div>
+	<hr>
+	<div style="display: flex; justify-content: center; align-items: center;">
+		<ion-card class="ion-text-center ion-padding-vertical" style="display: flex; flex-direction: column; align-items: center; border-radius: 8px;">
+			<ion-card-title class="ion-text-center">
+				<ion-label>
+					<h1>Iniciar sesión</h1>
+				</ion-label>
+			</ion-card-title>
+
+			<ion-card-content>
+				<ion-item>
+					<ion-input [(ngModel)]="usuario.cuenta" [clearInput]="true" class="custom-input-primary" type="text" labelPlacement="floating" fill="outline" label="Usuario" placeholder="Cuenta"></ion-input>
+				</ion-item>
+				<ion-item>
+					<ion-input [(ngModel)]="usuario.password" class="custom-input-primary" type="password" labelPlacement="floating" fill="outline" label="Contraseña" placeholder="Contraseña"></ion-input>
+				</ion-item>
+				<div style="display: flex; justify-content: center; margin-top: 20px;">
+					<ion-button (click)="login()" fill="outline" size="default" class="custom-button-primary">
+						<ion-icon slot="start" name="log-in-outline"></ion-icon>Ingresar
+					</ion-button>
+				</div>
+				<hr class="ion-margin-top ion-margin-bottom">
+				<ion-label [routerLink]="['/recuperar']" style="cursor: pointer;">
+					<h5>Recuperar contraseña</h5>
+				</ion-label>
+			</ion-card-content>
+		</ion-card>
+	</div>
+</ion-content>
