@@ -38,14 +38,6 @@
 }
 
 .custom-input-primary { --highlight-color: #F1B634; }
-.custom-button-primary {
-	--border-color: #F1B634;
-	--color: #F1B634;
-	
-	--background-hover: #F1B634;
-	--background-hover-opacity: 100%;
-	--color-hover: black;
-}
 
 ion-input { margin-top: 4px; }
 ion-content {
@@ -64,8 +56,6 @@ ion-item {
 }
 
 ion-badge {
-	// --background: #132CAA;
-	// --color: white;
 	--padding-end: 20px;
 	--padding-start: 20px;
 }

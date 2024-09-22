@@ -26,6 +26,10 @@ export class Usuario extends Persona {
 		return Usuario.getListaUsuarios().find(u => u.cuenta === cuenta && u.password === password)
 	}
 
+	public buscarUsuarioPorCorreo(correo: string): Usuario | undefined {
+		return Usuario.getListaUsuarios().find(u => u.correo === correo)
+	}
+
 	public validarCuenta(): string {
 		if (!this.buscarUsuarioValido(this.cuenta, this.password)) {
 			return "Para ingresar al sistema debes ingresar una cuenta y contraseña válidas."
