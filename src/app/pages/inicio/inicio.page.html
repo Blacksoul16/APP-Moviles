@@ -1,3 +1,4 @@
+<!-- MENÚ LATERAL -->
 <ion-menu side="end" contentId="main-content">
 	<ion-header>
 		<ion-toolbar>
@@ -17,7 +18,7 @@
 				<h4>Opciones rápidas</h4>
 			</ion-text>
 			<ion-row>
-				<ion-toggle [(ngModel)]="paletteToggle" (ionChange)="toggleChange($event)" labelPlacement="end" color="warning">Modo oscuro</ion-toggle>
+				<ion-toggle [(ngModel)]="paletteToggle" disabled="true" (ionChange)="toggleChange($event)" labelPlacement="end" color="warning">Modo oscuro</ion-toggle>
 			</ion-row>
 			<ion-item-divider style="margin-bottom: 2rem;"></ion-item-divider>
 			<ion-row>
@@ -28,6 +29,7 @@
 		</ion-grid>
 	</ion-content>
 </ion-menu>
+<!-- FIN MENÚ LATERAL -->
 
 <div class="ion-page" id="main-content">
 	<ion-header>
@@ -104,45 +106,78 @@
 				</ion-button>
 			</div>
 			<hr>
-			<video #video [hidden]="!escaneando"></video>
-			<canvas #canvas hidden></canvas>
-	
 			<div style="display: flex; justify-content: center;">
-				<ion-card style="width: 40rem;">
-					<ion-card-header class="ion-text-center">
-						<ion-card-title>Datos del Código QR</ion-card-title>
-					</ion-card-header>
-					<ion-card-content class="ion-text-center">
-						<h2 *ngIf="!datosQR">Aún no hay datos escaneados.</h2>
-						<h2 *ngIf="!datosQR">Prueba a subir un QR o usar la cámara de tu dispositivo para escanear uno.</h2>
-						<table *ngIf="datosQR" style="width: 100%; border-collapse: collapse; border-radius: 8px;">
-							<tr *ngFor="let i of datosQRKeys">
-								<td [style]="paletteToggle ? 'border: 1px solid #F1B634; padding: 8px;' : 'border: 1px solid #132CAA; padding: 8px;'">{{ i.k }}</td>
-								<td [style]="paletteToggle ? 'border: 1px solid #F1B634; padding: 8px;' : 'border: 1px solid #132CAA; padding: 8px;'">{{ i.v }}</td>
-							</tr>
-						</table>
-					</ion-card-content>
-				 </ion-card>
+				<div style="display: flex; justify-content: center; border-style: solid; border-color: #939393; width: 24rem; height: 18rem;">
+					<h4 *ngIf="!escaneando" style="display: flex; align-self: center; height: auto; color: #F1B634;">Aquí verás tu cámara.</h4>
+					<video #video [hidden]="!escaneando" style="width: 24rem; height: auto;"></video>
+					<canvas #canvas hidden></canvas>
+				</div>
 			</div>
+			<hr>
+			<div *ngIf="datosQR" style="display: flex; justify-content: center;">
+				<ion-button (click)="seleccionarTab('miclase')" fill="outline" shape="round" class="custom-button-success">
+					<ion-icon slot="start" name="chevron-forward-circle-outline"></ion-icon>Ir a ver los datos del QR escaneado.
+				</ion-button>
+			</div>
+		</div>
+	</ion-content>
+
+	<!-- Sección mi clase -->
+	<ion-content *ngIf="tabSeleccionada === 'miclase'">
+		<hr>
+		<ion-badge style="display: flex; justify-content: center; width: 30rem; margin: 0 auto;" color="light">
+			<ion-title class="ion-text-center" style="margin-top: 5px; margin-bottom: 5px;">Datos de mi clase</ion-title>
+		</ion-badge>
+		<hr>
+		<div style="display: flex; justify-content: center;">
+			<ion-button (click)="seleccionarTab('inicio')" fill="outline" shape="round" [ngClass]="{'custom-button-primary': paletteToggle, 'custom-button-secondary': !paletteToggle}">
+				<ion-icon slot="start" name="qr-code-outline"></ion-icon>Ir a escanear
+			</ion-button>
+		</div>
+		<div style="display: flex; justify-content: center;">
+			<ion-card style="width: 40rem;">
+				<ion-card-header class="ion-text-center">
+					<ion-card-title>Datos del Código QR</ion-card-title>
+				</ion-card-header>
+				<ion-card-content class="ion-text-center">
+					<h2 *ngIf="!datosQR">Aún no hay datos escaneados.</h2>
+					<h2 *ngIf="!datosQR">Prueba a subir un QR o usar la cámara de tu dispositivo para escanear uno.</h2>
+					<table *ngIf="datosQR" style="width: 100%; border-collapse: collapse; border-radius: 8px;">
+						<tr *ngFor="let i of datosQRKeys">
+							<td [style]="paletteToggle ? 'border: 1px solid #F1B634; padding: 8px;' : 'border: 1px solid #132CAA; padding: 8px;'">{{ i.k }}</td>
+							<td [style]="paletteToggle ? 'border: 1px solid #F1B634; padding: 8px;' : 'border: 1px solid #132CAA; padding: 8px;'">{{ i.v }}</td>
+						</tr>
+					</table>
+				</ion-card-content>
+			</ion-card>
 		</div>
 	</ion-content>
 
 	<!-- Sección mis datos -->
 	<ion-content *ngIf="tabSeleccionada === 'misdatos'">
-		<br>
+		<hr>
 		<ion-badge style="display: flex; justify-content: center; width: 30rem; margin: 0 auto;" color="light">
 			<ion-title class="ion-text-center" style="margin-top: 5px; margin-bottom: 5px;">Mis datos personales</ion-title>
 		</ion-badge>
-		<br>
-<<<<<<< HEAD
+		<hr>
 		<div style="display: flex; justify-content: center;">
 			<ion-card style="width: 40rem;">
 				<!-- <ion-card-header></ion-card-header> -->
 				<ion-card-content>
-
-					<ion-item #itemCuenta>
-						<ion-input [(ngModel)]="usuario.cuenta" class="custom-input-primary" label="Cuenta" labelPlacement="floating" placeholder="" fill="outline"></ion-input>
-					</ion-item>
+					<ion-grid>
+						<ion-row>
+							<ion-col size="6">
+								<ion-item #itemCuenta>
+									<ion-input [(ngModel)]="usuario.cuenta" class="custom-input-primary" label="Cuenta" labelPlacement="floating" placeholder="" fill="outline"></ion-input>
+								</ion-item>
+							</ion-col>
+							<ion-col size="6">
+								<ion-item #itemCorreo>
+									<ion-input [(ngModel)]="usuario.correo" class="custom-input-primary" label="Correo" labelPlacement="floating" placeholder="" fill="outline" disabled="true"></ion-input>
+								</ion-item>
+							</ion-col>
+						</ion-row>
+					</ion-grid>
 
 					<ion-grid>
 						<ion-row>
@@ -159,9 +194,6 @@
 						</ion-row>
 					</ion-grid>
 
-					<ion-item #itemCorreo>
-						<ion-input [(ngModel)]="usuario.correo" class="custom-input-primary" label="Correo" labelPlacement="floating" placeholder="" fill="outline" disabled="true"></ion-input>
-					</ion-item>
 
 					<ion-item #itemPreguntaSecreta>
 						<ion-input [(ngModel)]="usuario.preguntaSecreta" class="custom-input-primary" label="Pregunta secreta" labelPlacement="floating" placeholder="" fill="outline"></ion-input>
@@ -196,84 +228,13 @@
 					</ion-grid>
 
 					<div style="display: flex; justify-content: center; margin-top: 12px;">
-						<ion-button (click)="guardarCambios()" fill="outline" size="default" class="custom-button-primary">
+						<ion-button (click)="guardarCambios()" fill="outline" size="default" shape="round" class="custom-button-primary">
 							<ion-icon slot="start" name="document-outline"></ion-icon>Guardar Cambios
 						</ion-button>
 					</div>
 				</ion-card-content>
 			</ion-card>
 		</div>
-=======
-		<ion-item #itemCuenta>
-			<ion-input [(ngModel)]="usuario.cuenta" class="custom-input-primary"
-				label="Cuenta" labelPlacement="floating"
-				placeholder="" fill="outline"></ion-input>
-		</ion-item>
-		  <br>
-		  <ion-item #itemNombre>
-			<ion-input [(ngModel)]="usuario.nombre" class="custom-input-primary"
-				label="Nombre" labelPlacement="floating"
-				placeholder="" fill="outline"></ion-input>
-		  </ion-item>
-		  <br>
-		  <ion-item #itemApellido>
-			<ion-input [(ngModel)]="usuario.apellido" class="custom-input-primary"
-				label="Apellido" labelPlacement="floating"
-				placeholder="" fill="outline"></ion-input>
-		  </ion-item>
-		  <br>
-		  <ion-item #itemCorreo>
-			<ion-input [(ngModel)]="usuario.correo" class="custom-input-primary"
-				label="Apellido" labelPlacement="floating"
-				placeholder="" fill="outline" disabled="true"></ion-input>
-		  </ion-item>
-		  <br>
-		  <ion-item #itemPreguntaSecreta>
-			<ion-input [(ngModel)]="usuario.preguntaSecreta" class="custom-input-primary"
-				label="Pregunta Secreta" labelPlacement="floating"
-				placeholder="" fill="outline"></ion-input>
-		  </ion-item>
-		  <br>
-		  <ion-item #itemRespuestaSecreta>
-			<ion-input [(ngModel)]="usuario.respuestaSecreta" class="custom-input-primary"
-				label="Respuesta Secreta" labelPlacement="floating"
-				placeholder="" fill="outline"></ion-input>
-		  </ion-item>
-		  <br>
-		  <ion-item #itemEducacion class="font-size-12">
-			<ion-select [(ngModel)]="usuario.nivelEducacional!.id"
-				(ionChange)="actualizarNivelEducacional($event)"
-				label="Educación" position="floating">
-			  <ion-select-option *ngFor="let nivelEducacional of listaNivelesEducacionales" 
-				[value]="nivelEducacional.id">
-				  {{nivelEducacional.nombre}}
-			  </ion-select-option>
-			</ion-select>
-		  </ion-item>
-		  <br>
-		  <ion-item #itemContraseña1>
-			<ion-input [(ngModel)]="usuario.password" class="custom-input-primary"
-				label="Contraseña" labelPlacement="floating"
-				placeholder="" type="password" fill="outline"></ion-input>
-		  </ion-item>
-		  <br>
-		  <ion-item #itemContraseña2>
-			<ion-input [(ngModel)]="usuario.password" class="custom-input-primary"
-				label="Nueva Contraseña" labelPlacement="floating"
-				placeholder="" type="password" fill="outline"></ion-input>
-		  </ion-item>
-		  <br>
-		  <div style="display: flex; justify-content: center; margin-top: 20px;">
-			<ion-button (click)="guardarCambios()" fill="outline" size="default" class="custom-button-primary">
-				<ion-icon slot="start" name="document-outline"></ion-icon>Guardar Cambios
-			</ion-button>
-		  </div>
->>>>>>> 8551085b629885f662b6f10dd1945db25dd05133
-	</ion-content>
-
-	<!-- Sección mi clase -->
-	<ion-content *ngIf="tabSeleccionada === 'misclase'">
-		<hr>
 	</ion-content>
 
 </div>

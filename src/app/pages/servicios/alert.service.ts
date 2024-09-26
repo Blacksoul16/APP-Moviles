@@ -14,7 +14,7 @@ export class AlertService {
 			buttons: [{
 				text: "Ok",
 				role: "confirm",
-				cssClass: "alert-button-confirm"
+				cssClass: "custom-alert-button-confirm"
 			}]
 		})
 		await alert.present()

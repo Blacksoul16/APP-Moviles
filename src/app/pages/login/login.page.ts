@@ -43,9 +43,7 @@ export class LoginPage implements OnInit {
 			const user: Usuario | undefined = this.usuario.buscarUsuarioValido(this.usuario.cuenta, this.usuario.password)
 			if (user) {
 				const extras: NavigationExtras = {
-					state: {
-						usuario: user
-					}
+					state: { usuario: user }
 				}
 				this.toastService.showMsg("Inicio de sesión exitoso", 1000, "success")
 				this.ruta.navigate(["inicio"], extras)

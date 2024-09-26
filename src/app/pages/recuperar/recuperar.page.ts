@@ -11,27 +11,28 @@ import { AlertService } from '../servicios/alert.service';
 	styleUrls: ['./recuperar.page.scss'],
 })
 export class RecuperarPage implements OnInit {
-
 	public correo: string = ""
 	public tab: string = "validarCorreo"
-	public usuario: Usuario
+	public usuario: Usuario = new Usuario("", "", "", "", "", "", "", NivelEducacional.findNivelEducacional(1)!, undefined)
 	public respuestaSecreta: string = ""
-	public alertButtons = ["Ok suka"]
 
-	constructor(private router: Router, private toastService: ToastService, private alertService: AlertService) {
-		this.usuario = new Usuario("", "", "", "", "", "", "", NivelEducacional.findNivelEducacional(1)!, undefined)
-	}
+	constructor(private router: Router, private toast: ToastService, private alert: AlertService) {}
 
 	ngOnInit() {}
 
 	public validarCorreo(): void {
+		const emailRegex = /^[a-zA-Z0-9._+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/
 		const usuarioEncontrado = this.usuario.buscarUsuarioPorCorreo(this.correo)
 		if (this.correo.length === 0) {
-			this.toastService.showMsg("Ingresa un correo válido.", 1500, "danger")
+			this.toast.showMsg("Debes ingresar un correo.", 1500, "danger")
+			return
+		}
+		else if (!emailRegex.test(this.correo)) {
+			this.toast.showMsg("El formato del correo no es válido.", 1500, "danger")
 			return
 		}
 		else if (!usuarioEncontrado) {
-			this.toastService.showMsg("No se encontró un usuario con este correo.", 1500, "danger")
+			this.toast.showMsg("No se encontró un usuario con este correo.", 1500, "danger")
 			return
 		}
 		this.seleccionarTab("validarPreguntaSecreta")
@@ -40,15 +41,15 @@ export class RecuperarPage implements OnInit {
 
 	public validarRespuesta(): void {
 		if (this.respuestaSecreta.length === 0) {
-			this.toastService.showMsg("Debes ingresar una respuesta.", 1500, "danger")
+			this.toast.showMsg("Debes ingresar una respuesta.", 1500, "danger")
 			return
 		}
 		else if (this.respuestaSecreta !== this.usuario.respuestaSecreta) {
-			this.toastService.showMsg("Respuesta incorrecta.", 1500, "danger")
+			this.toast.showMsg("Respuesta incorrecta.", 1500, "danger")
 			return
 		}
-		this.toastService.showMsg("Respuesta correcta.", 1500, "success")
-		this.alertService.showAlert("Tu contraseña", "", `${this.usuario.password}`)
+		this.toast.showMsg("Respuesta correcta.", 1500, "success")
+		this.alert.showAlert("Tu contraseña", "", `${this.usuario.password}`)
 	}
 
 	public seleccionarTab(tab: string): void { this.tab = tab }

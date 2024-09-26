@@ -1,7 +1,7 @@
 <ion-content class="ion-padding-vertical background-container">
 	<div style="display: flex; flex-direction: column; justify-content: center; align-items: center;">
 		<img src="../../../assets/img/isotipo_white.png" alt="duocuc_logo" style="width: 25rem; margin-top: 32px; margin-bottom: 32px;">
-		<ion-badge color="dark">Sistema de asistencia</ion-badge>
+		<ion-badge style="font-size: 18px;" color="dark">Sistema de asistencia</ion-badge>
 	</div>
 	<hr>
 	<div style="display: flex; justify-content: center; align-items: center;">
@@ -20,7 +20,7 @@
 					<ion-input [(ngModel)]="usuario.password" class="custom-input-primary" type="password" labelPlacement="floating" fill="outline" label="Contraseña" placeholder="Ej: contraseñaSegura8"></ion-input>
 				</ion-item>
 				<div style="display: flex; justify-content: center; margin-top: 20px;">
-					<ion-button (click)="login()" fill="outline" size="default" class="custom-button-primary">
+					<ion-button (click)="login()" fill="outline" shape="round" size="default" class="custom-button-primary">
 						<ion-icon slot="start" name="log-in-outline"></ion-icon>Ingresar
 					</ion-button>
 				</div>

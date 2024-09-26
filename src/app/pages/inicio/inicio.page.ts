@@ -28,7 +28,7 @@ export class InicioPage implements OnInit {
 	public datosQRKeys: any[] = []
 	/* FIN COSAS RELACIONADAS AL QR */
 
-	constructor(private rutaActivada: ActivatedRoute, private ruta: Router, private menu: MenuController, private toastService: ToastService) {
+	constructor(private rutaActivada: ActivatedRoute, private ruta: Router, private menu: MenuController, private toast: ToastService) {
 		this.usuario = new Usuario("", "", "", "", "", "", "", NivelEducacional.findNivelEducacional(1)!, undefined)
 		this.rutaActivada.queryParams.subscribe(params => {
 			const nav = this.ruta.getCurrentNavigation()
@@ -38,7 +38,7 @@ export class InicioPage implements OnInit {
 					return
 				}
 			}
-			this.toastService.showMsg("Debes iniciar sesión para acceder a esta página.", 2000, "danger")
+			this.toast.showMsg("Debes iniciar sesión para acceder a esta página.", 2000, "danger")
 			this.ruta.navigate(["login"])
 		})
 		this.salut = this.getSalut()
@@ -106,7 +106,7 @@ export class InicioPage implements OnInit {
 			return true
 		} else {
 			if (!esVideo) {
-				this.toastService.showMsg("No se detectó un código QR. Por favor, seleccione un archivo válido.", 2000, "danger")
+				this.toast.showMsg("No se detectó un código QR. Por favor, seleccione un archivo válido.", 2000, "danger")
 			}
 			return false
 		}
@@ -169,25 +169,23 @@ export class InicioPage implements OnInit {
 	public listaNivelesEducacionales = NivelEducacional.getNivelesEducacionales();
 	public actualizarNivelEducacional(event: any) { this.usuario.nivelEducacional = NivelEducacional.findNivelEducacional(event.detail.value)!; }
 	  
-	public guardarCambios() {
-		if (this.usuario) {
-			const listaUsuarios = Usuario.getListaUsuarios()
-			const i = listaUsuarios.findIndex(u => u.cuenta === this.usuario.cuenta)
-			if (i !== -1) {
-				listaUsuarios[i] = this.usuario
-				Usuario.guardarListaUsuarios(listaUsuarios)
-			}
-			console.log("Datos actualizados del usuario:", this.usuario);
-			this.toastService.showMsg("Cambios guardados correctamente.", 2000, "success");
-		} else {
-			this.toastService.showMsg("Error al guardar los cambios. Usuario no encontrado.", 2000, "danger");
+	public guardarCambios(): void {
+		if (!this.usuario) {
+			this.toast.showMsg("Error al guardar los cambios: No se encontró el usuario.", 2000, "danger")
+			return
 		}
+		const listaUsuarios = Usuario.getListaUsuarios()
+		const i = listaUsuarios.findIndex(u => u.cuenta === this.usuario.cuenta)
+		if (i !== -1) {
+			listaUsuarios[i] = this.usuario
+			Usuario.guardarListaUsuarios(listaUsuarios)
+		}
+		this.toast.showMsg("Cambios guardados correctamente.", 2000, "success");
 	}
 
-	public cerrarSesion() {
-		this.ruta.navigate(['login'], {
-			state: { user: this.usuario }
-		})
+	public cerrarSesion(): void {
+		this.ruta.navigate(["login"], { state: { user: this.usuario } })
+		this.toast.showMsg("Se ha cerrado la sesión.", 2000, "success")
 	}
 
 }

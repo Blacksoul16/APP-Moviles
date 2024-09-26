@@ -1,7 +1,4 @@
-ion-toggle {
-	margin-top: 3px;
-	margin-bottom: 3px;
-}
+ion-toggle { margin-top: 3px; margin-bottom: 3px; }
 
 ion-input { margin-top: 4px; }
 ion-content {
@@ -19,10 +16,7 @@ ion-item {
 	--padding-bottom: 10px;
 }
 
-ion-badge {
-	--padding-end: 20px;
-	--padding-start: 20px;
-}
+ion-badge { --padding-end: 20px; --padding-start: 20px; }
 
 .custom-tab-primary { --color: #939393; --color-selected: #F1B634; }
 .custom-tab-secondary { --color: #939393; --color-selected: #132CAA; }
