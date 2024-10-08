@@ -1,4 +1,4 @@
-<div class="ion-page" id="main-content">
+<ion-content class="ion-padding-vertical background-container">
 	<ion-header>
 		<ion-toolbar>
 			<ion-grid>
@@ -16,7 +16,7 @@
 	
 	<!-- Contenidos de los tabs -->
 	<!-- Sección validar correo -->
-	<ion-content *ngIf="tab === 'validarCorreo'">
+	<ion-content *ngIf="tab === 'validarCorreo'" class="background-container">
 		<div style="display: flex; justify-content: center; align-items: center; height: 100vh;">
 			<ion-card class="ion-text-center ion-padding-vertical" style="display: flex; flex-direction: column; align-items: center; border-radius: 8px; width: 30rem;">
 				<ion-card-title class="ion-text-center">
@@ -41,7 +41,7 @@
 	</ion-content>
 
 	<!-- Sección validar pregunta secreta -->
-	<ion-content *ngIf="tab === 'validarPreguntaSecreta'">
+	<ion-content *ngIf="tab === 'validarPreguntaSecreta'" class="background-container">
 		<div style="display: flex; justify-content: center; align-items: center; height: 100vh;">
 			<ion-card class="ion-text-center ion-padding-vertical" style="display: flex; flex-direction: column; align-items: center; border-radius: 8px; width: 30rem;" >
 				<ion-card-title class="ion-text-center">
@@ -65,4 +65,4 @@
 			</ion-card>
 		</div>
 	</ion-content>
-</div>
+</ion-content>

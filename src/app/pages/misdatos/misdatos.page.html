@@ -1,0 +1,159 @@
+<ion-menu side="end" contentId="main-content">
+	<ion-header>
+		<ion-toolbar>
+			<ion-title class="ion-text-center">¿A dónde vamos?</ion-title>
+		</ion-toolbar>
+	</ion-header>
+	<ion-content class="ion-padding">
+		<ion-grid style="display: flex; flex-direction: column; justify-content: center; align-items: center;">
+			<ion-item-divider style="margin-bottom: 2rem;"></ion-item-divider>
+			<ion-row style="display: flex; flex-direction: column; justify-content: center; align-items: center;">
+				<ion-button fill="outline" shape="round" size="default" [ngClass]="{'custom-button-primary': paletteToggle, 'custom-button-secondary': !paletteToggle}" style="width: 14rem;">
+					<ion-icon slot="start" name="settings-outline"></ion-icon>Ajustes
+				</ion-button>
+			</ion-row>
+			<ion-item-divider></ion-item-divider>
+			<ion-text>
+				<h4>Opciones rápidas</h4>
+			</ion-text>
+			<!-- <ion-row>
+				<ion-toggle [(ngModel)]="paletteToggle" (ionChange)="toggleChange($event)" labelPlacement="end" color="warning">Modo oscuro</ion-toggle>
+			</ion-row> -->
+			<ion-item-divider style="margin-bottom: 2rem;"></ion-item-divider>
+			<ion-row>
+				<ion-button (click)="cerrarSesion()" fill="outline" shape="round" size="default" class="custom-button-danger" style="width: 14rem;">
+					<ion-icon slot="start" name="log-out-outline"></ion-icon>Cerrar sesión
+				</ion-button>
+			</ion-row>
+		</ion-grid>
+	</ion-content>
+</ion-menu>
+<!-- FIN MENU LATERAL -->
+
+<div class="ion-page" id="main-content">
+  <ion-header>
+		<ion-toolbar>
+			<ion-grid>
+				<ion-row>
+					<ion-col>
+						<img [src]="paletteToggle ? '../../../assets/img/duocuc_sec.svg' : '../../../assets/img/duocuc.svg'" alt="duocuc_logo" style="width: 8rem; margin-left: 16px; margin-right: 16px;">
+					</ion-col>
+					<ion-col style="display: flex; justify-content: center;">
+						<ion-title style="color: #a9a9a9">Sistema de asistencia</ion-title>
+					</ion-col>
+				</ion-row>
+			</ion-grid>
+		</ion-toolbar>
+	</ion-header>
+
+  <ion-footer>
+		<ion-toolbar>
+			<ion-tabs>
+				<ion-tab-bar slot="bottom">
+					<!-- Tabs -->
+					<ion-tab-button [selected]="tabSeleccionada === 'misdatos'" (click)="paginaMisdatos()" [ngClass]="{'custom-tab-primary': paletteToggle, 'custom-tab-secondary': !paletteToggle}">
+						<ion-icon name="bar-chart-outline"></ion-icon>
+						<ion-label>Mis datos</ion-label>
+					</ion-tab-button>
+
+					<ion-tab-button [selected]="tabSeleccionada === 'inicio'" (click)="seleccionarTab('inicio')" [ngClass]="{'custom-tab-primary': paletteToggle, 'custom-tab-secondary': !paletteToggle}">
+						<ion-icon name="qr-code-outline"></ion-icon>
+						<ion-label>Inicio</ion-label>
+					</ion-tab-button>
+
+					<ion-tab-button [selected]="tabSeleccionada === 'miclase'" (click)="seleccionarTab('miclase')" [ngClass]="{'custom-tab-primary': paletteToggle, 'custom-tab-secondary': !paletteToggle}">
+						<ion-icon name="school-outline"></ion-icon>
+						<ion-label>Mi clase</ion-label>
+					</ion-tab-button>
+
+					<ion-tab-button (click)="togglearMenuLateral()" [ngClass]="{'custom-tab-primary': paletteToggle, 'custom-tab-secondary': !paletteToggle}">
+						<ion-icon name="menu-outline"></ion-icon>
+						<ion-label>Menú</ion-label>
+					</ion-tab-button>
+
+				</ion-tab-bar>
+			</ion-tabs>
+		</ion-toolbar>
+	</ion-footer>
+  
+  <ion-content>
+    <hr>
+    <ion-badge style="display: flex; justify-content: center; width: 30rem; margin: 0 auto;" color="light">
+      <ion-title class="ion-text-center" style="margin-top: 5px; margin-bottom: 5px;">Mis datos personales</ion-title>
+    </ion-badge>
+    <hr>
+    <div style="display: flex; justify-content: center;">
+      <ion-card style="width: 40rem;">
+        <ion-card-content>
+          <ion-grid>
+            <ion-row>
+              <ion-col size="6">
+                <ion-item #itemCuenta>
+                  <ion-input [(ngModel)]="usuario.cuenta" class="custom-input-primary" label="Cuenta" labelPlacement="floating" placeholder="" disabled="true" fill="outline"></ion-input>
+                </ion-item>
+              </ion-col>
+              <ion-col size="6">
+                <ion-item #itemCorreo>
+                  <ion-input [(ngModel)]="usuario.correo" class="custom-input-primary" label="Correo" labelPlacement="floating" placeholder="" fill="outline"></ion-input>
+                </ion-item>
+              </ion-col>
+            </ion-row>
+          </ion-grid>
+  
+          <ion-grid>
+            <ion-row>
+              <ion-col size="6">
+                <ion-item #itemNombre>
+                  <ion-input [(ngModel)]="usuario.nombre" class="custom-input-primary" label="Nombre" labelPlacement="floating" placeholder="" fill="outline"></ion-input>
+                </ion-item>
+              </ion-col>
+              <ion-col size="6">
+                <ion-item #itemApellido>
+                  <ion-input [(ngModel)]="usuario.apellido" class="custom-input-primary" label="Apellido" labelPlacement="floating" placeholder="" fill="outline"></ion-input>
+                </ion-item>
+              </ion-col>
+            </ion-row>
+          </ion-grid>
+          <ion-item #itemPreguntaSecreta>
+            <ion-input [(ngModel)]="usuario.preguntaSecreta" class="custom-input-primary" label="Pregunta secreta" labelPlacement="floating" placeholder="" fill="outline"></ion-input>
+          </ion-item>
+  
+          <ion-item #itemRespuestaSecreta>
+            <ion-input [(ngModel)]="usuario.respuestaSecreta" class="custom-input-primary" label="Respuesta secreta" labelPlacement="floating" placeholder="" fill="outline"></ion-input>
+          </ion-item>
+  
+          <ion-item #itemEducacion class="font-size-12">
+            <ion-select [(ngModel)]="usuario.nivelEducacional!.id" (ionChange)="actualizarNivelEducacional($event)">
+              <div slot="label">Educación <ion-text color="danger">*</ion-text></div>
+              <ion-select-option *ngFor="let nivelEducacional of listaNivelesEducacionales" [value]="nivelEducacional.id">
+                {{nivelEducacional.nombre}}
+              </ion-select-option>
+            </ion-select>
+          </ion-item>
+  
+          <ion-grid>
+            <ion-row>
+              <ion-col size="6">								
+                <ion-item #itemContraseña1>
+                  <ion-input [(ngModel)]="usuario.password" class="custom-input-primary" label="Contraseña" labelPlacement="floating" placeholder="" type="password" fill="outline"></ion-input>
+                </ion-item>
+              </ion-col>
+              <ion-col size="6">
+                <ion-item #itemContraseña2>
+                  <ion-input [(ngModel)]="usuario.password" class="custom-input-primary" label="Nueva Contraseña" labelPlacement="floating" placeholder="" type="password" fill="outline"></ion-input>
+                </ion-item>
+              </ion-col>
+            </ion-row>
+          </ion-grid>
+  
+          <div style="display: flex; justify-content: center; margin-top: 12px;">
+            <ion-button (click)="guardarCambios()" fill="outline" size="default" shape="round" class="custom-button-primary">
+              <ion-icon slot="start" name="document-outline"></ion-icon>Guardar Cambios
+            </ion-button>
+          </div>
+        </ion-card-content>
+      </ion-card>
+    </div>
+  </ion-content>
+</div>
+

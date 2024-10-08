@@ -109,5 +109,12 @@ export class Usuario extends Persona {
 	}
 
 	public static guardarListaUsuarios(usuarios: Usuario[]): void { localStorage.setItem("usuarios", JSON.stringify(usuarios)) }
+
+	public static getUsuarioPorCuenta(cuenta: string): Usuario | null {
+		const listaUsuarios = Usuario.getListaUsuarios();
+		const usuarioEncontrado = listaUsuarios.find(u => u.cuenta === cuenta);
+		return usuarioEncontrado || null;
+	}
+	
 	
 }

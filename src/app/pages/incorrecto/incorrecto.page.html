@@ -1,0 +1,39 @@
+<ion-content class="ion-padding-vertical background-container">
+  <ion-header>
+		<ion-toolbar>
+			<ion-grid>
+				<ion-row>
+					<ion-col>
+						<img src="../../../assets/img/duocuc_sec.svg" alt="duocuc_logo" style="width: 8rem; margin-left: 16px; margin-right: 16px;">
+					</ion-col>
+					<ion-col style="display: flex; justify-content: center;">
+						<ion-title style="color: #a9a9a9">Sistema de asistencia</ion-title>
+					</ion-col>
+				</ion-row>
+			</ion-grid>
+		</ion-toolbar>
+	</ion-header>
+  <ion-content class="background-container">
+		<div style="display: flex; justify-content: center; align-items: center; height: 100vh;">
+			<ion-card class="ion-text-center ion-padding-vertical" style="display: flex; flex-direction: column; align-items: center; border-radius: 8px; width: 30rem;">
+				<ion-card-title class="ion-text-center">
+					<ion-label>
+						<h1>¡Respuesta Incorrecta!</h1>
+					</ion-label>
+				</ion-card-title>
+				<ion-card-content>
+					<hr>
+          <ion-card-subtitle>
+            <h2>¡No podemos mostrar tu contraseña si respondes mal la pregunta secreta!</h2>
+          </ion-card-subtitle>
+					<div style="display: flex; justify-content: center; margin-top: 20px;">
+						<img src="../../../assets/img/incorrectimg.png" alt="">
+					</div>
+          <div style="display: flex; justify-content: center; margin-top: 20px;">
+						<ion-button (click)="volverLogin()" class="custom-button-danger" fill="outline" shape="round">Volver</ion-button>
+					</div>
+				</ion-card-content>
+			</ion-card>
+		</div>
+	</ion-content>
+</ion-content>

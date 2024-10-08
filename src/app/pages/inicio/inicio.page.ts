@@ -5,6 +5,7 @@ import jsQR, { QRCode } from 'jsqr';
 import { NivelEducacional } from 'src/app/model/nivel-educacional';
 import { Usuario } from 'src/app/model/usuario';
 import { ToastService } from '../servicios/toast.service';
+import { state } from '@angular/animations';
 
 @Component({
 	selector: 'app-inicio',
@@ -38,14 +39,28 @@ export class InicioPage implements OnInit {
 					return
 				}
 			}
+			const usuarioGuardado = localStorage.getItem("usuarioActual")
+			if (usuarioGuardado) {
+			this.usuario = JSON.parse(usuarioGuardado)
+			} else {
 			this.toast.showMsg("Debes iniciar sesión para acceder a esta página.", 2000, "danger")
 			this.ruta.navigate(["login"])
+    		}
 		})
 		this.salut = this.getSalut()
 	}
 
 	togglearMenuLateral() { this.menu.toggle() }
-	seleccionarTab(tab: string) {this.tabSeleccionada = tab }
+
+	seleccionarTab(tab: string) {
+
+		if(tab === 'miclase'){
+			this.seleccionarTab('miclase')
+		}else if(tab === 'misdatos'){
+			this.ruta.navigate(['misdatos'], { state: { user: this.usuario } })
+		}
+	}
+	
 	getSalut(): string {
 		const h = new Date().getHours()
 		if (h >= 5 && h < 12) { return "Buenos días" }
@@ -54,16 +69,18 @@ export class InicioPage implements OnInit {
 	}
 
   	ngOnInit() {
-		const prefersDark = window.matchMedia("(prefers-color-scheme: dark)")
-		this.initializeDarkPalette(prefersDark.matches)
-		prefersDark.addEventListener("change", (mediaQuery) => this.initializeDarkPalette(mediaQuery.matches))
+		// const prefersDark = window.matchMedia("(prefers-color-scheme: dark)")
+		// this.initializeDarkPalette(prefersDark.matches)
+		// prefersDark.addEventListener("change", (mediaQuery) => this.initializeDarkPalette(mediaQuery.matches))
+		this.initializeDarkPalette(true)
+		this.initScan()
+		localStorage.setItem("usuarioActual", JSON.stringify(this.usuario))
+		Usuario.getUsuarioPorCuenta(this.usuario.cuenta)
 	}
 
 	initializeDarkPalette(isDark: any) { this.paletteToggle = isDark; this.toggleDarkPalette(isDark) }
 	toggleChange(e: any) { this.toggleDarkPalette(e.detail.checked) }
 	toggleDarkPalette(shouldAdd: any) { document.documentElement.classList.toggle("ion-palette-dark", shouldAdd) }
-
-
 
 	/* COSAS RELACIONADAS A LA LECTURA DE QR */
 	public seleccionarArchivo(e: Event) {
@@ -149,6 +166,7 @@ export class InicioPage implements OnInit {
 		this.datosQRKeys = Object.keys(objetoDatosQR).map(k => {
 			return { k: this.formatearKey(k), v: objetoDatosQR[k] }
 		})
+		this.ruta.navigate(['miclase'], { state: objetoDatosQR })
 	}
 
 	public formatearKey(k: string): string {
@@ -184,8 +202,13 @@ export class InicioPage implements OnInit {
 	}
 
 	public cerrarSesion(): void {
+		this.togglearMenuLateral()
 		this.ruta.navigate(["login"], { state: { user: this.usuario } })
 		this.toast.showMsg("Se ha cerrado la sesión.", 2000, "success")
+	}
+
+	public paginaMisdatos(): void {
+		this.ruta.navigate(["misdatos"], { state: {user: this.usuario} })
 	}
 
 }

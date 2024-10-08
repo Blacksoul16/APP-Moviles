@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Usuario } from 'src/app/model/usuario';
 import { ToastService } from '../servicios/toast.service';
 import { NivelEducacional } from 'src/app/model/nivel-educacional';
-import { Router } from '@angular/router';
+import { Router, NavigationExtras, ActivatedRoute } from '@angular/router';
 import { AlertService } from '../servicios/alert.service';
 
 @Component({
@@ -16,7 +16,7 @@ export class RecuperarPage implements OnInit {
 	public usuario: Usuario = new Usuario("", "", "", "", "", "", "", NivelEducacional.findNivelEducacional(1)!, undefined)
 	public respuestaSecreta: string = ""
 
-	constructor(private router: Router, private toast: ToastService, private alert: AlertService) {}
+	constructor(private rutaActivada: ActivatedRoute, private ruta: Router, private toast: ToastService, private alert: AlertService) {}
 
 	ngOnInit() {}
 
@@ -45,11 +45,14 @@ export class RecuperarPage implements OnInit {
 			return
 		}
 		else if (this.respuestaSecreta !== this.usuario.respuestaSecreta) {
-			this.toast.showMsg("Respuesta incorrecta.", 1500, "danger")
-			return
+			this.ruta.navigate(['incorrecto'])
 		}
-		this.toast.showMsg("Respuesta correcta.", 1500, "success")
-		this.alert.showAlert("Tu contraseña", "", `${this.usuario.password}`)
+		else if (this.respuestaSecreta = this.usuario.respuestaSecreta){
+			// this.toast.showMsg("Respuesta correcta.", 1500, "success")
+			// this.alert.showAlert("Tu contraseña", "", `${this.usuario.password}`)
+			this.ruta.navigate(['correcto'])
+		}
+		
 	}
 
 	public seleccionarTab(tab: string): void { this.tab = tab }
