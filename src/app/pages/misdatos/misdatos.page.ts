@@ -5,6 +5,7 @@ import jsQR, { QRCode } from 'jsqr';
 import { NivelEducacional } from 'src/app/model/nivel-educacional';
 import { Usuario } from 'src/app/model/usuario';
 import { ToastService } from '../servicios/toast.service';
+import { ThemeService } from '../servicios/theme.service';
 
 
 @Component({
@@ -15,41 +16,28 @@ import { ToastService } from '../servicios/toast.service';
 export class MisdatosPage implements OnInit {
 
   	public usuario: Usuario
-	public tabSeleccionada: string = "midatos"
-	public paletteToggle: boolean = true
+	public darkMode: boolean = true
 
-  constructor(private rutaActivada: ActivatedRoute, private ruta: Router, private menu: MenuController, private toast: ToastService) { 
-    this.usuario = new Usuario("", "", "", "", "", "", "", NivelEducacional.findNivelEducacional(1)!, undefined);
+	constructor(private rutaActivada: ActivatedRoute, private ruta: Router, private toast: ToastService, private theme: ThemeService) { 
+		this.usuario = new Usuario("", "", "", "", "", "", "", true, NivelEducacional.findNivelEducacional(1)!, undefined);
 
-    this.rutaActivada.queryParams.subscribe(params => {
-      const nav = this.ruta.getCurrentNavigation();
-      if (nav) {
-        if (nav.extras.state && nav.extras.state["usuario"]) {
-          this.usuario = nav.extras.state["usuario"];
-          localStorage.setItem("usuarioActual", JSON.stringify(this.usuario));
-          return;
-        }
-      }
-      const usuarioGuardado = localStorage.getItem("usuarioActual");
-      if (usuarioGuardado) {
-        this.usuario = JSON.parse(usuarioGuardado);
-      } else {
-        this.toast.showMsg("Debes iniciar sesión para acceder a esta página.", 2000, "danger");
-        this.ruta.navigate(["login"]);
-      }
-    });
-  }
-
-  togglearMenuLateral() { this.menu.toggle() }
-
-	seleccionarTab(tab: string) {
-		this.tabSeleccionada = tab
-
-		if(tab === 'miclase'){
-			this.seleccionarTab('miclase')
-		}else if(tab === 'inicio'){
-			this.ruta.navigate(['inicio'], { state: { user: this.usuario } })
-		}
+		this.rutaActivada.queryParams.subscribe(params => {
+			const nav = this.ruta.getCurrentNavigation();
+				if (nav && nav.extras.state) {
+					if (nav.extras.state["usuario"]) {
+						this.usuario = nav.extras.state["usuario"];
+						localStorage.setItem("usuarioActual", JSON.stringify(this.usuario));
+						return;
+					}
+				}
+				const usuarioGuardado = localStorage.getItem("usuarioActual");
+				if (usuarioGuardado) {
+					this.usuario = JSON.parse(usuarioGuardado);
+				} else {
+					this.toast.showMsg("Debes iniciar sesión para acceder a esta página.", 2000, "danger");
+					this.ruta.navigate(["login"]);
+				}
+			});
 	}
 
 	getSalut(): string {
@@ -59,18 +47,12 @@ export class MisdatosPage implements OnInit {
 		else { return "Buenas noches" }
 	}
 
-  ngOnInit() {
-    this.seleccionarTab('misdatos')
-  }
+	ngOnInit() { this.theme.darkMode$.subscribe(isDark => { this.darkMode = isDark }) }
 
-  initializeDarkPalette(isDark: any) { this.paletteToggle = isDark; this.toggleDarkPalette(isDark) }
-	toggleChange(e: any) { this.toggleDarkPalette(e.detail.checked) }
-	toggleDarkPalette(shouldAdd: any) { document.documentElement.classList.toggle("ion-palette-dark", shouldAdd) }
-
-  public listaNivelesEducacionales = NivelEducacional.getNivelesEducacionales();
+ 	public listaNivelesEducacionales = NivelEducacional.getNivelesEducacionales();
 	public actualizarNivelEducacional(event: any) { this.usuario.nivelEducacional = NivelEducacional.findNivelEducacional(event.detail.value)!; }
 
-  public guardarCambios(): void {
+	public guardarCambios(): void {
 		if (!this.usuario) {
 			this.toast.showMsg("Error al guardar los cambios: No se encontró el usuario.", 2000, "danger")
 			return
@@ -80,19 +62,9 @@ export class MisdatosPage implements OnInit {
 		if (i !== -1) {
 			listaUsuarios[i] = this.usuario
 			Usuario.guardarListaUsuarios(listaUsuarios)
-      Usuario.getUsuarioPorCuenta(this.usuario.cuenta)
+			Usuario.getUsuarioPorCuenta(this.usuario.cuenta)
 		}
 		this.toast.showMsg("Cambios guardados correctamente.", 2000, "success");
-	}
-
-  public cerrarSesion(): void {
-    this.togglearMenuLateral()
-		this.ruta.navigate(["login"], { state: { user: this.usuario } })
-		this.toast.showMsg("Se ha cerrado la sesión.", 2000, "success")
-	}
-  
-  public paginaMisdatos(): void {
-		this.ruta.navigate(["misdatos"], { state: {user: this.usuario} })
 	}
 
 }

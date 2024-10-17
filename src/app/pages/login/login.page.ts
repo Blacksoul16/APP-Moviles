@@ -3,6 +3,7 @@ import { NavigationExtras, Router } from '@angular/router';
 import { NivelEducacional } from 'src/app/model/nivel-educacional';
 import { Usuario } from 'src/app/model/usuario';
 import { ToastService } from '../servicios/toast.service';
+import { ThemeService } from '../servicios/theme.service';
 
 @Component({
 	selector: 'app-login',
@@ -14,28 +15,20 @@ export class LoginPage implements OnInit {
 	public usuario: Usuario
 	// public paletteToggle: boolean = true
 
-	constructor(private toastService: ToastService, private ruta: Router) {
-		const nav = this.ruta.getCurrentNavigation();
-		
-		if (nav && nav.extras.state && nav.extras.state["usuario"]) {
-			this.usuario = nav.extras.state["usuario"];
-			console.log("Usuario recuperado del estado de navegación:", this.usuario);
+	constructor(private toast: ToastService, private ruta: Router, private theme: ThemeService) {
+		const nav = this.ruta.getCurrentNavigation()
+		if (nav && nav.extras.state) {
+			this.usuario = nav.extras.state["usuario"] ? nav.extras.state["usuario"] : undefined
+			// console.log("Usuario recuperado del estado de navegación:", this.usuario);
 		} else {
-			this.usuario = new Usuario("", "", "", "", "", "", "", NivelEducacional.findNivelEducacional(1)!, undefined);
+			this.usuario = new Usuario("", "", "", "", "", "", "", true, NivelEducacional.findNivelEducacional(1)!, undefined);
 			this.usuario.cuenta = "sgarday";
 			this.usuario.password = "1234";
 		}
 
 	}
 
-	ngOnInit() {
-		// const prefersDark = window.matchMedia("(prefers-color-scheme: dark)")
-		// this.initializeDarkPalette(prefersDark.matches)
-		// prefersDark.addEventListener("change", (mediaQuery) => this.initializeDarkPalette(mediaQuery.matches))
-	}
-
-	// initializeDarkPalette(isDark: any) { this.paletteToggle = isDark; this.toggleDarkPalette(isDark) }
-	// toggleDarkPalette(shouldAdd: any) { document.documentElement.classList.toggle("ion-palette-dark", shouldAdd) }
+	ngOnInit() {}
 
 	public login() {
 		if (this.usuario) {
@@ -45,7 +38,8 @@ export class LoginPage implements OnInit {
 				const extras: NavigationExtras = {
 					state: { usuario: user }
 				}
-				this.toastService.showMsg("Inicio de sesión exitoso", 1000, "success")
+				localStorage.setItem("darkMode", JSON.stringify(user.modoOscuro))
+				this.toast.showMsg("Inicio de sesión exitoso", 1000, "success")
 				this.ruta.navigate(["inicio"], extras)
 			}
 		}
@@ -54,7 +48,7 @@ export class LoginPage implements OnInit {
 	public validarUsuario(usuario: Usuario): boolean {
 		const msgError = usuario.validarCuenta()
 		if (msgError) {
-			this.toastService.showMsg(msgError, 4000, "danger")
+			this.toast.showMsg(msgError, 4000, "danger")
 			return false
 		}
 		return true

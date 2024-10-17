@@ -7,13 +7,15 @@ import { IonicModule } from '@ionic/angular';
 import { CorrectoPageRoutingModule } from './correcto-routing.module';
 
 import { CorrectoPage } from './correcto.page';
+import { SharedModule } from 'src/app/componentes/shared.module';
 
 @NgModule({
   imports: [
     CommonModule,
     FormsModule,
     IonicModule,
-    CorrectoPageRoutingModule
+    CorrectoPageRoutingModule,
+    SharedModule
   ],
   declarations: [CorrectoPage]
 })

@@ -1,20 +1,6 @@
-<ion-content class="ion-padding-vertical background-container">
-	<ion-header>
-		<ion-toolbar>
-			<ion-grid>
-				<ion-row>
-					<ion-col>
-						<img src="../../../assets/img/duocuc_sec.svg" alt="duocuc_logo" style="width: 8rem; margin-left: 16px; margin-right: 16px;">
-					</ion-col>
-					<ion-col style="display: flex; justify-content: center;">
-						<ion-title style="color: #a9a9a9">Sistema de asistencia</ion-title>
-					</ion-col>
-				</ion-row>
-			</ion-grid>
-		</ion-toolbar>
-	</ion-header>
-	
-	<!-- Contenidos de los tabs -->
+<duocuc-header></duocuc-header>
+
+<ion-content>
 	<!-- Sección validar correo -->
 	<ion-content *ngIf="tab === 'validarCorreo'" class="background-container">
 		<div style="display: flex; justify-content: center; align-items: center; height: 100vh;">

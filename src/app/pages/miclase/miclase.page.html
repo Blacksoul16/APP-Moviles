@@ -1,0 +1,36 @@
+<duocuc-header></duocuc-header>
+
+<ion-content>
+	<hr>
+	<ion-badge style="display: flex; justify-content: center; width: 30rem; margin: 0 auto;" color="light">
+		<ion-title class="ion-text-center" style="margin-top: 5px; margin-bottom: 5px;">Datos de mi clase</ion-title>
+	</ion-badge>
+	<hr>
+	<div style="display: flex; justify-content: center;">
+		<ion-button [routerLink]="['/inicio']" fill="outline" shape="round" [ngClass]="{'custom-button-primary': darkMode, 'custom-button-secondary': !darkMode}">
+			<ion-icon slot="start" name="qr-code-outline"></ion-icon>Ir a escanear
+		</ion-button>
+		<ion-button (click)="limpiarDatosQR()" fill="outline" shape="round" class="custom-button-danger" [disabled]="!datosQR">
+			<ion-icon slot="start" name="trash-outline"></ion-icon>Limpiar datos QR
+		</ion-button>
+	</div>
+	<div style="display: flex; justify-content: center;">
+		<ion-card style="width: 40rem;">
+			<ion-card-header class="ion-text-center">
+				<ion-card-title>Datos del Código QR</ion-card-title>
+			</ion-card-header>
+			<ion-card-content class="ion-text-center">
+				<h2 *ngIf="!datosQR">Aún no hay datos escaneados.</h2>
+				<h2 *ngIf="!datosQR">Prueba a subir un QR o usar la cámara de tu dispositivo para escanear uno.</h2>
+				<table *ngIf="datosQR" style="width: 100%; border-collapse: collapse; border-radius: 8px;">
+					<tr *ngFor="let i of datosQRKeys">
+						<td [style]="darkMode ? 'border: 1px solid #F1B634; padding: 8px;' : 'border: 1px solid #132CAA; padding: 8px;'">{{ i.k }}</td>
+						<td [style]="darkMode ? 'border: 1px solid #F1B634; padding: 8px;' : 'border: 1px solid #132CAA; padding: 8px;'">{{ i.v }}</td>
+					</tr>
+				</table>
+			</ion-card-content>
+		</ion-card>
+	</div>
+</ion-content>
+
+<duocuc-footer></duocuc-footer>

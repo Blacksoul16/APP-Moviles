@@ -7,13 +7,15 @@ import { IonicModule } from '@ionic/angular';
 import { IncorrectoPageRoutingModule } from './incorrecto-routing.module';
 
 import { IncorrectoPage } from './incorrecto.page';
+import { SharedModule } from 'src/app/componentes/shared.module';
 
 @NgModule({
   imports: [
     CommonModule,
     FormsModule,
     IonicModule,
-    IncorrectoPageRoutingModule
+    IncorrectoPageRoutingModule,
+    SharedModule
   ],
   declarations: [IncorrectoPage]
 })

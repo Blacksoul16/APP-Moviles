@@ -1,11 +1,11 @@
 import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { MenuController } from '@ionic/angular';
 import jsQR, { QRCode } from 'jsqr';
 import { NivelEducacional } from 'src/app/model/nivel-educacional';
 import { Usuario } from 'src/app/model/usuario';
 import { ToastService } from '../servicios/toast.service';
-import { state } from '@angular/animations';
+import { ThemeService } from '../servicios/theme.service';
+// import { state } from '@angular/animations';
 
 @Component({
 	selector: 'app-inicio',
@@ -15,9 +15,8 @@ import { state } from '@angular/animations';
 export class InicioPage implements OnInit {
 
 	public usuario: Usuario
-	public tabSeleccionada: string = "inicio"
 	public salut: string = ""
-	public paletteToggle: boolean = true
+	public darkMode: boolean = true
 
 	/* COSAS RELACIONADAS A LA LECTURA DE QR */
 	@ViewChild("video")
@@ -26,39 +25,25 @@ export class InicioPage implements OnInit {
 	private canvas!: ElementRef;
 	public escaneando = false
 	public datosQR: any = ""
-	public datosQRKeys: any[] = []
 	/* FIN COSAS RELACIONADAS AL QR */
 
-	constructor(private rutaActivada: ActivatedRoute, private ruta: Router, private menu: MenuController, private toast: ToastService) {
-		this.usuario = new Usuario("", "", "", "", "", "", "", NivelEducacional.findNivelEducacional(1)!, undefined)
+	constructor(private rutaActivada: ActivatedRoute, private ruta: Router, private toast: ToastService, private theme: ThemeService) {
+		this.usuario = new Usuario("", "", "", "", "", "", "", true, NivelEducacional.findNivelEducacional(1)!, undefined)
 		this.rutaActivada.queryParams.subscribe(params => {
 			const nav = this.ruta.getCurrentNavigation()
-			if (nav) {
-				if (nav.extras.state && nav.extras.state["usuario"]) {
-					this.usuario = nav.extras.state["usuario"]
-					return
-				}
+			if (nav && nav.extras.state) {
+				this.usuario = nav.extras.state["usuario"] ? nav.extras.state["usuario"] : null
+				this.datosQR = nav.extras.state["datosQR"] ? nav.extras.state["datosQR"] : null
 			}
 			const usuarioGuardado = localStorage.getItem("usuarioActual")
 			if (usuarioGuardado) {
-			this.usuario = JSON.parse(usuarioGuardado)
+				this.usuario = JSON.parse(usuarioGuardado)
 			} else {
-			this.toast.showMsg("Debes iniciar sesión para acceder a esta página.", 2000, "danger")
-			this.ruta.navigate(["login"])
+				this.toast.showMsg("Debes iniciar sesión para acceder a esta página.", 2000, "danger")
+				this.ruta.navigate(["login"])
     		}
 		})
 		this.salut = this.getSalut()
-	}
-
-	togglearMenuLateral() { this.menu.toggle() }
-
-	seleccionarTab(tab: string) {
-
-		if(tab === 'miclase'){
-			this.seleccionarTab('miclase')
-		}else if(tab === 'misdatos'){
-			this.ruta.navigate(['misdatos'], { state: { user: this.usuario } })
-		}
 	}
 	
 	getSalut(): string {
@@ -69,18 +54,11 @@ export class InicioPage implements OnInit {
 	}
 
   	ngOnInit() {
-		// const prefersDark = window.matchMedia("(prefers-color-scheme: dark)")
-		// this.initializeDarkPalette(prefersDark.matches)
-		// prefersDark.addEventListener("change", (mediaQuery) => this.initializeDarkPalette(mediaQuery.matches))
-		this.initializeDarkPalette(true)
-		this.initScan()
+		this.theme.darkMode$.subscribe(isDark => { this.darkMode = isDark })
+		//this.initScan()
 		localStorage.setItem("usuarioActual", JSON.stringify(this.usuario))
 		Usuario.getUsuarioPorCuenta(this.usuario.cuenta)
 	}
-
-	initializeDarkPalette(isDark: any) { this.paletteToggle = isDark; this.toggleDarkPalette(isDark) }
-	toggleChange(e: any) { this.toggleDarkPalette(e.detail.checked) }
-	toggleDarkPalette(shouldAdd: any) { document.documentElement.classList.toggle("ion-palette-dark", shouldAdd) }
 
 	/* COSAS RELACIONADAS A LA LECTURA DE QR */
 	public seleccionarArchivo(e: Event) {
@@ -92,7 +70,8 @@ export class InicioPage implements OnInit {
 				const img = new Image()
 				img.src = e.target?.result as string
 				img.onload = () => {
-					this.procesarIMG(img)
+					this.procesarQR(img)
+					fileInput.value = ""
 				}
 			}
 			reader.readAsDataURL(file)
@@ -129,12 +108,12 @@ export class InicioPage implements OnInit {
 		}
 	}
 
-	public procesarIMG(img: HTMLImageElement): void { this.procesarQR(img) }
-	public procesarVideo(): boolean { return this.procesarQR(this.video.nativeElement, true) }
+	// public procesarIMG(img: HTMLImageElement): void { this.procesarQR(img) }
+	// public procesarVideo(): boolean { return this.procesarQR(this.video.nativeElement, true) }
 
 	async checkVideo() {
 		if (this.video.nativeElement.readyState === this.video.nativeElement.HAVE_ENOUGH_DATA) {
-			if (this.procesarVideo() || !this.escaneando) { return }
+			if (this.procesarQR(this.video.nativeElement, true) || !this.escaneando) { return }
 			requestAnimationFrame(this.checkVideo.bind(this))
 		} else {
 			requestAnimationFrame(this.checkVideo.bind(this))
@@ -163,52 +142,8 @@ export class InicioPage implements OnInit {
 	public showQRData(datosQR: string): void {
 		const objetoDatosQR = JSON.parse(datosQR)
 		this.datosQR = objetoDatosQR
-		this.datosQRKeys = Object.keys(objetoDatosQR).map(k => {
-			return { k: this.formatearKey(k), v: objetoDatosQR[k] }
-		})
-		this.ruta.navigate(['miclase'], { state: objetoDatosQR })
+		this.ruta.navigate(["miclase"], { state: { "datosQR": objetoDatosQR } })
 	}
-
-	public formatearKey(k: string): string {
-		const s = k.replace(/([a-z])([A-Z])/g, "$1_$2").toLowerCase()
-		let r = s.split("_").map(w => w.charAt(0).toUpperCase() + w.slice(1)).join(" ")
-		// let r = s.replace(/_/g, "").split("").map((c, i) => i === 0 || s[i - 1] === "_" ? c.toUpperCase() : c).join(" ")
-		// console.log("S: " + s)
-		// console.log("R: " + r)
-		return r
-	}
-
-	public limpiarDatosQR(): void { this.datosQR = null; this.datosQRKeys = [] }
+	
 	/* FIN DE COSAS RELACIONADAS AL QR */
-
-
-
-	/* Sección mis datos */
-	public listaNivelesEducacionales = NivelEducacional.getNivelesEducacionales();
-	public actualizarNivelEducacional(event: any) { this.usuario.nivelEducacional = NivelEducacional.findNivelEducacional(event.detail.value)!; }
-	  
-	public guardarCambios(): void {
-		if (!this.usuario) {
-			this.toast.showMsg("Error al guardar los cambios: No se encontró el usuario.", 2000, "danger")
-			return
-		}
-		const listaUsuarios = Usuario.getListaUsuarios()
-		const i = listaUsuarios.findIndex(u => u.cuenta === this.usuario.cuenta)
-		if (i !== -1) {
-			listaUsuarios[i] = this.usuario
-			Usuario.guardarListaUsuarios(listaUsuarios)
-		}
-		this.toast.showMsg("Cambios guardados correctamente.", 2000, "success");
-	}
-
-	public cerrarSesion(): void {
-		this.togglearMenuLateral()
-		this.ruta.navigate(["login"], { state: { user: this.usuario } })
-		this.toast.showMsg("Se ha cerrado la sesión.", 2000, "success")
-	}
-
-	public paginaMisdatos(): void {
-		this.ruta.navigate(["misdatos"], { state: {user: this.usuario} })
-	}
-
 }

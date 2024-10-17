@@ -2,8 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Usuario } from 'src/app/model/usuario';
 import { ToastService } from '../servicios/toast.service';
 import { NivelEducacional } from 'src/app/model/nivel-educacional';
-import { Router, NavigationExtras, ActivatedRoute } from '@angular/router';
-import { AlertService } from '../servicios/alert.service';
+import { Router, ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-correcto',
@@ -11,10 +10,10 @@ import { AlertService } from '../servicios/alert.service';
   styleUrls: ['./correcto.page.scss'],
 })
 export class CorrectoPage implements OnInit {
-  public usuario: Usuario = new Usuario("", "", "", "", "", "", "", NivelEducacional.findNivelEducacional(1)!, undefined)
+  public usuario: Usuario = new Usuario("", "", "", "", "", "", "", true, NivelEducacional.findNivelEducacional(1)!, undefined)
 
   constructor(private rutaActivada: ActivatedRoute, private ruta: Router, private toast: ToastService) { 
-    this.usuario = new Usuario("", "", "", "", "", "", "", NivelEducacional.findNivelEducacional(1)!, undefined);
+    this.usuario = new Usuario("", "", "", "", "", "", "", true, NivelEducacional.findNivelEducacional(1)!, undefined);
 
     this.rutaActivada.queryParams.subscribe(params => {
       const nav = this.ruta.getCurrentNavigation();

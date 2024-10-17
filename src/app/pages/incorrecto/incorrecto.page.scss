@@ -46,6 +46,6 @@ ion-content {
     display: flex; 
     justify-content: center; 
     align-items: center; 
-    height: 100%; /* Asegúrate que ocupe el 100% del contenedor */
-    --padding-bottom: 0; /* Evita el padding que puede provocar scroll */
+    height: 100%;
+    --padding-bottom: 0;
 }

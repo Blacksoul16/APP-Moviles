@@ -8,8 +8,9 @@ export class Usuario extends Persona {
 	public password: string
 	public preguntaSecreta: string
 	public respuestaSecreta: string
+	public modoOscuro: boolean
 
-	public constructor(cuenta: string, correo: string, password: string, preguntaSecreta: string, respuestaSecreta: string, nombre: string, apellido: string, nivelEducacional: NivelEducacional, fechaNacimiento: Date | undefined) {
+	public constructor(cuenta: string, correo: string, password: string, preguntaSecreta: string, respuestaSecreta: string, nombre: string, apellido: string, modoOscuro: boolean, nivelEducacional: NivelEducacional, fechaNacimiento: Date | undefined) {
 		super()
 		this.cuenta = cuenta
 		this.correo = correo
@@ -18,6 +19,7 @@ export class Usuario extends Persona {
 		this.respuestaSecreta = respuestaSecreta
 		this.nombre = nombre
 		this.apellido = apellido
+		this.modoOscuro = modoOscuro
 		this.nivelEducacional = nivelEducacional
 		this.fechaNacimiento = fechaNacimiento
 	}
@@ -99,12 +101,13 @@ export class Usuario extends Persona {
 				u.respuestaSecreta,
 				u.nombre,
 				u.apellido,
+				u.modoOscuro,
 				NivelEducacional.findNivelEducacional(u.nivelEducacional.id)!,
 				new Date(u.fechaNacimiento)
 			))
 		}
 		return [
-			new Usuario("sgarday", "s.garday@duocuc.cl", "1234", "¿Cuál es tu color favorito?", "Negro", "Seth", "Garday", NivelEducacional.findNivelEducacional(5)!, new Date(2000, 2, 4)),
+			new Usuario("sgarday", "s.garday@duocuc.cl", "1234", "¿Cuál es tu color favorito?", "Negro", "Seth", "Garday", true, NivelEducacional.findNivelEducacional(5)!, new Date(2000, 2, 4)),
 		]
 	}
 

@@ -13,12 +13,14 @@ import { AlertService } from '../servicios/alert.service';
 export class RecuperarPage implements OnInit {
 	public correo: string = ""
 	public tab: string = "validarCorreo"
-	public usuario: Usuario = new Usuario("", "", "", "", "", "", "", NivelEducacional.findNivelEducacional(1)!, undefined)
+	public usuario: Usuario = new Usuario("", "", "", "", "", "", "", true, NivelEducacional.findNivelEducacional(1)!, undefined)
 	public respuestaSecreta: string = ""
 
-	constructor(private rutaActivada: ActivatedRoute, private ruta: Router, private toast: ToastService, private alert: AlertService) {}
+	constructor(private ruta: Router, private toast: ToastService) {}
 
 	ngOnInit() {}
+
+	public seleccionarTab(tab: string): void { this.tab = tab }
 
 	public validarCorreo(): void {
 		const emailRegex = /^[a-zA-Z0-9._+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/
@@ -45,16 +47,11 @@ export class RecuperarPage implements OnInit {
 			return
 		}
 		else if (this.respuestaSecreta !== this.usuario.respuestaSecreta) {
-			this.ruta.navigate(['incorrecto'])
+			this.ruta.navigate(["incorrecto"])
 		}
-		else if (this.respuestaSecreta = this.usuario.respuestaSecreta){
-			// this.toast.showMsg("Respuesta correcta.", 1500, "success")
-			// this.alert.showAlert("Tu contraseña", "", `${this.usuario.password}`)
-			this.ruta.navigate(['correcto'])
+		else if (this.respuestaSecreta == this.usuario.respuestaSecreta){
+			this.ruta.navigate(["correcto"])
 		}
-		
 	}
-
-	public seleccionarTab(tab: string): void { this.tab = tab }
 
 }

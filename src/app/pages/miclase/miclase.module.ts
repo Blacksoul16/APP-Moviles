@@ -4,9 +4,9 @@ import { FormsModule } from '@angular/forms';
 
 import { IonicModule } from '@ionic/angular';
 
-import { MisdatosPageRoutingModule } from './misdatos-routing.module';
+import { MiclasePageRoutingModule } from './miclase-routing.module';
 
-import { MisdatosPage } from './misdatos.page';
+import { MiclasePage } from './miclase.page';
 import { SharedModule } from 'src/app/componentes/shared.module';
 
 @NgModule({
@@ -14,9 +14,9 @@ import { SharedModule } from 'src/app/componentes/shared.module';
     CommonModule,
     FormsModule,
     IonicModule,
-    MisdatosPageRoutingModule,
+    MiclasePageRoutingModule,
     SharedModule
   ],
-  declarations: [MisdatosPage]
+  declarations: [MiclasePage]
 })
-export class MisdatosPageModule {}
+export class MiclasePageModule {}
