@@ -3,7 +3,7 @@
 <ion-content id="main-content">
 	<hr>
 	<ion-badge style="display: flex; justify-content: center; width: 30rem; margin: 0 auto;" color="light">
-		<ion-title class="ion-text-center" style="margin-top: 5px; margin-bottom: 5px;">Mis datos personales</ion-title>
+		<ion-title class="ion-text-center" style="margin-top: 5px; margin-bottom: 5px;">{{ "misdatos.badge" | translate }}</ion-title>
 	</ion-badge>
 	<hr>
 	<div style="display: flex; justify-content: center;">
@@ -13,12 +13,12 @@
 					<ion-row>
 						<ion-col size="6">
 							<ion-item #itemCuenta>
-								<ion-input [(ngModel)]="usuario.cuenta" class="custom-input-primary" label="Cuenta" labelPlacement="floating" placeholder="" disabled="true" fill="outline"></ion-input>
+								<ion-input [(ngModel)]="usuario.cuenta" class="custom-input-primary" label="{{ 'misdatos.input.cuenta' | translate }}" labelPlacement="floating" placeholder="" disabled="true" fill="outline"></ion-input>
 							</ion-item>
 						</ion-col>
 						<ion-col size="6">
 							<ion-item #itemCorreo>
-								<ion-input [(ngModel)]="usuario.correo" class="custom-input-primary" label="Correo" labelPlacement="floating" placeholder="" fill="outline"></ion-input>
+								<ion-input [(ngModel)]="usuario.correo" class="custom-input-primary" label="{{ 'misdatos.input.correo' | translate }}" labelPlacement="floating" placeholder="" fill="outline"></ion-input>
 							</ion-item>
 						</ion-col>
 					</ion-row>
@@ -28,12 +28,12 @@
 					<ion-row>
 						<ion-col size="6">
 							<ion-item #itemNombre>
-								<ion-input [(ngModel)]="usuario.nombre" class="custom-input-primary" label="Nombre" labelPlacement="floating" placeholder="" fill="outline"></ion-input>
+								<ion-input [(ngModel)]="usuario.nombre" class="custom-input-primary" label="{{ 'misdatos.input.nombre' | translate }}" labelPlacement="floating" placeholder="" fill="outline"></ion-input>
 							</ion-item>
 						</ion-col>
 						<ion-col size="6">
 							<ion-item #itemApellido>
-								<ion-input [(ngModel)]="usuario.apellido" class="custom-input-primary" label="Apellido" labelPlacement="floating" placeholder="" fill="outline"></ion-input>
+								<ion-input [(ngModel)]="usuario.apellido" class="custom-input-primary" label="{{ 'misdatos.input.apellido' | translate }}" labelPlacement="floating" placeholder="" fill="outline"></ion-input>
 							</ion-item>
 						</ion-col>
 					</ion-row>
@@ -43,12 +43,12 @@
 					<ion-row>
 						<ion-col size="6">
 							<ion-item #itemPreguntaSecreta>
-								<ion-input [(ngModel)]="usuario.preguntaSecreta" class="custom-input-primary" label="Pregunta secreta" labelPlacement="floating" placeholder="" fill="outline"></ion-input>
+								<ion-input [(ngModel)]="usuario.preguntaSecreta" class="custom-input-primary" label="{{ 'misdatos.input.preguntasecreta' | translate }}" labelPlacement="floating" placeholder="" fill="outline"></ion-input>
 							</ion-item>
 						</ion-col>
 						<ion-col size="6">
 							<ion-item #itemRespuestaSecreta>
-								<ion-input [(ngModel)]="usuario.respuestaSecreta" class="custom-input-primary" label="Respuesta secreta" labelPlacement="floating" placeholder="" fill="outline"></ion-input>
+								<ion-input [(ngModel)]="usuario.respuestaSecreta" class="custom-input-primary" label="{{ 'misdatos.input.respuestasecreta' | translate }}" labelPlacement="floating" placeholder="" fill="outline"></ion-input>
 							</ion-item>
 						</ion-col>
 					</ion-row>
@@ -57,7 +57,7 @@
 
 				<ion-item #itemEducacion class="font-size-12">
 					<ion-select [(ngModel)]="usuario.nivelEducacional!.id" (ionChange)="actualizarNivelEducacional($event)">
-						<div slot="label">Educación <ion-text color="danger">*</ion-text></div>
+						<div slot="label">{{ 'misdatos.select.educacion' | translate }} <ion-text color="danger">*</ion-text></div>
 						<ion-select-option *ngFor="let nivelEducacional of listaNivelesEducacionales" [value]="nivelEducacional.id">
 							{{nivelEducacional.nombre}}
 						</ion-select-option>
@@ -68,12 +68,12 @@
 					<ion-row>
 						<ion-col size="6">								
 							<ion-item #itemContraseña1>
-								<ion-input [(ngModel)]="usuario.password" class="custom-input-primary" label="Contraseña" labelPlacement="floating" placeholder="" type="password" fill="outline"></ion-input>
+								<ion-input [(ngModel)]="usuario.password" class="custom-input-primary" label="{{ 'misdatos.input.contraseña' | translate }}" labelPlacement="floating" placeholder="" type="password" fill="outline"></ion-input>
 							</ion-item>
 						</ion-col>
 						<ion-col size="6">
 							<ion-item #itemContraseña2>
-								<ion-input [(ngModel)]="usuario.password" class="custom-input-primary" label="Nueva Contraseña" labelPlacement="floating" placeholder="" type="password" fill="outline"></ion-input>
+								<ion-input [(ngModel)]="usuario.password" class="custom-input-primary" label="{{ 'misdatos.input.nuevacontraseña' | translate }}" labelPlacement="floating" placeholder="" type="password" fill="outline"></ion-input>
 							</ion-item>
 						</ion-col>
 					</ion-row>
@@ -81,7 +81,7 @@
 
 				<div style="display: flex; justify-content: center; margin-top: 12px;">
 					<ion-button (click)="guardarCambios()" fill="outline" size="default" shape="round" [ngClass]="{'custom-button-primary': darkMode, 'custom-button-secondary': !darkMode}">
-						<ion-icon slot="start" name="document-outline"></ion-icon>Guardar Cambios
+						<ion-icon slot="start" name="document-outline"></ion-icon>{{ 'button.save_changes' | translate }}
 					</ion-button>
 				</div>
 			</ion-card-content>

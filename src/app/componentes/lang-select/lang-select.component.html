@@ -1,0 +1,12 @@
+<div>
+	<div style="display: flex; justify-content: center; align-items: center;">
+		<h3>{{ "lang" | translate }}</h3>
+	</div>
+	<ion-list>
+		<ion-radio-group [value]="langSelected">
+			<ion-item *ngFor="let lang of langCodes">
+				<ion-radio [value]="lang" (click)="changeLang(lang)">{{ "lang." + lang | translate }}</ion-radio>
+			</ion-item>
+		</ion-radio-group>
+	</ion-list>
+</div>

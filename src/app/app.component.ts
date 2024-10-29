@@ -1,8 +1,8 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 import { MenuController } from '@ionic/angular';
-import { ToastService } from './pages/servicios/toast.service';
-import { ThemeService } from './pages/servicios/theme.service';
+import { ToastService } from './servicios/toast.service';
+import { ThemeService } from './servicios/theme.service';
 
 @Component({
 	selector: 'app-root',

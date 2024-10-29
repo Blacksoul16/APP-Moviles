@@ -35,3 +35,56 @@
 // @import "@ionic/angular/css/palettes/dark.always.css";
 @import "@ionic/angular/css/palettes/dark.class.css";
 // @import "@ionic/angular/css/palettes/dark.system.css";
+
+
+
+
+
+
+
+
+.centrar {
+	display: flex;                 /* Define un contenedor Flexbox */
+	justify-content: center;       /* Centra el contenido horizontalmente dentro del contenedor */
+	align-items: center;           /* Centra el contenido verticalmente dentro del contenedor */
+	height: 100%;                  /* Hace que el contenedor ocupe el 100% de la altura del elemento padre */
+	padding: 20px;                 /* Agrega un espacio de 20px alrededor del contenido */
+	//border: 5px solid red !important; // Comentado: Estilo de borde para depuración visual
+  }
+  
+  /* Clases .enmarcar:
+   Estas clases están pensada para proporcionar un marco (borde) alrededor de un contenido
+   con un ancho máximo. Asegura que el contenido esté centrado horizontalmente, con bordes
+   redondeados, relleno interno (padding) y un borde gris claro.
+  */
+  
+  .enmarcar {
+	max-width: 600px;              /* Define el ancho máximo del elemento en 600px */
+	width: 100%;                   /* Asegura que el elemento ocupe el 100% del ancho disponible */
+	margin: auto;                  /* Centra el elemento horizontalmente dentro de su contenedor padre */
+	border-radius: 10px;           /* Aplica un radio de 10px a las esquinas del borde, redondeándolas */
+	padding: 20px;                 /* Agrega un espacio de 20px dentro del elemento, entre el contenido y el borde */
+	border: 1px solid gray;      /* Aplica un borde de 1px de grosor con color gris alrededor del elemento */
+	//border: 5px solid blue !important; // Comentado: Estilo de borde para depuración visual
+  }
+  
+  .enmarcar800px {
+	max-width: 800px;              /* Define el ancho máximo del elemento en 600px */
+	width: 100%;                   /* Asegura que el elemento ocupe el 100% del ancho disponible */
+	margin: auto;                  /* Centra el elemento horizontalmente dentro de su contenedor padre */
+	border-radius: 10px;           /* Aplica un radio de 10px a las esquinas del borde, redondeándolas */
+	padding: 20px;                 /* Agrega un espacio de 20px dentro del elemento, entre el contenido y el borde */
+	border: 1px solid gray;      /* Aplica un borde de 1px de grosor con color gris alrededor del elemento */
+	//border: 5px solid blue !important; // Comentado: Estilo de borde para depuración visual
+  }
+  
+  .enmarcar1000px {
+	max-width: 1000px;              /* Define el ancho máximo del elemento en 600px */
+	width: 100%;                   /* Asegura que el elemento ocupe el 100% del ancho disponible */
+	margin: auto;                  /* Centra el elemento horizontalmente dentro de su contenedor padre */
+	border-radius: 10px;           /* Aplica un radio de 10px a las esquinas del borde, redondeándolas */
+	padding: 20px;                 /* Agrega un espacio de 20px dentro del elemento, entre el contenido y el borde */
+	border: 1px solid gray;      /* Aplica un borde de 1px de grosor con color gris alrededor del elemento */
+	//border: 5px solid blue !important; // Comentado: Estilo de borde para depuración visual
+  }
+  

@@ -1,34 +1,67 @@
 <ion-content class="ion-padding-vertical background-container">
 	<div style="display: flex; flex-direction: column; justify-content: center; align-items: center;">
 		<img src="../../../assets/img/isotipo_white.png" alt="duocuc_logo" style="width: 25rem; margin-top: 32px; margin-bottom: 32px;">
-		<ion-badge style="font-size: 18px;" color="dark">Sistema de asistencia</ion-badge>
+		<ion-badge style="font-size: 18px;" color="dark">{{ "label.program_description" | translate }}</ion-badge>
 	</div>
 	<hr>
 	<div style="display: flex; justify-content: center; align-items: center;">
 		<ion-card class="ion-text-center ion-padding-vertical" style="display: flex; flex-direction: column; align-items: center; border-radius: 8px;">
 			<ion-card-title class="ion-text-center">
 				<ion-label>
-					<h1>Iniciar sesión</h1>
+					<h1>{{ "login.title" | translate }}</h1>
 				</ion-label>
 			</ion-card-title>
 
 			<ion-card-content>
 				<ion-item>
-					<ion-input [(ngModel)]="usuario.cuenta" [clearInput]="true" class="custom-input-primary" type="text" labelPlacement="floating" fill="outline" label="Usuario" placeholder="Ej: u.suario123"></ion-input>
+					<ion-input [(ngModel)]="usuario.cuenta" [clearInput]="true" class="custom-input-primary" type="text" labelPlacement="floating" fill="outline" label="{{ 'input.user.label' | translate }}" placeholder="Ej: u.suario123"></ion-input>
 				</ion-item>
 				<ion-item>
-					<ion-input [(ngModel)]="usuario.password" class="custom-input-primary" type="password" labelPlacement="floating" fill="outline" label="Contraseña" placeholder="Ej: contraseñaSegura8"></ion-input>
+					<ion-input [(ngModel)]="usuario.password" class="custom-input-primary" type="password" labelPlacement="floating" fill="outline" label="{{ 'input.password.label' | translate }}" placeholder="Ej: contraseñaSegura8"></ion-input>
 				</ion-item>
 				<div style="display: flex; justify-content: center; margin-top: 20px;">
 					<ion-button (click)="login()" fill="outline" shape="round" size="default" class="custom-button-primary">
-						<ion-icon slot="start" name="log-in-outline"></ion-icon>Ingresar
+						<ion-icon slot="start" name="log-in-outline"></ion-icon>{{ "button.log_in" | translate }}
 					</ion-button>
 				</div>
 				<hr class="ion-margin-top ion-margin-bottom">
 				<ion-label [routerLink]="['/recuperar']" style="cursor: pointer;">
-					<h5>¿Problemas con tu contraseña?</h5>
+					<h5>{{ "label.recover_pass" | translate }}</h5>
 				</ion-label>
 			</ion-card-content>
 		</ion-card>
 	</div>
+
+	<!-- Botón flotante -->
+	<ion-fab slot="fixed" horizontal="end" vertical="bottom">
+		<ion-grid>
+			<ion-row>
+				<ion-col>
+					<ion-fab-button class="custom-fabbutton-primary" (click)="langSelector($event)">
+						<ion-icon name="language-outline"></ion-icon>
+					</ion-fab-button>
+				</ion-col>
+				<ion-col>
+					<ion-fab-button class="custom-fabbutton-primary" [routerLink]="['/temas']">
+						<ion-icon name="color-palette"></ion-icon>
+					</ion-fab-button>
+				</ion-col>
+			</ion-row>
+		</ion-grid>
+	</ion-fab>
+
+	<!-- <ion-fab slot="fixed" horizontal="end" vertical="bottom">
+		<ion-fab-button class="custom-fabbutton-primary">
+			<ion-icon name="settings-outline"></ion-icon>
+		</ion-fab-button>
+		<ion-fab-list side="top">
+			<ion-fab-button (click)="langSelector($event)">
+				<ion-icon name="language-outline"></ion-icon>
+			</ion-fab-button>
+			<ion-fab-button>
+				<ion-icon name="color-palette"></ion-icon>
+			</ion-fab-button>
+		</ion-fab-list>
+	</ion-fab> -->
+	
 </ion-content>

@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { NavigationEnd, Router } from '@angular/router';
 import { MenuController } from '@ionic/angular';
 import { filter } from 'rxjs';
-import { ThemeService } from 'src/app/pages/servicios/theme.service';
+import { ThemeService } from 'src/app/servicios/theme.service';
 
 @Component({
   selector: 'duocuc-footer',

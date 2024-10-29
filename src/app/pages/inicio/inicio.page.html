@@ -10,23 +10,23 @@
 		<div style="display: flex; justify-content: center;">
 			<!-- Comentar luego -->
 			<ion-button (click)="fileInput.click()" fill="outline" shape="round" [ngClass]="{'custom-button-primary': darkMode, 'custom-button-secondary': !darkMode}">
-				<ion-icon slot="start" name="arrow-up-circle-outline"></ion-icon>Subir un QR
+				<ion-icon slot="start" name="arrow-up-circle-outline"></ion-icon>{{ "button.upload_qr" | translate }}
 			</ion-button>
 			<input type="file" #fileInput accept="image/*" style="display: none;" (change)="seleccionarArchivo($event)">
 			<!-- Comentar luego -->
 
 			<ion-button *ngIf="!escaneando" (click)="initScan()" fill="outline" shape="round" [ngClass]="{'custom-button-primary': darkMode, 'custom-button-secondary': !darkMode}">
-				<ion-icon slot="start" name="videocam-outline"></ion-icon>Escanear QR
+				<ion-icon slot="start" name="videocam-outline"></ion-icon>{{ "button.scan_qr" | translate }}
 			</ion-button>
 	
 			<ion-button *ngIf="escaneando" (click)="stopScan()" fill="outline" shape="round" class="custom-button-danger">
-				<ion-icon slot="start" name="stop-circle-outline"></ion-icon>Detener escaneo
+				<ion-icon slot="start" name="stop-circle-outline"></ion-icon>{{ "button.stop_scan" | translate }}
 			</ion-button>
 		</div>
 		<hr>
 		<div style="display: flex; justify-content: center;">
 			<div style="display: flex; justify-content: center; border-style: solid; border-color: #939393; width: 24rem; height: 18rem;">
-				<h4 *ngIf="!escaneando" style="display: flex; align-self: center; height: auto;">Aquí verás tu cámara.</h4>
+				<h4 *ngIf="!escaneando" style="display: flex; align-self: center; height: auto;">{{ "label.camera_text" | translate }}</h4>
 				<video #video [hidden]="!escaneando" style="width: 24rem; height: auto;"></video>
 				<canvas #canvas hidden></canvas>
 			</div>

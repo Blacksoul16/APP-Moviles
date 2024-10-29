@@ -4,10 +4,9 @@ import { FormsModule } from '@angular/forms';
 
 import { IonicModule } from '@ionic/angular';
 
-import { LoginPageRoutingModule } from './login-routing.module';
+import { TemasPageRoutingModule } from './temas-routing.module';
 
-import { LoginPage } from './login.page';
-import { LangSelectComponent } from "../../componentes/lang-select/lang-select.component";
+import { TemasPage } from './temas.page';
 import { SharedModule } from 'src/app/componentes/shared.module';
 
 @NgModule({
@@ -15,10 +14,9 @@ import { SharedModule } from 'src/app/componentes/shared.module';
     CommonModule,
     FormsModule,
     IonicModule,
-    LoginPageRoutingModule,
-    LangSelectComponent,
+    TemasPageRoutingModule,
     SharedModule
-],
-  declarations: [LoginPage]
+  ],
+  declarations: [TemasPage]
 })
-export class LoginPageModule {}
+export class TemasPageModule {}

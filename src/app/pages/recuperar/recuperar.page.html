@@ -1,4 +1,4 @@
-<duocuc-header></duocuc-header>
+<!-- <duocuc-header></duocuc-header> -->
 
 <ion-content>
 	<!-- Sección validar correo -->
@@ -7,19 +7,19 @@
 			<ion-card class="ion-text-center ion-padding-vertical" style="display: flex; flex-direction: column; align-items: center; border-radius: 8px; width: 30rem;">
 				<ion-card-title class="ion-text-center">
 					<ion-label>
-						<h1>Recuperar contraseña</h1>
+						<h1>{{ "label.recover_pass" | translate}}</h1>
 					</ion-label>
 				</ion-card-title>
-				<ion-card-subtitle class="ion-text-center"><ion-text color="warning"> Paso 1:</ion-text> Ingresa tu correo.</ion-card-subtitle>
+				<ion-card-subtitle class="ion-text-center"><ion-text color="warning">{{ "label.recover_pass.step" | translate}} 1:</ion-text> {{ "recuperar.correo.text" | translate }}.</ion-card-subtitle>
 				<hr>
 				<ion-card-content>
 					<ion-item>
-						<ion-input [(ngModel)]="correo" [clearInput]="true" class="custom-input-primary" type="text" labelPlacement="floating" fill="outline" label="Correo" placeholder="Ingresa tu correo" ></ion-input>
+						<ion-input [(ngModel)]="correo" [clearInput]="true" class="custom-input-primary" type="text" labelPlacement="floating" fill="outline" label="{{ 'recuperar.correo.label' | translate }}" placeholder="{{ 'recuperar.correo.text' | translate }}" ></ion-input>
 					</ion-item>
 					<hr>
 					<div style="display: flex; justify-content: center; margin-top: 20px;">
-						<ion-button [routerLink]="['/login']" class="custom-button-danger" fill="outline" shape="round">Volver</ion-button>
-						<ion-button (click)="validarCorreo()" class="custom-button-primary" fill="outline" shape="round">Siguiente</ion-button>
+						<ion-button [routerLink]="['/login']" class="custom-button-danger" fill="outline" shape="round">{{ "button.go_back" | translate }}</ion-button>
+						<ion-button (click)="validarCorreo()" class="custom-button-primary" fill="outline" shape="round">{{ "button.continue" | translate }}</ion-button>
 					</div>
 				</ion-card-content>
 			</ion-card>
@@ -32,20 +32,20 @@
 			<ion-card class="ion-text-center ion-padding-vertical" style="display: flex; flex-direction: column; align-items: center; border-radius: 8px; width: 30rem;" >
 				<ion-card-title class="ion-text-center">
 					<ion-label>
-						<h1>Recuperar contraseña</h1>
+						<h1>{{ "label.recover_pass" | translate}}</h1>
 					</ion-label>
 				</ion-card-title>
-				<ion-card-subtitle class="ion-text-center"> <ion-text color="warning">Paso 2:</ion-text> Responde a la pregunta secreta, <ion-text color="warning">{{usuario.nombre}} {{usuario.apellido}}</ion-text>.</ion-card-subtitle>
+				<ion-card-subtitle class="ion-text-center"> <ion-text color="warning">{{ "label.recover_pass.step" | translate}} 2:</ion-text> {{ "recuperar.preguntasecreta.text" | translate }}, <ion-text color="warning">{{usuario.nombre}} {{usuario.apellido}}</ion-text>.</ion-card-subtitle>
 				<hr>
 				<h3>{{usuario.preguntaSecreta}}</h3>
 				<ion-card-content>
 					<ion-item>
-						<ion-input [(ngModel)]="respuestaSecreta" [clearInput]="true" class="custom-input-primary" type="text" labelPlacement="floating" fill="outline" label="Respuesta" placeholder="Ingresa respuesta 🤫"></ion-input>
+						<ion-input [(ngModel)]="respuestaSecreta" [clearInput]="true" class="custom-input-primary" type="text" labelPlacement="floating" fill="outline" label="{{ 'recuperar.preguntasecreta.label' | translate }}" placeholder="🤫"></ion-input>
 					</ion-item>
 					<hr>
 					<div style="display: flex; justify-content: center; margin-top: 20px;">
-						<ion-button (click)="seleccionarTab('validarCorreo')" class="custom-button-danger" fill="outline" shape="round">Volver</ion-button>
-						<ion-button (click)="validarRespuesta()" class="custom-button-primary" fill="outline" shape="round">Siguiente</ion-button>
+						<ion-button (click)="seleccionarTab('validarCorreo')" class="custom-button-danger" fill="outline" shape="round">{{ "button.go_back" | translate }}</ion-button>
+						<ion-button (click)="validarRespuesta()" class="custom-button-primary" fill="outline" shape="round">{{ "button.continue" | translate }}</ion-button>
 					</div>
 				</ion-card-content>
 			</ion-card>

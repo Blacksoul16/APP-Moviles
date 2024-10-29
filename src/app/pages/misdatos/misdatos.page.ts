@@ -4,8 +4,9 @@ import { MenuController } from '@ionic/angular';
 import jsQR, { QRCode } from 'jsqr';
 import { NivelEducacional } from 'src/app/model/nivel-educacional';
 import { Usuario } from 'src/app/model/usuario';
-import { ToastService } from '../servicios/toast.service';
-import { ThemeService } from '../servicios/theme.service';
+import { ToastService } from '../../servicios/toast.service';
+import { ThemeService } from '../../servicios/theme.service';
+import { LangChangeEvent, TranslateService } from '@ngx-translate/core';
 
 
 @Component({
@@ -18,26 +19,26 @@ export class MisdatosPage implements OnInit {
   	public usuario: Usuario
 	public darkMode: boolean = true
 
-	constructor(private rutaActivada: ActivatedRoute, private ruta: Router, private toast: ToastService, private theme: ThemeService) { 
+	constructor(private rutaActivada: ActivatedRoute, private ruta: Router, private toast: ToastService, private theme: ThemeService, private translate: TranslateService) { 
 		this.usuario = new Usuario("", "", "", "", "", "", "", true, NivelEducacional.findNivelEducacional(1)!, undefined);
 
 		this.rutaActivada.queryParams.subscribe(params => {
-			const nav = this.ruta.getCurrentNavigation();
+			const nav = this.ruta.getCurrentNavigation()
 				if (nav && nav.extras.state) {
 					if (nav.extras.state["usuario"]) {
-						this.usuario = nav.extras.state["usuario"];
-						localStorage.setItem("usuarioActual", JSON.stringify(this.usuario));
+						this.usuario = nav.extras.state["usuario"]
+						localStorage.setItem("usuarioActual", JSON.stringify(this.usuario))
 						return;
 					}
 				}
-				const usuarioGuardado = localStorage.getItem("usuarioActual");
+				const usuarioGuardado = localStorage.getItem("usuarioActual")
 				if (usuarioGuardado) {
 					this.usuario = JSON.parse(usuarioGuardado);
 				} else {
-					this.toast.showMsg("Debes iniciar sesión para acceder a esta página.", 2000, "danger");
-					this.ruta.navigate(["login"]);
+					this.toast.showMsg("Debes iniciar sesión para acceder a esta página.", 2000, "danger")
+					this.ruta.navigate(["login"])
 				}
-			});
+			})
 	}
 
 	getSalut(): string {
@@ -47,7 +48,10 @@ export class MisdatosPage implements OnInit {
 		else { return "Buenas noches" }
 	}
 
-	ngOnInit() { this.theme.darkMode$.subscribe(isDark => { this.darkMode = isDark }) }
+	ngOnInit() {
+		this.translate.use(localStorage.getItem("selectedLang") || "es")
+		this.theme.darkMode$.subscribe(isDark => { this.darkMode = isDark })
+	}
 
  	public listaNivelesEducacionales = NivelEducacional.getNivelesEducacionales();
 	public actualizarNivelEducacional(event: any) { this.usuario.nivelEducacional = NivelEducacional.findNivelEducacional(event.detail.value)!; }

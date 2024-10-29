@@ -2,8 +2,9 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { NivelEducacional } from 'src/app/model/nivel-educacional';
 import { Usuario } from 'src/app/model/usuario';
-import { ToastService } from '../servicios/toast.service';
-import { ThemeService } from '../servicios/theme.service';
+import { ToastService } from '../../servicios/toast.service';
+import { ThemeService } from '../../servicios/theme.service';
+import { TranslateService } from '@ngx-translate/core';
 
 @Component({
 	selector: 'app-miclase',
@@ -17,7 +18,7 @@ export class MiclasePage implements OnInit {
 	public datosQRKeys: any[] = []
 	public darkMode: boolean = true
 
-	constructor(private rutaActivada: ActivatedRoute, private ruta: Router, private toast: ToastService, private theme: ThemeService) {
+	constructor(private rutaActivada: ActivatedRoute, private ruta: Router, private toast: ToastService, private theme: ThemeService, private translate: TranslateService) {
 		this.usuario = new Usuario("", "", "", "", "", "", "", true, NivelEducacional.findNivelEducacional(1)!, undefined)
 		this.rutaActivada.queryParams.subscribe(params => {
 			const nav = this.ruta.getCurrentNavigation()
@@ -43,7 +44,10 @@ export class MiclasePage implements OnInit {
 		})
 	}
 
-	ngOnInit() { this.theme.darkMode$.subscribe(isDark => { this.darkMode = isDark }) }
+	ngOnInit() {
+		this.translate.use(localStorage.getItem("selectedLang") || "es")
+		this.theme.darkMode$.subscribe(isDark => { this.darkMode = isDark })
+	}
 
 	public limpiarDatosQR(): void { this.datosQR = null; this.datosQRKeys = [] }
 

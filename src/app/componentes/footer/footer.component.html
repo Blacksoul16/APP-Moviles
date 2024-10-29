@@ -5,22 +5,27 @@
 				
 				<ion-tab-button [selected]="tabSeleccionada === 'misdatos'" (click)="seleccionarTab('misdatos')" [ngClass]="{'custom-tab-primary': darkMode, 'custom-tab-secondary': !darkMode}">
 					<ion-icon name="bar-chart-outline"></ion-icon>
-					<ion-label>Mis datos</ion-label>
+					<ion-label>{{ "tab.my_data.label" | translate }}</ion-label>
+				</ion-tab-button>
+				
+				<ion-tab-button disabled [selected]="tabSeleccionada === 'foro'" (click)="seleccionarTab('foro')" [ngClass]="{'custom-tab-primary': darkMode, 'custom-tab-secondary': !darkMode}">
+					<ion-icon name="newspaper-outline"></ion-icon>
+					<ion-label>{{ "tab.forum.label" | translate }}</ion-label>
 				</ion-tab-button>
 		
 				<ion-tab-button [selected]="tabSeleccionada === 'inicio'" (click)="seleccionarTab('inicio')" [ngClass]="{'custom-tab-primary': darkMode, 'custom-tab-secondary': !darkMode}">
 					<ion-icon name="qr-code-outline"></ion-icon>
-					<ion-label>Inicio</ion-label>
+					<ion-label>{{ "tab.home.label" | translate }}</ion-label>
 				</ion-tab-button>
 		
 				<ion-tab-button [selected]="tabSeleccionada === 'miclase'" (click)="seleccionarTab('miclase')" [ngClass]="{'custom-tab-primary': darkMode, 'custom-tab-secondary': !darkMode}">
 					<ion-icon name="school-outline"></ion-icon>
-					<ion-label>Mi clase</ion-label>
+					<ion-label>{{ "tab.my_class.label" | translate }}</ion-label>
 				</ion-tab-button>
 		
 				<ion-tab-button (click)="togglearMenuLateral()" [ngClass]="{'custom-tab-primary': darkMode, 'custom-tab-secondary': !darkMode}">
 					<ion-icon name="menu-outline"></ion-icon>
-					<ion-label>Menú</ion-label>
+					<ion-label>{{ "tab.menu.label" | translate }}</ion-label>
 				</ion-tab-button>
 		
 			</ion-tab-bar>

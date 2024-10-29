@@ -3,8 +3,9 @@ import { ActivatedRoute, Router } from '@angular/router';
 import jsQR, { QRCode } from 'jsqr';
 import { NivelEducacional } from 'src/app/model/nivel-educacional';
 import { Usuario } from 'src/app/model/usuario';
-import { ToastService } from '../servicios/toast.service';
-import { ThemeService } from '../servicios/theme.service';
+import { ToastService } from '../../servicios/toast.service';
+import { ThemeService } from '../../servicios/theme.service';
+import { TranslateService } from '@ngx-translate/core';
 // import { state } from '@angular/animations';
 
 @Component({
@@ -27,7 +28,7 @@ export class InicioPage implements OnInit {
 	public datosQR: any = ""
 	/* FIN COSAS RELACIONADAS AL QR */
 
-	constructor(private rutaActivada: ActivatedRoute, private ruta: Router, private toast: ToastService, private theme: ThemeService) {
+	constructor(private rutaActivada: ActivatedRoute, private ruta: Router, private toast: ToastService, private theme: ThemeService, private translate: TranslateService) {
 		this.usuario = new Usuario("", "", "", "", "", "", "", true, NivelEducacional.findNivelEducacional(1)!, undefined)
 		this.rutaActivada.queryParams.subscribe(params => {
 			const nav = this.ruta.getCurrentNavigation()
@@ -54,6 +55,7 @@ export class InicioPage implements OnInit {
 	}
 
   	ngOnInit() {
+		this.translate.use(localStorage.getItem("selectedLang") || "es")
 		this.theme.darkMode$.subscribe(isDark => { this.darkMode = isDark })
 		//this.initScan()
 		localStorage.setItem("usuarioActual", JSON.stringify(this.usuario))

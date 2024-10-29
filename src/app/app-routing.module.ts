@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { PreloadAllModules, RouterModule, Routes } from '@angular/router';
 
-const routes: Routes = [
+export const routes: Routes = [
   {
     path: '',
     redirectTo: 'login',
@@ -34,7 +34,11 @@ const routes: Routes = [
   {
     path: 'miclase',
     loadChildren: () => import('./pages/miclase/miclase.module').then( m => m.MiclasePageModule)
+  },  {
+    path: 'temas',
+    loadChildren: () => import('./pages/temas/temas.module').then( m => m.TemasPageModule)
   },
+
 
 ];
 

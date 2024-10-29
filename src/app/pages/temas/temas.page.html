@@ -1,0 +1,144 @@
+<ion-header>
+	<ion-toolbar>
+		<h4 slot="start">
+			<ion-select  label="{{ 'temas.label.colortheme' | translate }}:" (ionChange)="cambiarTema($event)" [(ngModel)]="tema">
+				<ion-select-option value="light">{{ 'temas.color.light' | translate }}</ion-select-option>
+				<ion-select-option value="dark">{{ 'temas.color.dark' | translate }}</ion-select-option>
+				<ion-select-option value="green">{{ 'temas.color.green' | translate }}</ion-select-option>
+				<ion-select-option value="red">{{ 'temas.color.red' | translate }}</ion-select-option>
+				<ion-select-option value="facebook">{{ 'temas.color.facebook' | translate }}</ion-select-option>
+				<ion-select-option value="instagram">{{ 'temas.color.instagram' | translate }}</ion-select-option>
+				<ion-select-option value="duoc">{{ 'temas.color.duoc' | translate }}</ion-select-option>
+			</ion-select>
+		</h4>
+		<div slot="end">
+			<ion-button [routerLink]="['/login']" fill="outline" shape="round" size="default" color="danger">Volver</ion-button>
+		</div>
+	</ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true" class="ion-padding">
+	<!-- Botones -->
+	<br>
+	<ion-grid class="enmarcar">
+		<ion-row class="ion-justify-content-center">
+			<ion-col size="auto">
+				<ion-button shape="round" size="small" color="primary">{{ 'temas.button.primary' | translate }}</ion-button>
+			</ion-col>
+			<ion-col size="auto">
+				<ion-button shape="round" size="small" color="secondary">{{ 'temas.button.secondary' | translate }}</ion-button>
+			</ion-col>
+			<ion-col size="auto">
+				<ion-button shape="round" size="small" color="tertiary">{{ 'temas.button.tertiary' | translate }}</ion-button>
+			</ion-col>
+		</ion-row>
+		<ion-row class="ion-justify-content-center">
+			<ion-col size="auto">
+				<ion-button shape="round" size="small" color="success">{{ 'temas.button.success' | translate }}</ion-button>
+			</ion-col>
+			<ion-col size="auto">
+				<ion-button shape="round" size="small" color="warning">{{ 'temas.button.warning' | translate }}</ion-button>
+			</ion-col>
+			<ion-col size="auto">
+				<ion-button shape="round" size="small" color="danger">{{ 'temas.button.danger' | translate }}</ion-button>
+			</ion-col>
+		</ion-row>
+		<ion-row class="ion-justify-content-center">
+			<ion-col size="auto">
+				<ion-button shape="round" size="small" color="light">{{ 'temas.button.light' | translate }}</ion-button>
+			</ion-col>
+			<ion-col size="auto">
+				<ion-button shape="round" size="small" color="dark">{{ 'temas.button.dark' | translate }}</ion-button>
+			</ion-col>
+			<ion-col size="auto">
+				<ion-button shape="round" size="small" color="primary">
+					<ion-icon slot="start" name="home-outline" size="small"></ion-icon>{{ 'temas.button.home' | translate }}
+				</ion-button>
+			</ion-col>
+			<ion-col size="auto">
+				<ion-button shape="round" size="small" color="primary">
+					<ion-icon slot="start" name="log-out-outline" size="small"></ion-icon>{{ 'temas.button.logout' | translate }}
+				</ion-button>
+			</ion-col>
+		</ion-row>
+	</ion-grid>
+
+	<!-- Tarjetas -->
+	<br>
+	<ion-card class="enmarcar">
+		<ion-card-header>
+			<ion-card-title>
+				{{ 'temas.card.title' | translate }}
+			</ion-card-title>
+			<ion-card-subtitle>
+				{{ 'temas.card.subtitle' | translate }}
+			</ion-card-subtitle>
+		</ion-card-header>
+		<ion-card-content>
+			{{ 'temas.card.content' | translate }}
+		</ion-card-content>
+	</ion-card>
+
+	<!-- Listas -->
+	<br>
+	<div class="enmarcar">
+		<ion-title> {{ 'temas.list.title' | translate }} </ion-title>
+		<br>
+		<ion-list>
+		<ion-item>
+			<ion-label> {{ 'temas.list.item1' | translate }} </ion-label>
+		</ion-item>
+		<ion-item>
+			<ion-label> {{ 'temas.list.item2' | translate }} </ion-label>
+		</ion-item>
+		<ion-item>
+			<ion-label> {{ 'temas.list.item3' | translate }} </ion-label>
+		</ion-item>
+		</ion-list>
+	</div>
+
+	<!-- Calendarios -->
+	<br>
+	<div class="enmarcar">
+		<ion-title> {{ 'temas.calendar.title' | translate }} </ion-title>
+		<br>
+		<ion-datetime size="small" class="ion-text-right enmarcar" presentation="date" [preferWheel]="true" displayFormat="DD/MM/YYYY" placeholder="dd/mm/yyyy"></ion-datetime>
+	</div>
+
+	<!-- Ingreso de datos -->
+	<br>
+	<div class="enmarcar">
+		<ion-title> {{ 'temas.form.title' | translate }} </ion-title>
+		<br>
+		<ion-item>
+		<ion-input label="{{ 'temas.form.namelabel' | translate }}" labelPlacement="floating" 
+			placeholder="{{ 'temas.form.nameplaceholder' | translate }}"></ion-input>
+		</ion-item>
+
+		<ion-item>
+		<ion-textarea label="{{ 'temas.form.descriptionlabel' | translate }}" labelPlacement="floating" 
+			placeholder="{{ 'temas.form.descriptionplaceholder' | translate }}"></ion-textarea>
+		</ion-item>
+		
+		<ion-item>
+		<ion-label>{{ 'temas.form.togglelabel' | translate }}</ion-label>
+		<ion-toggle checked="true"></ion-toggle>
+		</ion-item>
+		
+		<ion-item>
+		<ion-label>{{ 'temas.form.checkboxlabel' | translate }}</ion-label>
+		<ion-checkbox slot="start"></ion-checkbox>
+		</ion-item>
+	</div>
+</ion-content>
+
+<ion-footer>
+	<ion-toolbar class="padding-6">
+		<div style="display: flex; justify-content: center; align-items: center;">
+			<h5>
+				{{ 'temas.authortext' | translate }}
+				{{ 'temas.author' | translate }}
+			</h5>
+		</div>
+	</ion-toolbar>
+</ion-footer>

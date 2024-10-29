@@ -2,7 +2,7 @@
 	<ion-menu *ngIf="mostrarComponentes" side="end" contentId="main-content">
 		<ion-header>
 			<ion-toolbar>
-				<ion-title class="ion-text-center">¿A dónde vamos?</ion-title>
+				<ion-title class="ion-text-center">{{ "label.where_we_goin" | translate }}</ion-title>
 			</ion-toolbar>
 		</ion-header>
 		<ion-content class="ion-padding">
@@ -10,7 +10,7 @@
 				<ion-item-divider style="margin-bottom: 2rem;"></ion-item-divider>
 				<ion-row style="display: flex; flex-direction: column; justify-content: center; align-items: center;">
 					<ion-button fill="outline" shape="round" size="default" [ngClass]="{'custom-button-primary': darkMode, 'custom-button-secondary': !darkMode}" style="width: 14rem;">
-						<ion-icon slot="start" name="settings-outline"></ion-icon>Ajustes
+						<ion-icon slot="start" name="settings-outline"></ion-icon>{{ "button.settings" | translate }}
 					</ion-button>
 				</ion-row>
 				<ion-item-divider></ion-item-divider>
@@ -23,7 +23,7 @@
 				<ion-item-divider style="margin-bottom: 2rem;"></ion-item-divider>
 				<ion-row>
 					<ion-button (click)="cerrarSesion()" fill="outline" shape="round" size="default" class="custom-button-danger" style="width: 14rem;">
-						<ion-icon slot="start" name="log-out-outline"></ion-icon>Cerrar sesión
+						<ion-icon slot="start" name="log-out-outline"></ion-icon>{{ "button.log_out" | translate }}
 					</ion-button>
 				</ion-row>
 			</ion-grid>

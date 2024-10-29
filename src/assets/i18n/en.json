@@ -1,0 +1,62 @@
+{
+	"lang": "Language",
+	"lang.es": "Spanish",
+	"lang.en": "English",
+	"lang.fr": "French",
+
+	"login.title": "Log in",
+
+	"input.user.label": "User",
+	"input.password.label": "Password",
+
+	"button.upload_qr": "Upload QR",
+	"button.scan_qr": "Scan QR",
+	"button.stop_scan": "Stop scan",
+	"button.log_in": "Enter",
+	"button.log_out": "Log out",
+	"button.settings": "Settings",
+	"button.go_scan": "Go to scan",
+	"button.clear_qr_data": "Clear QR data",
+	"button.save_changes": "Save changes",
+	"button.go_back": "Go back",
+	"button.continue": "Continue",
+
+	"tab.home.label": "Home",
+	"tab.my_data.label": "My data",
+	"tab.my_class.label": "My class",
+	"tab.menu.label": "Menu",
+	"tab.forum.label": "Forum",
+	
+	"label.recover_pass": "Password recovery",
+	"label.camera_text": "Here you will see your camera",
+	"label.where_we_goin": "Where are we going?",
+	"label.program_description": "Assistance System",
+	"label.recover_pass.step": "Step",
+
+	"correcto.text": "Correct answer!",
+	"correcto.descripcion": "Your password is",
+
+	"incorrecto.text": "Wrong answer!",
+	"incorrecto.descripcion": "We can't show your password if you answer the secret question wrong!",
+
+	"recuperar.correo.text": "Enter your email",
+	"recuperar.correo.label": "Email",
+	"recuperar.preguntasecreta.text": "Answer the secret question",
+	"recuperar.preguntasecreta.label": "Answer",
+
+	"miclase.badge": "My class data",
+	"miclase.card.title": "QR Code data",
+	"miclase.card.content1": "There is no scanned data yet.",
+	"miclase.card.content2": "Try uploading a QR or using your device's camera to scan one.",
+
+	"misdatos.badge": "My personal data",
+	"misdatos.input.cuenta": "Account",
+	"misdatos.input.correo": "Email",
+	"misdatos.input.nombre": "Name",
+	"misdatos.input.apellido": "Surname",
+	"misdatos.input.preguntasecreta": "Secret question",
+	"misdatos.input.respuestasecreta": "Secret answer",
+	"misdatos.select.educacion": "Education",
+	"misdatos.input.contraseña": "Password",
+	"misdatos.input.nuevacontraseña": "New password"
+}

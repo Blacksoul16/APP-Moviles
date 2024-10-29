@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { MenuController } from '@ionic/angular';
-import { ToastService } from 'src/app/pages/servicios/toast.service';
+import { ToastService } from 'src/app/servicios/toast.service';
 
 @Component({
 	selector: 'duocuc-menu-lateral',

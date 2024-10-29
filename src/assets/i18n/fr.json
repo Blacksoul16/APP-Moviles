@@ -1,0 +1,62 @@
+{
+	"lang": "Langue",
+	"lang.es": "Espagnol",
+	"lang.en": "Anglais",
+	"lang.fr": "Français",
+	
+	"login.title": "Se connecter",
+
+	"input.user.label": "Utilisateur",
+	"input.password.label": "Mot de passe",
+
+	"button.upload_qr": "Télécharger un QR",
+	"button.scan_qr": "Scanner un QR",
+	"button.stop_scan": "Arrêter le scan",
+	"button.log_in": "Entrer",
+	"button.log_out": "Déconnexion",
+	"button.settings": "Paramètres",
+	"button.go_scan": "Aller scanner",
+	"button.clear_qr_data": "Effacer les données QR",
+	"button.save_changes": "Enregistrer les modifications",
+	"button.go_back": "Retourner",
+	"button.continue": "Continuer",
+
+	"tab.home.label": "Accueil",
+	"tab.my_data.label": "Mes données",
+	"tab.my_class.label": "Ma classe",
+	"tab.menu.label": "Menu",
+	"tab.forum.label": "Forum",
+
+	"label.recover_pass": "Récupérer le mot de passe",
+	"label.camera_text": "Ici, vous verrez votre caméra",
+	"label.where_we_goin": "Où allons-nous?",
+	"label.program_description": "Système de présence",
+	"label.recover_pass.step": "Étape",
+
+	"correcto.text": "Bonne réponse !",
+	"correcto.descripcion": "Votre mot de passe est",
+
+	"incorrecto.text": "Mauvaise réponse !",
+	"incorrecto.descripcion": "Nous ne pouvons pas afficher votre mot de passe si vous répondez mal à la question secrète !",
+	
+	"recuperar.correo.text": "Entrez votre e-mail",
+	"recuperar.correo.label": "E-mail",
+	"recuperar.preguntasecreta.text": "Répondez à la question secrète",
+	"recuperar.preguntasecreta.label": "Réponse",
+
+	"miclase.badge": "Données de ma classe",
+	"miclase.card.title": "Données du code QR",
+	"miclase.card.content1": "Aucune donnée scannée pour le moment.",
+	"miclase.card.content2": "Essayez de télécharger un QR ou utilisez la caméra de votre appareil pour en scanner un.",
+
+	"misdatos.badge": "Mes informations personnelles",
+	"misdatos.input.cuenta": "Compte",
+	"misdatos.input.correo": "E-mail",
+	"misdatos.input.nombre": "Prénom",
+	"misdatos.input.apellido": "Nom de famille",
+	"misdatos.input.preguntasecreta": "Question secrète",
+	"misdatos.input.respuestasecreta": "Réponse secrète",
+	"misdatos.select.educacion": "Éducation",
+	"misdatos.input.contraseña": "Mot de passe",
+	"misdatos.input.nuevacontraseña": "Nouveau mot de passe"
+}

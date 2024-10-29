@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ThemeService } from 'src/app/pages/servicios/theme.service';
+import { ThemeService } from 'src/app/servicios/theme.service';
 
 @Component({
   selector: 'duocuc-header',

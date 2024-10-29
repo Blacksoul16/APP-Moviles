@@ -1,9 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { Usuario } from 'src/app/model/usuario';
-import { ToastService } from '../servicios/toast.service';
+import { ToastService } from '../../servicios/toast.service';
 import { NivelEducacional } from 'src/app/model/nivel-educacional';
 import { Router, NavigationExtras, ActivatedRoute } from '@angular/router';
-import { AlertService } from '../servicios/alert.service';
+import { AlertService } from '../../servicios/alert.service';
+import { TranslateService } from '@ngx-translate/core';
 
 @Component({
 	selector: 'app-recuperar',
@@ -16,9 +17,11 @@ export class RecuperarPage implements OnInit {
 	public usuario: Usuario = new Usuario("", "", "", "", "", "", "", true, NivelEducacional.findNivelEducacional(1)!, undefined)
 	public respuestaSecreta: string = ""
 
-	constructor(private ruta: Router, private toast: ToastService) {}
+	constructor(private ruta: Router, private toast: ToastService, private translate: TranslateService) {}
 
-	ngOnInit() {}
+	ngOnInit() {
+		this.translate.use(localStorage.getItem("selectedLang") || "es")
+	}
 
 	public seleccionarTab(tab: string): void { this.tab = tab }
 
