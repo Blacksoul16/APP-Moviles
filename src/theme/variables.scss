@@ -1,48 +1,58 @@
 // For information on how to create your own theme, please see:
 // http://ionicframework.com/docs/theming/
 
+/* Ini Custom */
+// ion-input { margin-top: 4px; }
+// ion-content {
+// 	--padding-top: 20px
+// 	--padding-bottom: 20px
+// 	--padding-start: 20px
+// 	--padding-end: 20px
+// }
+
+// ion-item {
+// 	--inner-padding-start: 0px;
+// 	--inner-padding-end: 0px;
+// 	--padding-start: 0px;
+// 	--padding-end: 0px;
+// 	--padding-bottom: 10px;
+// }
+// ion-segment-button.md::part(indicator-background) {
+// 	height: 1px;
+// }
+
+ion-select { --color-checked: #F1B634; --color-selected: #F1B634; }
+
+.select-popover .popover-viewport ion-button {
+	&:first-child { color: #FF6347; }
+	&:last-child { color: #54C240; }
+}
+  
+
 .custom-tab-primary { --color: #939393; --color-selected: #F1B634; }
 .custom-tab-secondary { --color: #939393; --color-selected: #132CAA; }
 
-.custom-input-primary { --highlight-color: #F1B634; }
+.custom-input-primary {--highlight-color: #F1B634; }
 .custom-input-secondary { --highlight-color: #132CAA; }
 .custom-input-danger { --highlight-color: #F63926; }
 .custom-input-success { --highlight-color: #54C240; }
 
-// .custom-toggle-primary { --handle-background-checked: #F1B634; }
-// .custom-toggle-secondary { --track-background: #132CAA; --track-background-checked: #132CAA; }
-// .custom-toggle-danger { --track-background: #F63926; --track-background-checked: #F63926; }
+.custom-textarea-primary { --highlight-color: #F1B634; }
+.custom-textarea-secondary { --highlight-color: #132CAA; }
+.custom-textarea-danger { --highlight-color: #F63926; }
+.custom-textarea-success { --highlight-color: #54C240; }
 
-// BOTONES
-// .custom-button {
-// 	--border-color: #132CAA;
-// 	--color: #132CAA;
-// 	--background-hover: #132CAA;
-// 	--background-hover-opacity: 100%;
-// 	--color-hover: white;
-// }
+.custom-select-primary { --highlight-color: #F1B634; }
+.custom-select-secondary { --highlight-color: #132CAA; }
+.custom-select-danger { --highlight-color: #F63926; }
+.custom-select-success { --highlight-color: #54C240; }
 
-// .ion-palette-dark .custom-button {
-// 	--border-color: #F1B634;
-// 	--color: #F1B634;
-// 	--background-hover: #F1B634;
-// 	--background-hover-opacity: 100%;
-// 	--color-hover: black;
-// }
+.custom-fabbutton-primary { --color: black; --background: #F1B634; --background-hover: 100%; }
+.custom-fabbutton-secondary { --color: white; --background: #132CAA; --background-hover: 100%; }
 
-.custom-fabbutton-primary {
-	--color: black;
-	--background: #F1B634;
-	--background-hover: 100%;
-}
+.custom-segmentbutton-primary { --color: #939393; --color-checked: #F1B634;  }
+.custom-segmentbutton-secondary { --color: #939393; --color-checked: #132CAA; }
 
-.custom-fabbutton-secondary {
-	--color: white;
-	--background: #132CAA;
-	--background-hover: 100%;
-}
-
-// No editar aún, cambios en proceso
 .custom-button-primary {
 	--border-color: #F1B634;
 	--color: #F1B634;
@@ -71,6 +81,28 @@
 	--background-hover-opacity: 100%;
 	--color-hover: black;
 }
+/* Fin Custom */
+
+// .custom-toggle-primary { --handle-background-checked: #F1B634; }
+// .custom-toggle-secondary { --track-background: #132CAA; --track-background-checked: #132CAA; }
+// .custom-toggle-danger { --track-background: #F63926; --track-background-checked: #F63926; }
+
+// BOTONES
+// .custom-button {
+// 	--border-color: #132CAA;
+// 	--color: #132CAA;
+// 	--background-hover: #132CAA;
+// 	--background-hover-opacity: 100%;
+// 	--color-hover: white;
+// }
+
+// .ion-palette-dark .custom-button {
+// 	--border-color: #F1B634;
+// 	--color: #F1B634;
+// 	--background-hover: #F1B634;
+// 	--background-hover-opacity: 100%;
+// 	--color-hover: black;
+// }
 
 /*
 	TEMAS DEL PROFE

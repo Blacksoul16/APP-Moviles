@@ -1,7 +1,7 @@
 <ion-header>
 	<ion-toolbar>
-		<h4 slot="start">
-			<ion-select  label="{{ 'temas.label.colortheme' | translate }}:" (ionChange)="cambiarTema($event)" [(ngModel)]="tema">
+		<h4 slot="start" style="margin-left: 12px;">
+			<ion-select (ionChange)="cambiarTema($event)" [(ngModel)]="tema" class="custom-select-primary" fill="outline" label="{{ 'temas.label.colortheme' | translate }}:">
 				<ion-select-option value="light">{{ 'temas.color.light' | translate }}</ion-select-option>
 				<ion-select-option value="dark">{{ 'temas.color.dark' | translate }}</ion-select-option>
 				<ion-select-option value="green">{{ 'temas.color.green' | translate }}</ion-select-option>
@@ -11,7 +11,7 @@
 				<ion-select-option value="duoc">{{ 'temas.color.duoc' | translate }}</ion-select-option>
 			</ion-select>
 		</h4>
-		<div slot="end">
+		<div slot="end" style="margin-right: 12px;">
 			<ion-button [routerLink]="['/login']" fill="outline" shape="round" size="default" color="danger">Volver</ion-button>
 		</div>
 	</ion-toolbar>

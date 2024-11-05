@@ -58,5 +58,7 @@
 	"misdatos.input.respuestasecreta": "Secret answer",
 	"misdatos.select.educacion": "Education",
 	"misdatos.input.contraseña": "Password",
-	"misdatos.input.nuevacontraseña": "New password"
+	"misdatos.input.nuevacontraseña": "New password",
+
+	"foro.badge": "Today's Forum"
 }

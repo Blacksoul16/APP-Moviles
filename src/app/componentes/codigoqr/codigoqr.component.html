@@ -1,0 +1,37 @@
+<hr>
+<ion-badge style="display: flex; justify-content: center; width: 30rem; margin: 0 auto;" color="light">
+	<ion-title class="ion-text-center" style="margin-top: 5px; margin-bottom: 5px;">¡{{ salut }}, <ion-text [color]="darkMode ? 'warning' : 'secondary' ">{{usuario.nombre}} {{usuario.apellido}}</ion-text>!</ion-title>
+</ion-badge>
+<hr>
+<div style="display: flex; flex-direction: column; justify-content: center;">
+	<div style="display: flex; justify-content: center;">
+		<!-- Comentar luego -->
+		<ion-button (click)="fileInput.click()" fill="outline" shape="round" [ngClass]="{'custom-button-primary': darkMode, 'custom-button-secondary': !darkMode}">
+			<ion-icon slot="start" name="arrow-up-circle-outline"></ion-icon>{{ "button.upload_qr" | translate }}
+		</ion-button>
+		<input type="file" #fileInput accept="image/*" style="display: none;" (change)="seleccionarArchivo($event)">
+		<!-- Comentar luego -->
+
+		<ion-button *ngIf="!escaneando" (click)="initScan()" fill="outline" shape="round" [ngClass]="{'custom-button-primary': darkMode, 'custom-button-secondary': !darkMode}">
+			<ion-icon slot="start" name="videocam-outline"></ion-icon>{{ "button.scan_qr" | translate }}
+		</ion-button>
+
+		<ion-button *ngIf="escaneando" (click)="stopScan()" fill="outline" shape="round" class="custom-button-danger">
+			<ion-icon slot="start" name="stop-circle-outline"></ion-icon>{{ "button.stop_scan" | translate }}
+		</ion-button>
+	</div>
+	<hr>
+	<div style="display: flex; justify-content: center;">
+		<div class="enmarcar" style="display: flex; justify-content: center; width: 24rem; height: 18rem;">
+			<h4 *ngIf="!escaneando" style="display: flex; align-self: center; height: auto;">{{ "label.camera_text" | translate }}</h4>
+			<video #video [hidden]="!escaneando" style="width: 24rem; height: auto;"></video>
+			<canvas #canvas hidden></canvas>
+		</div>
+	</div>
+	<!-- <hr>
+	<div *ngIf="datosQR" style="display: flex; justify-content: center;">
+		<ion-button fill="outline" shape="round" class="custom-button-success">
+			<ion-icon slot="start" name="chevron-forward-circle-outline"></ion-icon>Ir a ver los datos del QR escaneado.
+		</ion-button>
+	</div> -->
+</div>

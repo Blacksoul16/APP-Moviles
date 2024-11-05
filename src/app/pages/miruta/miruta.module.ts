@@ -4,9 +4,9 @@ import { FormsModule } from '@angular/forms';
 
 import { IonicModule } from '@ionic/angular';
 
-import { MisdatosPageRoutingModule } from './misdatos-routing.module';
+import { MirutaPageRoutingModule } from './miruta-routing.module';
 
-import { MisdatosPage } from './misdatos.page';
+import { MirutaPage } from './miruta.page';
 import { SharedModule } from 'src/app/componentes/shared.module';
 
 @NgModule({
@@ -14,9 +14,9 @@ import { SharedModule } from 'src/app/componentes/shared.module';
     CommonModule,
     FormsModule,
     IonicModule,
-    MisdatosPageRoutingModule,
+    MirutaPageRoutingModule,
     SharedModule
   ],
-  declarations: [MisdatosPage]
+  declarations: [MirutaPage]
 })
-export class MisdatosPageModule {}
+export class MirutaPageModule {}

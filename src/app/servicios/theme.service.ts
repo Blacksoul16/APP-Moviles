@@ -9,7 +9,7 @@ export class ThemeService {
 	public darkMode$ = this.darkModeSubject.asObservable()
 	
 	constructor() {
-		const isDark = this.getDarkModeFromStorage()
+		const isDark = this.getDarkModeFromStorage() || true
 		document.documentElement.classList.toggle("ion-palette-dark", isDark)
 	}
 
@@ -23,6 +23,6 @@ export class ThemeService {
 
 	getDarkModeFromStorage(): boolean {
 		const savedTheme = localStorage.getItem("darkMode")
-		return savedTheme ? JSON.parse(savedTheme) : false
+		return savedTheme ? JSON.parse(savedTheme) : true
 	}
 }

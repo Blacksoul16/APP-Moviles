@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { NavigationEnd, Router } from '@angular/router';
 import { MenuController } from '@ionic/angular';
-import { filter } from 'rxjs';
+import { AuthService } from 'src/app/servicios/auth.service';
 import { ThemeService } from 'src/app/servicios/theme.service';
 
 @Component({
@@ -11,20 +10,27 @@ import { ThemeService } from 'src/app/servicios/theme.service';
 })
 export class FooterComponent implements OnInit {
 
-	public tabSeleccionada: string = "inicio"
 	public darkMode: boolean = true
+	public tabSeleccionada: string = "codigoqr"
 
-	constructor(private ruta: Router, private menu: MenuController, private theme: ThemeService) { }
+	constructor(private auth: AuthService, private menu: MenuController, private theme: ThemeService) { }
 
 	ngOnInit() {
 		this.theme.darkMode$.subscribe(isDark => { this.darkMode = isDark })
-		this.ruta.events.pipe(filter(e => e instanceof NavigationEnd)).subscribe((ev: any) => {
-			const urlActual = ev.urlAfterRedirects.split("/")[1]
-			this.tabSeleccionada = urlActual
+		this.auth.tabSeleccionado.subscribe((tab) => {
+			this.tabSeleccionada = tab
 		})
 	}
 
 	togglearMenuLateral() { this.menu.toggle() }
-	
-	seleccionarTab(tab: string) { this.ruta.navigate([tab]) }
+
+	changeTab(e: any) {
+		const temp = e.detail.value
+		if (temp === "menulateral") {
+			e.target.value = this.tabSeleccionada
+		} else {
+			this.tabSeleccionada = temp
+			this.auth.tabSeleccionado.next(this.tabSeleccionada)
+		}
+	}
 }

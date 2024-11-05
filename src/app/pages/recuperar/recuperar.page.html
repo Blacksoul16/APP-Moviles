@@ -4,24 +4,40 @@
 	<!-- Sección validar correo -->
 	<ion-content *ngIf="tab === 'validarCorreo'" class="background-container">
 		<div style="display: flex; justify-content: center; align-items: center; height: 100vh;">
-			<ion-card class="ion-text-center ion-padding-vertical" style="display: flex; flex-direction: column; align-items: center; border-radius: 8px; width: 30rem;">
-				<ion-card-title class="ion-text-center">
-					<ion-label>
-						<h1>{{ "label.recover_pass" | translate}}</h1>
-					</ion-label>
-				</ion-card-title>
-				<ion-card-subtitle class="ion-text-center"><ion-text color="warning">{{ "label.recover_pass.step" | translate}} 1:</ion-text> {{ "recuperar.correo.text" | translate }}.</ion-card-subtitle>
-				<hr>
-				<ion-card-content>
-					<ion-item>
-						<ion-input [(ngModel)]="correo" [clearInput]="true" class="custom-input-primary" type="text" labelPlacement="floating" fill="outline" label="{{ 'recuperar.correo.label' | translate }}" placeholder="{{ 'recuperar.correo.text' | translate }}" ></ion-input>
-					</ion-item>
-					<hr>
-					<div style="display: flex; justify-content: center; margin-top: 20px;">
-						<ion-button [routerLink]="['/login']" class="custom-button-danger" fill="outline" shape="round">{{ "button.go_back" | translate }}</ion-button>
-						<ion-button (click)="validarCorreo()" class="custom-button-primary" fill="outline" shape="round">{{ "button.continue" | translate }}</ion-button>
-					</div>
-				</ion-card-content>
+			<ion-card class="ion-padding-vertical enmarcar" style="border-radius: 8px; width: 30rem; height: 20rem;">
+				<ion-grid fixed>
+					<ion-col>
+						<ion-row class="ion-justify-content-center">
+							<ion-card-title>
+								<ion-label style="font-size: 26px;">{{ "label.recover_pass" | translate}}</ion-label>
+							</ion-card-title>
+						</ion-row>
+						<ion-row class="ion-justify-content-center">
+							<ion-card-subtitle>
+								<ion-text color="warning">{{ "label.recover_pass.step" | translate}} 1:</ion-text> {{ "recuperar.correo.text" | translate }}.
+							</ion-card-subtitle>
+						</ion-row>
+						<ion-row class="ion-justify-content-center">
+							<ion-card-content style="width: 55dvh;">
+								<hr>
+								<ion-input [(ngModel)]="correo" [clearInput]="true" ngModel email errorText="Ingresa un correo válido." class="custom-input-primary" type="text" labelPlacement="floating" fill="outline" label="{{ 'recuperar.correo.label' | translate }}" placeholder="{{ 'recuperar.correo.text' | translate }}"></ion-input>
+								<hr>
+							</ion-card-content>
+						</ion-row>
+						<ion-row class="ion-justify-content-center">
+							<ion-col class="ion-text-center">
+								<ion-button [routerLink]="['/login']" class="custom-button-danger" fill="outline" shape="round" style="width: 80%;">
+									{{ "button.go_back" | translate }}
+								</ion-button>
+							</ion-col>
+							<ion-col class="ion-text-center">
+								<ion-button [disabled]="!correo" (click)="validarCorreo()" class="custom-button-success" fill="outline" shape="round" style="width: 80%;">
+									{{ "button.continue" | translate }}
+								</ion-button>
+							</ion-col>
+						</ion-row>
+					</ion-col>
+				</ion-grid>
 			</ion-card>
 		</div>
 	</ion-content>
@@ -29,25 +45,42 @@
 	<!-- Sección validar pregunta secreta -->
 	<ion-content *ngIf="tab === 'validarPreguntaSecreta'" class="background-container">
 		<div style="display: flex; justify-content: center; align-items: center; height: 100vh;">
-			<ion-card class="ion-text-center ion-padding-vertical" style="display: flex; flex-direction: column; align-items: center; border-radius: 8px; width: 30rem;" >
-				<ion-card-title class="ion-text-center">
-					<ion-label>
-						<h1>{{ "label.recover_pass" | translate}}</h1>
-					</ion-label>
-				</ion-card-title>
-				<ion-card-subtitle class="ion-text-center"> <ion-text color="warning">{{ "label.recover_pass.step" | translate}} 2:</ion-text> {{ "recuperar.preguntasecreta.text" | translate }}, <ion-text color="warning">{{usuario.nombre}} {{usuario.apellido}}</ion-text>.</ion-card-subtitle>
-				<hr>
-				<h3>{{usuario.preguntaSecreta}}</h3>
-				<ion-card-content>
-					<ion-item>
-						<ion-input [(ngModel)]="respuestaSecreta" [clearInput]="true" class="custom-input-primary" type="text" labelPlacement="floating" fill="outline" label="{{ 'recuperar.preguntasecreta.label' | translate }}" placeholder="🤫"></ion-input>
-					</ion-item>
-					<hr>
-					<div style="display: flex; justify-content: center; margin-top: 20px;">
-						<ion-button (click)="seleccionarTab('validarCorreo')" class="custom-button-danger" fill="outline" shape="round">{{ "button.go_back" | translate }}</ion-button>
-						<ion-button (click)="validarRespuesta()" class="custom-button-primary" fill="outline" shape="round">{{ "button.continue" | translate }}</ion-button>
-					</div>
-				</ion-card-content>
+			<ion-card class="ion-padding-vertical enmarcar" style="border-radius: 8px; width: 30rem; height: 20rem;">
+				<ion-grid fixed>
+					<ion-col>
+						<ion-row class="ion-justify-content-center">
+							<ion-card-title>
+								<ion-label style="font-size: 26px;">{{ "label.recover_pass" | translate}}</ion-label>
+							</ion-card-title>
+						</ion-row>
+						<ion-row class="ion-justify-content-center">
+							<ion-card-subtitle>
+								<ion-text color="warning">{{ "label.recover_pass.step" | translate}} 2:</ion-text> {{ "recuperar.preguntasecreta.text" | translate }}, <ion-text color="warning">{{usuario.nombre}} {{usuario.apellido}}</ion-text>.
+							</ion-card-subtitle>
+						</ion-row>
+						<ion-row class="ion-justify-content-center">
+							<h3>{{usuario.preguntaSecreta}}</h3>
+						</ion-row>
+						<ion-row class="ion-justify-content-center">
+							<ion-card-content style="width: 55dvh;">
+								<ion-input [(ngModel)]="respuestaSecreta" [clearInput]="true" class="custom-input-primary" type="text" labelPlacement="floating" fill="outline" label="{{ 'recuperar.preguntasecreta.label' | translate }}" placeholder="🤫"></ion-input>
+								<hr>
+							</ion-card-content>
+						</ion-row>
+						<ion-row class="ion-justify-content-center">
+							<ion-col class="ion-text-center">
+								<ion-button (click)="seleccionarTab('validarCorreo')" class="custom-button-danger" fill="outline" shape="round" style="width: 80%;">
+									{{ "button.go_back" | translate }}
+								</ion-button>
+							</ion-col>
+							<ion-col class="ion-text-center">
+								<ion-button [disabled]="!respuestaSecreta" (click)="validarRespuesta()" class="custom-button-success" fill="outline" shape="round" style="width: 80%;">
+									{{ "button.continue" | translate }}
+								</ion-button>
+							</ion-col>
+						</ion-row>
+					</ion-col>
+				</ion-grid>
 			</ion-card>
 		</div>
 	</ion-content>

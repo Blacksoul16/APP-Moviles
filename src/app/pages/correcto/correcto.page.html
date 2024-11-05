@@ -2,21 +2,34 @@
 
 <ion-content class="background-container">
 	<div style="display: flex; justify-content: center; align-items: center; height: 100vh;">
-		<ion-card class="ion-text-center ion-padding-vertical" style="display: flex; flex-direction: column; align-items: center; border-radius: 8px; width: 30rem;">
-			<ion-card-title class="ion-text-center">
-				<h1>{{ "correcto.text" | translate }}</h1>
-			</ion-card-title>
-			<ion-card-content>
-				<ion-label>{{ "correcto.descripcion" | translate }}</ion-label>
-				<br>
-				<ion-label color="warning">{{ this.usuario.password }}</ion-label>
-				<div style="display: flex; justify-content: center; margin-top: 20px;">
-					<img src="../../../assets/img/correctimg.png" alt="correctimg" style="height: 50%; width: 50%;">
-				</div>
-				<div style="display: flex; justify-content: center; margin-top: 20px;">
-					<ion-button [routerLink]="['/login']" class="custom-button-danger" fill="outline" shape="round">{{ "button.go_back" | translate }}</ion-button>
-				</div>
-			</ion-card-content>
+		<ion-card class="ion-text-center ion-padding-vertical enmarcar" style="border-radius: 8px; width: 30rem; height: 32rem;">
+			<ion-grid fixed>
+				<ion-col>
+					<ion-row class="ion-justify-content-center">
+						<ion-card-title>
+							<ion-badge color="success" style="font-size: 26px;">{{ "correcto.text" | translate }}</ion-badge>
+						</ion-card-title>
+					</ion-row>
+					<ion-row class="ion-justify-content-center">
+						<ion-label style="font-size: 18px;">{{ "correcto.descripcion" | translate }}</ion-label>
+					</ion-row>
+					<ion-row class="ion-justify-content-center">
+						<ion-label style="font-size: 18px;" color="warning">{{ this.usuario.password }}</ion-label>
+					</ion-row>
+					<ion-row class="ion-justify-content-center">
+						<br>
+						<ion-card-content>
+							<img src="../../../assets/img/correctimg.png" alt="correctimg" style="height: 256px; width: 256px;">
+						</ion-card-content>
+						<br>
+					</ion-row>
+					<ion-row class="ion-justify-content-center">
+						<ion-button [routerLink]="['/login']" class="custom-button-danger" fill="outline" shape="round" style="width: 40%;">
+							{{ "button.go_back" | translate }}
+						</ion-button>
+					</ion-row>
+				</ion-col>
+			</ion-grid>
 		</ion-card>
 	</div>
 </ion-content>

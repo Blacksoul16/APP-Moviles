@@ -1,0 +1,84 @@
+<hr>
+<ion-badge style="display: flex; justify-content: center; width: 30rem; margin: 0 auto;" color="light">
+	<ion-title class="ion-text-center" style="margin-top: 5px; margin-bottom: 5px;">{{ "foro.badge" | translate }}</ion-title>
+</ion-badge>
+<hr>
+<div>
+	<a id="top" href="#top"></a>
+	<ion-card class="enmarcar" style="width: 29rem;">
+		<ion-card-header>
+			<ion-card-title>Ingresar publicación</ion-card-title>
+			<ion-card-subtitle>{{selectedPost}}</ion-card-subtitle>
+		</ion-card-header>
+
+		<div class="ion-padding-horizontal ion-padding-vertical" style="display: flex; justify-content: center; flex-direction: column;">
+			<ion-select [(ngModel)]="selectedUserID" (ngModelChange)="changeUser($event)" [interfaceOptions]="selectOptions" label="Selecciona usuario" [ngClass]="{'custom-select-primary': darkMode, 'custom-select-secondary': !darkMode}" fill="outline" labelPlacement="floating" cancelText="Cancelar" okText="Aceptar">
+				<!-- <ion-select-option [value]="usuario.cuenta" *ngIf="usuario">
+					{{usuario.nombre}} {{usuario.apellido}}
+				</ion-select-option> -->
+				<ion-select-option *ngFor="let u of users" [value]="u.id">
+					{{u.name}}
+				</ion-select-option>
+			</ion-select>
+			<hr>
+			<ion-input [(ngModel)]="post.title" [ngClass]="{'custom-input-primary': darkMode, 'custom-input-secondary': !darkMode}" label="Título" labelPlacement="floating" placeholder="Un título." fill="outline"></ion-input>	
+			<hr>
+			<ion-textarea [(ngModel)]="post.body" [ngClass]="{'custom-textarea-primary': darkMode, 'custom-textarea-secondary': !darkMode}" label="Cuerpo de la publicación" labelPlacement="floating" placeholder="Érase una vez..." fill="outline"></ion-textarea>
+		</div>
+		<hr>
+		<div style="display: flex; justify-content: center;">
+			<ion-button (click)="savePost()" fill="outline" size="default" shape="round" [ngClass]="{'custom-button-primary': darkMode, 'custom-button-secondary': !darkMode}">
+				<ion-icon slot="start" name="save-outline"></ion-icon>Guardar
+			</ion-button>
+			<ion-button (click)="wipePost()" fill="outline" size="default" shape="round" class="custom-button-danger">
+				<ion-icon slot="start" name="trash-outline"></ion-icon>Limpiar
+			</ion-button>
+		</div>
+		<hr>
+	</ion-card>
+
+	<hr>
+
+	<div style="display: flex; justify-content: center;">
+		<ion-card style="width: 32rem;">
+			<ion-card-header>
+				<ion-card-title>Publicaciones recientes</ion-card-title>
+				<ion-card-content>
+	
+				</ion-card-content>
+			</ion-card-header>
+	
+			<ion-card-content *ngIf="!posts">
+				<ion-card-subtitle>No hay publicaciones recientes.</ion-card-subtitle>
+			</ion-card-content>
+	
+			<ion-card-content *ngIf="posts">
+				<ion-card *ngFor="let p of posts; let i=index; trackBy: getPostItemID" class="enmarcar" style="margin-bottom: 1.78rem;">
+					<ion-grid fixed>
+						<ion-row class="ion-justify-content-between">
+							<ion-col size="auto">Autor: {{p.name}}</ion-col>
+							<ion-col size="3" style="display: flex; justify-content: end;">#{{p.id}}</ion-col>
+						</ion-row>
+					</ion-grid>
+					
+					<ion-card-header>
+						<ion-card-title>{{p.title}}</ion-card-title>
+						<ion-card-subtitle>{{p.body}}</ion-card-subtitle>
+					</ion-card-header>
+					
+					<hr>
+					<div style="display: flex; justify-content: center;">
+						<ion-button (click)="editPost(p)" fill="outline" shape="round" size="default" [ngClass]="{'custom-button-primary': darkMode, 'custom-button-secondary': !darkMode}">
+							<ion-icon slot="start" name="pencil-outline"></ion-icon>Editar
+						</ion-button>
+						<ion-button (click)="deletePost(p)" fill="outline" shape="round" size="default" class="custom-button-danger">
+							<ion-icon slot="start" name="trash-outline"></ion-icon>Eliminar
+						</ion-button>
+					</div>
+					<hr>
+				</ion-card>
+			</ion-card-content>
+		</ion-card>
+	</div>
+
+</div>
