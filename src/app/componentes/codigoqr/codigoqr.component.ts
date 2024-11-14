@@ -109,12 +109,23 @@ export class CodigoqrComponent implements OnInit {
 	}
 
 	public async initScan() {
-		const mediaProvider: MediaProvider = await navigator.mediaDevices.getUserMedia({ video: {facingMode: "environment"} })
-		this.video.nativeElement.srcObject = mediaProvider
-		this.video.nativeElement.setAttribute("playsinline", "true")
-		this.video.nativeElement.play()
-		this.escaneando = true
-		requestAnimationFrame(this.checkVideo.bind(this))
+		try {
+			const devices = await navigator.mediaDevices.enumerateDevices()
+			const tieneCamara = devices.some(device => device.kind === "videoinput")
+			if (!tieneCamara) {
+				this.toast.showMsg("No se detectó una cámara en el dispositivo.", 2500, "danger")
+				return
+			}
+			const mediaProvider: MediaProvider = await navigator.mediaDevices.getUserMedia({ video: { facingMode: "environment" } })
+			this.video.nativeElement.srcObject = mediaProvider
+			this.video.nativeElement.setAttribute("playsinline", "true")
+			this.video.nativeElement.play()
+			this.escaneando = true
+			requestAnimationFrame(this.checkVideo.bind(this))
+		} catch (e) {
+			this.toast.showMsg(`Hubo un error al intentar acceder a la cámara: ${e}`, 3000, "danger")
+			console.error("Error al intentar acceder a la cámara:", e)
+		}
 	}
 	
 	public showQRData(datosQR: string): void {

@@ -21,7 +21,7 @@ export class LangSelectComponent implements OnInit {
 	@Output() changeCurrentLang = new EventEmitter()
 
 	langSelected = "es"
-	langCodes = ["es", "en", "fr"]
+	langCodes = ["es", "en"]
 
 	constructor(private translate: TranslateService) {
 		const storedLang = localStorage.getItem("selectedLang") || "es"

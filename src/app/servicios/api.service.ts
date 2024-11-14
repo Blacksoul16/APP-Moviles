@@ -9,8 +9,8 @@ export class APIService {
 
 	httpOptions = {
 		headers: new HttpHeaders({
-			"content-type": "application/json",
-			"access-control-allow-origin": "*"
+			"content-type": "application/json"
+			// "access-control-allow-origin": "*"
 		})
 	}
 

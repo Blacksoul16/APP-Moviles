@@ -93,6 +93,10 @@
   ],
   "users": [
     {
+      "id": "sgarday",
+      "name": "Seth Garday"
+    },
+    {
       "id": "1",
       "name": "Leanne Graham",
       "username": "Bret",

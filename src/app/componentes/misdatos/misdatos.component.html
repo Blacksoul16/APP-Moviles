@@ -51,16 +51,30 @@
 				</ion-row>
 			</ion-grid>
 
-			<ion-list>
-				<ion-item #itemEducacion class="font-size-12">
-					<ion-select [(ngModel)]="usuario.nivelEducacional!.id" (ionChange)="actualizarNivelEducacional($event)" [ngClass]="{'custom-select-primary': darkMode, 'custom-select-secondary': !darkMode}"  fill="outline">
-						<div slot="label">{{ 'misdatos.select.educacion' | translate }} <ion-text color="danger">*</ion-text></div>
-						<ion-select-option *ngFor="let nivelEducacional of listaNivelesEducacionales" [value]="nivelEducacional.id">
-							{{nivelEducacional.nombre}}
-						</ion-select-option>
-					</ion-select>
-				</ion-item>
-			</ion-list>
+			<ion-grid>
+				<ion-row>
+					<ion-col size="12">
+						<ion-item #itemEducacion class="font-size-12">
+							<ion-select [(ngModel)]="usuario.nivelEducacional!.id" (ionChange)="actualizarNivelEducacional($event)" [ngClass]="{'custom-select-primary': darkMode, 'custom-select-secondary': !darkMode}"  fill="outline">
+								<div slot="label">{{ 'misdatos.select.educacion' | translate }}</div>
+								<ion-select-option *ngFor="let nivelEducacional of listaNivelesEducacionales" [value]="nivelEducacional.id">
+									{{nivelEducacional.nombre}}
+								</ion-select-option>
+							</ion-select>
+						</ion-item>
+					</ion-col>
+				</ion-row>
+			</ion-grid>
+
+			<ion-grid>
+				<ion-row>
+					<ion-col size="12">
+						<ion-item>
+							<ion-input [(ngModel)]="usuario.direccion" [ngClass]="{'custom-input-primary': darkMode, 'custom-input-secondary': !darkMode}" label="{{ 'misdatos.input.dirección' | translate }}" labelPlacement="floating" placeholder="" type="text" fill="outline"></ion-input>
+						</ion-item>
+					</ion-col>
+				</ion-row>
+			</ion-grid>
 
 			<ion-grid>
 				<ion-row>

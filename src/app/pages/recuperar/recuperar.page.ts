@@ -22,7 +22,6 @@ export class RecuperarPage implements OnInit {
 	public seleccionarTab(tab: string): void { this.tab = tab }
 
 	public async validarCorreo() {
-		// this.toast.showMsg("Función en mantenimiento.", 2000, "warning")
 		const emailRegex = /^[a-zA-Z0-9._+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/
 		const usuarioEncontrado = await this.bd.findUserEmail(this.correo)
 		if (this.correo.length === 0) {
@@ -35,6 +34,7 @@ export class RecuperarPage implements OnInit {
 		}
 		else if (!usuarioEncontrado) {
 			this.toast.showMsg("No se encontró un usuario con este correo.", 1500, "danger")
+			this.ruta.navigate(["/incorrecto"]) // lol?
 			return
 		}
 		this.seleccionarTab("validarPreguntaSecreta")

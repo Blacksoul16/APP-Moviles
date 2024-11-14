@@ -41,14 +41,14 @@ export class ForoComponent  implements OnInit {
 		this.translate.use(localStorage.getItem("selectedLang") || "es")
 		this.theme.darkMode$.subscribe(isDark => { this.darkMode = isDark })
 		this.selectedUserID = null
-		this.setPost(null, null, "", "", "")
+		this.setPost(this.usuario?.cuenta, null, "", "", "")
 		this.getUsers()
 		this.getPosts()
 	}
 
 	changeUser($e: number) { this.setPost($e, null, "", "", "") }
 
-	wipePost() { this.setPost(this.selectedUserID, null, "", "", "") }
+	wipePost() { this.setPost(this.usuario?.cuenta, null, "", "", "") }
 	
 	setPost(userID: number | any, postID: number | any, title: string, body: string, name: string) {
 		this.post.userID = userID
@@ -59,7 +59,8 @@ export class ForoComponent  implements OnInit {
 
 		const uid = userID === null ? "Sin seleccionar" : userID
 		const pid = postID === null ? "Nueva ID" : postID
-		this.selectedPost = `(UserID: ${uid} | PostID: ${pid})`
+		this.selectedPost = `${uid}`
+		// this.selectedPost = `(UserID: ${uid} | PostID: ${pid})`
 	}
 
 	// En este caso, "d" es "data".
@@ -95,12 +96,11 @@ export class ForoComponent  implements OnInit {
 
 	createPost() {
 		const postRegistry = {
-			"userId": +this.post.userID,
+			"userId": this.post.userID,
 			// "id": v4(),
 			"title": this.post.title,
 			"body": this.post.body
 		}
-
 		this.api.createPost(postRegistry).subscribe({
 			next: (data) => {
 				this.toast.showMsg(`Se creó la publicación: "${data.title}" (ID: ${data.id}).`, 2500, "success")

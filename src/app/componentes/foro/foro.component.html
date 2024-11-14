@@ -8,19 +8,19 @@
 	<ion-card class="enmarcar" style="width: 29rem;">
 		<ion-card-header>
 			<ion-card-title>Ingresar publicación</ion-card-title>
-			<ion-card-subtitle>{{selectedPost}}</ion-card-subtitle>
+			<ion-card-subtitle>Sesión iniciada como <ion-text [color]="darkMode ? 'warning' : 'secondary' ">{{selectedPost}}</ion-text>.</ion-card-subtitle>
 		</ion-card-header>
 
 		<div class="ion-padding-horizontal ion-padding-vertical" style="display: flex; justify-content: center; flex-direction: column;">
-			<ion-select [(ngModel)]="selectedUserID" (ngModelChange)="changeUser($event)" [interfaceOptions]="selectOptions" label="Selecciona usuario" [ngClass]="{'custom-select-primary': darkMode, 'custom-select-secondary': !darkMode}" fill="outline" labelPlacement="floating" cancelText="Cancelar" okText="Aceptar">
+			<!-- <ion-select [(ngModel)]="selectedUserID" (ngModelChange)="changeUser($event)" [interfaceOptions]="selectOptions" label="Selecciona usuario" [ngClass]="{'custom-select-primary': darkMode, 'custom-select-secondary': !darkMode}" fill="outline" labelPlacement="floating" cancelText="Cancelar" okText="Aceptar"> -->
 				<!-- <ion-select-option [value]="usuario.cuenta" *ngIf="usuario">
 					{{usuario.nombre}} {{usuario.apellido}}
 				</ion-select-option> -->
-				<ion-select-option *ngFor="let u of users" [value]="u.id">
+				<!-- <ion-select-option *ngFor="let u of users" [value]="u.id">
 					{{u.name}}
 				</ion-select-option>
-			</ion-select>
-			<hr>
+			</ion-select> -->
+			<!-- <hr> -->
 			<ion-input [(ngModel)]="post.title" [ngClass]="{'custom-input-primary': darkMode, 'custom-input-secondary': !darkMode}" label="Título" labelPlacement="floating" placeholder="Un título." fill="outline"></ion-input>	
 			<hr>
 			<ion-textarea [(ngModel)]="post.body" [ngClass]="{'custom-textarea-primary': darkMode, 'custom-textarea-secondary': !darkMode}" label="Cuerpo de la publicación" labelPlacement="floating" placeholder="Érase una vez..." fill="outline"></ion-textarea>
