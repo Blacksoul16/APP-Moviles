@@ -30,7 +30,7 @@ export class MiclaseComponent  implements OnInit {
 		this.theme.darkMode$.subscribe(isDark => { this.darkMode = isDark })
 	}
 
-	public limpiarDatosQR(): void { this.datosQR = null; this.datosQRKeys = [] }
+	public limpiarDatosQR(): void { this.datosQR = null; this.datosQRKeys = []; this.auth.codigoQRData.next(null) }
 	public goToScan() { this.auth.tabSeleccionado.next("codigoqr") }
 	
 	public formatearKey(k: string): string {

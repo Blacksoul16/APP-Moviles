@@ -20,7 +20,6 @@ export class InicioPage implements OnInit {
 		})
 	}
 
-
   	ngOnInit() {
 		this.translate.use(localStorage.getItem("selectedLang") || "es")
 		this.theme.darkMode$.subscribe(isDark => { this.darkMode = isDark })

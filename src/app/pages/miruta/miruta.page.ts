@@ -3,6 +3,7 @@ import { Component, OnInit } from '@angular/core';
 import { TranslateService } from '@ngx-translate/core';
 import * as L from "leaflet";
 import { GeolocationService } from 'src/app/servicios/geolocation.service';
+import { ToastService } from 'src/app/servicios/toast.service';
 
 @Component({
 	selector: 'app-miruta',
@@ -15,7 +16,7 @@ export class MirutaPage implements OnInit {
 	addressName: string = ""
 	distance: string = ""
 
-	constructor(private geo: GeolocationService, private http: HttpClient, private translate: TranslateService) {}
+	constructor(private geo: GeolocationService, private http: HttpClient, private translate: TranslateService, private toast: ToastService) {}
 
 	ngOnInit() {
 		this.translate.use(localStorage.getItem("selectedLang") || "es")
@@ -37,17 +38,20 @@ export class MirutaPage implements OnInit {
 			}
 		}).catch((e) => {
 			if (e.code === 1) {
-				console.error(`[MiRuta.ts] No hay permiso para usar la ubicación.`)
+				this.toast.showMsg("No hay permiso para usar la ubicación.", 3000, "danger")
+				// console.error(`[MiRuta.ts] No hay permiso para usar la ubicación.`)
 			} else if (e.code === 2) {
-				console.error(`[MiRuta.ts] La posición no está disponible, ¿el GPS está activado?`)
+				this.toast.showMsg("La ubicación no está disponible, ¿el GPS está activado?", 3000, "danger")
+				// console.error(`[MiRuta.ts] La ubicación no está disponible, ¿el GPS está activado?`)
 			} else if (e.code === 3) {
-				console.error(`[MiRuta.ts] Se excedió el tiempo de espera para obtener la ubicación.`)
+				this.toast.showMsg("Se excedió el tiempo de espera para obtener la ubicación.", 3000, "danger")
+				// console.error(`[MiRuta.ts] Se excedió el tiempo de espera para obtener la ubicación.`)
 			} 
 			console.error(`[MiRuta.ts] Error al obtener la ubicación: ${e}`)
 		})
 	}
 
-	goToDUOC() { this.goToPosition(-33.44703, -70.65762, 60, "Instituto DUOC Padre Alonso de Ovalle") }
+	goToDUOC() { this.goToPosition(-33.44703, -70.65762, 60, "DUOC Padre Alonso de Ovalle") }
 
 	async goToMyPos() {
 		this.geo.getCurrentPosition().then((pos: { lat: number, lng: number } | null ) => {
