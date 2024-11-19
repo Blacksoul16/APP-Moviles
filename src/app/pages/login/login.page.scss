@@ -1,18 +1,4 @@
-// .card-login {
-// 	display: flex;
-// 	justify-content: center;
-// 	align-items: center;
-// 	height: 100%;
-//   }
-  
-// .center-elements {
-// 	display: flex;
-// 	flex-direction: column;
-// 	align-items: center;
-// 	text-align: center;
-// }
-
-// .login-button { margin-top: 20px; align-self: center; }
+// @import "src/theme/variables.scss";
 
 .background-container {
 	position: relative;
@@ -36,25 +22,25 @@
 	height: 100%;
 }
 
-.custom-input-primary { --highlight-color: #F1B634; }
+// .custom-input-primary { --highlight-color: #F1B634; }
 
-ion-input { margin-top: 4px; }
-ion-content {
-	--padding-top: 20px
-	--padding-bottom: 20px
-	--padding-start: 20px
-	--padding-end: 20px
-}
+// ion-input { margin-top: 4px; }
+// ion-content {
+// 	--padding-top: 20px
+// 	--padding-bottom: 20px
+// 	--padding-start: 20px
+// 	--padding-end: 20px
+// }
 
-ion-item {
-	--inner-padding-start: 0px;
-	--inner-padding-end: 0px;
-	--padding-start: 0px;
-	--padding-end: 0px;
-	--padding-bottom: 10px;
-}
+// ion-item {
+// 	--inner-padding-start: 0px;
+// 	--inner-padding-end: 0px;
+// 	--padding-start: 0px;
+// 	--padding-end: 0px;
+// 	--padding-bottom: 10px;
+// }
 
-ion-badge {
-	--padding-end: 20px;
-	--padding-start: 20px;
-}
+// ion-badge {
+// 	--padding-end: 20px;
+// 	--padding-start: 20px;
+// }

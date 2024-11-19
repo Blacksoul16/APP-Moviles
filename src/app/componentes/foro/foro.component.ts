@@ -14,7 +14,7 @@ import { ToastService } from 'src/app/servicios/toast.service';
 export class ForoComponent  implements OnInit {
 
 	public usuario: Usuario | null
-	public darkMode: boolean = true
+	// public darkMode: boolean = true
 	protected selectOptions = {
 		message: "La publicación se hará bajo el usuario que selecciones."
 	}
@@ -39,7 +39,7 @@ export class ForoComponent  implements OnInit {
 
 	ngOnInit() {
 		this.translate.use(localStorage.getItem("selectedLang") || "es")
-		this.theme.darkMode$.subscribe(isDark => { this.darkMode = isDark })
+		// this.theme.darkMode$.subscribe(isDark => { this.darkMode = isDark })
 		this.selectedUserID = null
 		this.setPost(this.usuario?.cuenta, null, "", "", "")
 		this.getUsers()

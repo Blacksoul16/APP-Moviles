@@ -4,7 +4,7 @@ import { IonicModule } from "@ionic/angular";
 
 import { HeaderComponent } from "./header/header.component";
 import { FooterComponent } from "./footer/footer.component";
-import { MenuLateralComponent } from "./menu-lateral/menu-lateral.component";
+// import { MenuLateralComponent } from "./menu-lateral/menu-lateral.component";
 import { FormsModule } from "@angular/forms";
 import { TranslateModule } from "@ngx-translate/core";
 import { CodigoqrComponent } from "./codigoqr/codigoqr.component";
@@ -16,7 +16,7 @@ import { ForoComponent } from "./foro/foro.component";
 	declarations: [
 		HeaderComponent, 
 		FooterComponent, 
-		MenuLateralComponent, 
+		// MenuLateralComponent, 
 		CodigoqrComponent, 
 		MisdatosComponent, 
 		MiclaseComponent,
@@ -26,7 +26,7 @@ import { ForoComponent } from "./foro/foro.component";
 	exports: [
 		HeaderComponent, 
 		FooterComponent, 
-		MenuLateralComponent, 
+		// MenuLateralComponent, 
 		TranslateModule, 
 		CodigoqrComponent, 
 		MisdatosComponent, 

@@ -13,7 +13,7 @@ export class MiclaseComponent  implements OnInit {
 	public usuario: any
 	public datosQR: any = ""
 	public datosQRKeys: any[] = []
-	public darkMode: boolean = true
+	// public darkMode: boolean = true
 
 	constructor(private auth: AuthService , private theme: ThemeService, private translate: TranslateService) {
 		this.usuario = this.auth.usuarioAutenticado.value
@@ -27,7 +27,7 @@ export class MiclaseComponent  implements OnInit {
 
 	ngOnInit() {
 		this.translate.use(localStorage.getItem("selectedLang") || "es")
-		this.theme.darkMode$.subscribe(isDark => { this.darkMode = isDark })
+		// this.theme.darkMode$.subscribe(isDark => { this.darkMode = isDark })
 	}
 
 	public limpiarDatosQR(): void { this.datosQR = null; this.datosQRKeys = []; this.auth.codigoQRData.next(null) }

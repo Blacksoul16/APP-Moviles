@@ -31,22 +31,10 @@ export const routes: Routes = [
     path: 'incorrecto',
     loadChildren: () => import('./pages/incorrecto/incorrecto.module').then( m => m.IncorrectoPageModule)
   },
-  // {
-  //   path: 'misdatos',
-  //   loadChildren: () => import('./pages/misdatos/misdatos.module').then( m => m.MisdatosPageModule)
-  // },
-  // {
-  //   path: 'miclase',
-  //   loadChildren: () => import('./pages/miclase/miclase.module').then( m => m.MiclasePageModule)
-  // },
   {
     path: 'temas',
     loadChildren: () => import('./pages/temas/temas.module').then( m => m.TemasPageModule)
   },
-  // {
-  //   path: 'foro',
-  //   loadChildren: () => import('./pages/foro/foro.module').then( m => m.ForoPageModule)
-  // },
   {
     path: 'miruta',
     loadChildren: () => import('./pages/miruta/miruta.module').then( m => m.MirutaPageModule)

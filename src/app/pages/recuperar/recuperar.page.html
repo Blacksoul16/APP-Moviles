@@ -14,24 +14,24 @@
 						</ion-row>
 						<ion-row class="ion-justify-content-center">
 							<ion-card-subtitle>
-								<ion-text color="warning">{{ "label.recover_pass.step" | translate}} 1:</ion-text> {{ "recuperar.correo.text" | translate }}.
+								<ion-text color="secondary">{{ "label.recover_pass.step" | translate}} 1:</ion-text> {{ "recuperar.correo.text" | translate }}.
 							</ion-card-subtitle>
 						</ion-row>
 						<ion-row class="ion-justify-content-center">
 							<ion-card-content style="width: 55dvh;">
 								<hr>
-								<ion-input [(ngModel)]="correo" [clearInput]="true" ngModel email errorText="Ingresa un correo válido." class="custom-input-primary" type="text" labelPlacement="floating" fill="outline" label="{{ 'recuperar.correo.label' | translate }}" placeholder="{{ 'recuperar.correo.text' | translate }}"></ion-input>
+								<ion-input [(ngModel)]="correo" [clearInput]="true" ngModel email errorText="Ingresa un correo válido." color="secondary" type="text" labelPlacement="floating" fill="outline" label="{{ 'recuperar.correo.label' | translate }}" placeholder="{{ 'recuperar.correo.text' | translate }}"></ion-input>
 								<hr>
 							</ion-card-content>
 						</ion-row>
 						<ion-row class="ion-justify-content-center">
 							<ion-col class="ion-text-center">
-								<ion-button [routerLink]="['/login']" class="custom-button-danger" fill="outline" shape="round" style="width: 80%;">
+								<ion-button [routerLink]="['/login']" color="danger" fill="outline" shape="round" style="width: 80%;">
 									{{ "button.go_back" | translate }}
 								</ion-button>
 							</ion-col>
 							<ion-col class="ion-text-center">
-								<ion-button [disabled]="!correo" (click)="validarCorreo()" class="custom-button-success" fill="outline" shape="round" style="width: 80%;">
+								<ion-button [disabled]="!correo" (click)="validarCorreo()" color="success" fill="outline" shape="round" style="width: 80%;">
 									{{ "button.continue" | translate }}
 								</ion-button>
 							</ion-col>
@@ -55,7 +55,7 @@
 						</ion-row>
 						<ion-row class="ion-justify-content-center">
 							<ion-card-subtitle>
-								<ion-text color="warning">{{ "label.recover_pass.step" | translate}} 2:</ion-text> {{ "recuperar.preguntasecreta.text" | translate }}, <ion-text color="warning">{{usuario.nombre}} {{usuario.apellido}}</ion-text>.
+								<ion-text color="secondary">{{ "label.recover_pass.step" | translate}} 2:</ion-text> {{ "recuperar.preguntasecreta.text" | translate }}, <ion-text color="light">{{usuario.nombre}} {{usuario.apellido}}</ion-text>.
 							</ion-card-subtitle>
 						</ion-row>
 						<ion-row class="ion-justify-content-center">
@@ -63,18 +63,18 @@
 						</ion-row>
 						<ion-row class="ion-justify-content-center">
 							<ion-card-content style="width: 55dvh;">
-								<ion-input [(ngModel)]="respuestaSecreta" [clearInput]="true" class="custom-input-primary" type="text" labelPlacement="floating" fill="outline" label="{{ 'recuperar.preguntasecreta.label' | translate }}" placeholder="🤫"></ion-input>
+								<ion-input [(ngModel)]="respuestaSecreta" [clearInput]="true" color="secondary" type="text" labelPlacement="floating" fill="outline" label="{{ 'recuperar.preguntasecreta.label' | translate }}" placeholder="🤫"></ion-input>
 								<hr>
 							</ion-card-content>
 						</ion-row>
 						<ion-row class="ion-justify-content-center">
 							<ion-col class="ion-text-center">
-								<ion-button (click)="seleccionarTab('validarCorreo')" class="custom-button-danger" fill="outline" shape="round" style="width: 80%;">
+								<ion-button (click)="seleccionarTab('validarCorreo')" color="danger" fill="outline" shape="round" style="width: 80%;">
 									{{ "button.go_back" | translate }}
 								</ion-button>
 							</ion-col>
 							<ion-col class="ion-text-center">
-								<ion-button [disabled]="!respuestaSecreta" (click)="validarRespuesta()" class="custom-button-success" fill="outline" shape="round" style="width: 80%;">
+								<ion-button [disabled]="!respuestaSecreta" (click)="validarRespuesta()" color="success" fill="outline" shape="round" style="width: 80%;">
 									{{ "button.continue" | translate }}
 								</ion-button>
 							</ion-col>

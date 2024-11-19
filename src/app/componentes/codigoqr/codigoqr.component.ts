@@ -12,7 +12,6 @@ import { ToastService } from 'src/app/servicios/toast.service';
 })
 export class CodigoqrComponent implements OnInit {
 
-	public darkMode: boolean = true
 	public salut: string = ""
 	public usuario: any
 
@@ -28,9 +27,7 @@ export class CodigoqrComponent implements OnInit {
 		this.salut = this.getSalut()
 	}
 
-	ngOnInit() {
-		this.theme.darkMode$.subscribe(isDark => { this.darkMode = isDark })
-	}
+	ngOnInit() {}
 
 	private getSalut(): string {
 		const h = new Date().getHours()

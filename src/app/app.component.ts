@@ -23,12 +23,12 @@ export class AppComponent {
 		})
 	}
 
-	ngOnInit() { this.darkMode = this.theme.getDarkMode() }
+	ngOnInit() { /*this.darkMode = this.theme.getDarkMode()*/ }
 
-	toggleChange(e: any) { 
-		this.theme.toggleDarkMode(e.detail.checked)
-		this.darkMode = e.detail.checked
-	}
+	// toggleChange(e: any) { 
+	// 	this.theme.toggleDarkMode(e.detail.checked)
+	// 	this.darkMode = e.detail.checked
+	// }
 
 	checkComponentes(url: string): boolean {
 		return url.includes("inicio") || url.includes("misdatos") || url.includes("miclase") || url.includes("foro")

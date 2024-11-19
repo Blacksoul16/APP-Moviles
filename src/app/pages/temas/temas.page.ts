@@ -11,8 +11,8 @@ export class TemasPage implements OnInit {
 	tema: string
 
 	constructor(private translate: TranslateService) {
-		this.tema = "dark"
-		// document.body.setAttribute("color-theme", this.tema)
+		this.tema = document.body.getAttribute("color-theme")! ? document.body.getAttribute("color-theme")! : "duoc"
+		document.body.setAttribute("color-theme", this.tema)
 	}
 
 	ngOnInit() {
@@ -21,7 +21,7 @@ export class TemasPage implements OnInit {
 
 	cambiarTema(e: any) {
 		this.tema = e.detail.value
-		// document.body.setAttribute("color-theme", this.tema)
+		document.body.setAttribute("color-theme", this.tema)
 	}
 
 }

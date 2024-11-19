@@ -1,19 +1,31 @@
+import { animate, state, style, transition, trigger } from '@angular/animations';
 import { Component, OnInit } from '@angular/core';
-import { ThemeService } from 'src/app/servicios/theme.service';
 
 @Component({
-  selector: 'duocuc-header',
-  templateUrl: './header.component.html',
-  styleUrls: ['./header.component.scss'],
+	selector: 'duocuc-header',
+	templateUrl: './header.component.html',
+	styleUrls: ['./header.component.scss'],
+	animations: [
+		trigger("fadeSlideIn", [
+			state("hidden", style({ opacity: 0, transform: "translateX(50px)" })),
+			state("visible", style({ opacity: 1, transform: "translateX(0)" })),
+			transition("hidden => visible", [
+				animate("1s ease-out")
+			]),
+			transition("visible => hidden", [
+				animate("1s ease-in")
+			])
+		])
+	]
 })
 export class HeaderComponent implements OnInit {
 
-  public darkMode: boolean = true
+	colState = "hidden"
 
-  constructor(private theme: ThemeService) {}
+	constructor() {}
 
-  ngOnInit() {
-    this.theme.darkMode$.subscribe(isDark => { this.darkMode = isDark })
-  }
+	ngOnInit() { this.colState = "visible" }
+
+	toggleAnim() { this.colState = this.colState === "hidden" ? "visible" : "hidden" }
 
 }

@@ -1,13 +1,13 @@
 <hr>
-<ion-badge style="display: flex; justify-content: center; width: 30rem; margin: 0 auto;" color="light">
+<ion-badge style="display: flex; justify-content: center; width: 30rem; margin: 0 auto;" color="dark">
 	<ion-title class="ion-text-center" style="margin-top: 5px; margin-bottom: 5px;">{{ "miclase.badge" | translate }}</ion-title>
 </ion-badge>
 <hr>
 <div style="display: flex; justify-content: center;">
-	<ion-button (click)="goToScan()" fill="outline" shape="round" [ngClass]="{'custom-button-primary': darkMode, 'custom-button-secondary': !darkMode}">
+	<ion-button (click)="goToScan()" fill="outline" shape="round" color="secondary">
 		<ion-icon slot="start" name="qr-code-outline"></ion-icon>{{ "button.go_scan" | translate }}
 	</ion-button>
-	<ion-button (click)="limpiarDatosQR()" fill="outline" shape="round" class="custom-button-danger" [disabled]="!datosQR">
+	<ion-button (click)="limpiarDatosQR()" fill="outline" shape="round" color="danger" [disabled]="!datosQR">
 		<ion-icon slot="start" name="trash-outline"></ion-icon>{{ "button.clear_qr_data" | translate }}
 	</ion-button>
 </div>
@@ -22,8 +22,8 @@
 			<h2 *ngIf="!datosQR">{{ "miclase.card.content2" | translate }}</h2>
 			<table *ngIf="datosQR" style="width: 100%; border-collapse: collapse; border-radius: 8px;">
 				<tr *ngFor="let i of datosQRKeys">
-					<td [style]="darkMode ? 'border: 1px solid #F1B634; padding: 8px;' : 'border: 1px solid #132CAA; padding: 8px;'">{{ i.k }}</td>
-					<td [style]="darkMode ? 'border: 1px solid #F1B634; padding: 8px;' : 'border: 1px solid #132CAA; padding: 8px;'">{{ i.v }}</td>
+					<td style="border: 1px solid gray; padding: 8px;">{{ i.k }}</td>
+					<td style="border: 1px solid gray; padding: 8px;">{{ i.v }}</td>
 				</tr>
 			</table>
 		</ion-card-content>

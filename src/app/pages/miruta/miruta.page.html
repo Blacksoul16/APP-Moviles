@@ -8,16 +8,16 @@
 	<ion-grid>
 		<ion-row class="ion-justify-content-between">
 			<ion-col size="auto">
-				<ion-button [routerLink]="['/login']" size="small" fill="outline" shape="round" class="custom-button-danger">Volver</ion-button>
+				<ion-button [routerLink]="['/login']" size="small" fill="outline" shape="round" color="danger">Volver</ion-button>
 			</ion-col>
 			<ion-col size="3" style="display: flex; justify-content: end;">
-				<ion-button (click)="goToDUOC()" size="small" shape="round" fill="outline" class="custom-button-primary">
+				<ion-button (click)="goToDUOC()" size="small" shape="round" fill="outline" color="secondary">
 					<ion-icon slot="start" name="school-outline"></ion-icon>DUOC
 				</ion-button>
-				<ion-button (click)="goToMyPos()" size="small" shape="round" fill="outline" class="custom-button-primary">
+				<ion-button (click)="goToMyPos()" size="small" shape="round" fill="outline" color="secondary">
 					<ion-icon slot="start" name="caret-down-circle-outline"></ion-icon>Aquí
 				</ion-button>
-				<ion-button (click)="showRouteToDUOC()" size="small" shape="round" fill="outline" class="custom-button-primary">
+				<ion-button (click)="showRouteToDUOC()" size="small" shape="round" fill="outline" color="secondary">
 					<ion-icon slot="start" name="map-outline"></ion-icon>Ruta
 				</ion-button>
 			</ion-col>
