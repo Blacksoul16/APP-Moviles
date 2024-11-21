@@ -102,7 +102,7 @@ export class AuthService {
 		try {
 			const user = await this.readAuthUser()
 			if (user) {
-				//MSG logout
+				this.toast.showMsg("Se cerró la sesión.", 2000, "success")
 				await this.deleteAuthUser()
 			}
 			await this.router.navigate(["/login"])

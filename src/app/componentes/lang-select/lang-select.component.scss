@@ -1,0 +1,26 @@
+.flag-container {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	width: 80px;
+	height: 80px;
+	cursor: pointer;
+	border: 2px solid transparent;
+	border-radius: 8px;
+	transition: border-color 0.3s, background-color 0.3s;
+}
+
+.flag-container.selected {
+	border-color: var(--ion-color-secondary);
+	background-color: rgba(var(--ion-color-primary-rgb), 0.1);
+}
+
+.flag-icon {
+	width: 50px;
+	height: auto;
+	transition: transform 0.2s;
+}
+
+.flag-container:hover .flag-icon {
+	transform: scale(1.1);
+}

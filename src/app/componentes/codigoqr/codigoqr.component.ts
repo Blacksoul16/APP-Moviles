@@ -22,7 +22,7 @@ export class CodigoqrComponent implements OnInit {
 	public escaneando = false
 	public datosQR: any = ""
 
-	constructor(private auth: AuthService, private toast: ToastService, private theme: ThemeService) {
+	constructor(private auth: AuthService, private toast: ToastService) {
 		this.usuario = this.auth.usuarioAutenticado.value
 		this.salut = this.getSalut()
 	}

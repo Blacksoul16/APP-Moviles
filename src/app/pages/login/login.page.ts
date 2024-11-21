@@ -31,7 +31,7 @@ export class LoginPage implements OnInit {
 			backdropDismiss: true,
 			side: "top",
 			alignment: "start",
-			size: "auto"
+			size: "auto",
 		})
 		await popover.present()
 	}

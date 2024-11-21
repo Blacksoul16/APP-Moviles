@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { TranslateService } from '@ngx-translate/core';
 import { AuthService } from 'src/app/servicios/auth.service';
-import { ThemeService } from 'src/app/servicios/theme.service';
 
 @Component({
 	selector: 'duocuc-miclase',
@@ -13,9 +12,8 @@ export class MiclaseComponent  implements OnInit {
 	public usuario: any
 	public datosQR: any = ""
 	public datosQRKeys: any[] = []
-	// public darkMode: boolean = true
 
-	constructor(private auth: AuthService , private theme: ThemeService, private translate: TranslateService) {
+	constructor(private auth: AuthService, private translate: TranslateService) {
 		this.usuario = this.auth.usuarioAutenticado.value
 		if (this.auth.codigoQRData.value) {
 			this.datosQR = this.auth.codigoQRData.value
@@ -27,7 +25,6 @@ export class MiclaseComponent  implements OnInit {
 
 	ngOnInit() {
 		this.translate.use(localStorage.getItem("selectedLang") || "es")
-		// this.theme.darkMode$.subscribe(isDark => { this.darkMode = isDark })
 	}
 
 	public limpiarDatosQR(): void { this.datosQR = null; this.datosQRKeys = []; this.auth.codigoQRData.next(null) }

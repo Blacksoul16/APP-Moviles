@@ -1,13 +1,16 @@
-<div class="enmarcar">
-	<h3 class="ion-text-center">{{ "lang" | translate }}</h3>
-	<hr>
-	<ion-list>
-		<ion-radio-group [value]="langSelected">
-			<ion-item *ngFor="let lang of langCodes">
-				<ion-radio [value]="lang" (click)="changeLang(lang)" style="font-size: 16px;">
-					<img [src]="'assets/flags/' + lang + '.svg'" alt="{{lang}}" style="width: 20px; height: 15px; margin-right: 5px;">{{ "lang." + lang | translate }}
-				</ion-radio>
-			</ion-item>
-		</ion-radio-group>
-	</ion-list>
+<div style="padding: 0px;">
+	<ion-badge color="dark" class="ion-text-center" style="width: 100%;">
+		<h3>{{ "lang" | translate }}</h3>
+	</ion-badge>
+	<ion-radio-group [(ngModel)]="langSelected" (ionChange)="changeLang($event.detail.value)">
+		<ion-grid>
+			<ion-row>
+				<ion-col size="4" *ngFor="let lang of langCodes" style="display: flex; justify-content: center;">
+					<div class="flag-container" [class.selected]="langSelected === lang" (click)="changeLang(lang)">
+						<img [src]="'assets/flags/' + lang + '.svg'" alt="{{lang}}" class="flag-icon"/>
+					</div>
+				</ion-col>
+			</ion-row>
+		</ion-grid>
+	</ion-radio-group>
 </div>

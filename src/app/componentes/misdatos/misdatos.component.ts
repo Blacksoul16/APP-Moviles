@@ -15,15 +15,13 @@ import { ToastService } from 'src/app/servicios/toast.service';
 export class MisdatosComponent  implements OnInit {
 
 	public usuario: any
-	// public darkMode: boolean = true
 
-	constructor(private auth: AuthService, private toast: ToastService, private theme: ThemeService, private translate: TranslateService, private bd: DataBaseService) { 
+	constructor(private auth: AuthService, private toast: ToastService, private translate: TranslateService, private bd: DataBaseService) { 
 		this.usuario = this.auth.usuarioAutenticado.value
 	}
 
 	ngOnInit() {
 		this.translate.use(localStorage.getItem("selectedLang") || "es")
-		// this.theme.darkMode$.subscribe(isDark => { this.darkMode = isDark })
 	}
 
  	public listaNivelesEducacionales = NivelEducacional.getNivelesEducacionales();

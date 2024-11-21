@@ -1,8 +1,5 @@
-import { Optional } from "@angular/core";
-import { Asistencia } from "../interfaces/asistencia";
 import { NivelEducacional } from "./nivel-educacional";
 import { Persona } from "./persona";
-import { DataBaseService } from "../servicios/db.service";
 import { convertirFechaAString } from "../herramientas/funcFechas";
 
 export class Usuario extends Persona {

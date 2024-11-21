@@ -10,13 +10,11 @@ import { ThemeService } from 'src/app/servicios/theme.service';
 })
 export class FooterComponent implements OnInit {
 
-	// public darkMode: boolean = true
 	public tabSeleccionada: string = "codigoqr"
 
-	constructor(private auth: AuthService, private menu: MenuController, private theme: ThemeService) { }
+	constructor(private auth: AuthService, private menu: MenuController) { }
 
 	ngOnInit() {
-		// this.theme.darkMode$.subscribe(isDark => { this.darkMode = isDark })
 		this.auth.tabSeleccionado.subscribe((tab) => {
 			this.tabSeleccionada = tab
 		})
