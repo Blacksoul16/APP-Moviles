@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-import { LangSelectComponent } from 'src/app/componentes/lang-select/lang-select.component';
-import { AuthService } from 'src/app/servicios/auth.service';
+import { LangSelectComponent } from 'src/app/components/lang-select/lang-select.component';
+import { AuthService } from 'src/app/services/auth.service';
 import { TranslateModule, TranslateService } from '@ngx-translate/core';
 import { PopoverController } from '@ionic/angular';
 import { IonicModule } from '@ionic/angular';

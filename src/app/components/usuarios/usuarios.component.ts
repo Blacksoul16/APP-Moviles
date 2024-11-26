@@ -5,9 +5,9 @@ import { RouterModule } from '@angular/router';
 import { IonicModule } from '@ionic/angular';
 import { TranslateModule } from '@ngx-translate/core';
 import { Usuario } from 'src/app/model/usuario';
-import { DataBaseService } from 'src/app/servicios/database.service';
+import { DataBaseService } from 'src/app/services/database.service';
 import { IonPopover } from '@ionic/angular';
-import { AuthService } from 'src/app/servicios/auth.service';
+import { AuthService } from 'src/app/services/auth.service';
 
 @Component({
 	selector: 'duocuc-usuarios',

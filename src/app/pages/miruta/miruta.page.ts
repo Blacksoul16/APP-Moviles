@@ -1,14 +1,14 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, NgZone, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
 import { TranslateModule, TranslateService } from '@ngx-translate/core';
-import { IonicModule } from '@ionic/angular';
-import { HeaderComponent } from 'src/app/componentes/header/header.component';
+import { IonicModule, LoadingController } from '@ionic/angular';
+import { HeaderComponent } from 'src/app/components/header/header.component';
 import * as L from "leaflet";
-import { GeolocationService } from 'src/app/servicios/geolocation.service';
+import { GeolocationService } from 'src/app/services/geolocation.service';
 import { HttpClient } from '@angular/common/http';
-import { ToastService } from 'src/app/servicios/toast.service';
+import { ToastService } from 'src/app/services/toast.service';
 
 
 @Component({
@@ -23,9 +23,12 @@ export class MirutaPage implements OnInit {
 	map: L.Map | null = null
 	addressName: string = ""
 	distance: string = ""
-	isLoading = false
+	
 
-	constructor(private geo: GeolocationService, private http: HttpClient, private translate: TranslateService, private toast: ToastService) {}
+	constructor(
+		private geo: GeolocationService, private http: HttpClient, private translate: TranslateService, 
+		private toast: ToastService, private loading: LoadingController, 
+	) {}
 
 	ngOnInit() {
 		this.translate.use(localStorage.getItem("selectedLang") || "es")
@@ -34,29 +37,28 @@ export class MirutaPage implements OnInit {
 	}
 
 	async loadMap() {
-		this.isLoading = true
-		await this.geo.getCurrentPosition().then((pos: { lat: number, lng: number } | null ) => {
-			if (pos) {
-				this.map = L.map("mapId").setView([pos.lat, pos.lng], 16)
-				L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
-					maxZoom: 19,
-					attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
-				}).addTo(this.map)
-				this.goToMyPos()
-			} else {
-				console.log("Posición geográfica desconocida.")
+		const loading = await this.loading.create({ message: "El mapa está cargando...", spinner: "crescent" })
+		await loading.present()
+
+		try {
+			const pos = await this.geo.getCurrentPosition()
+			if (!pos) {
+				this.toast.showMsg("Posición geográfica desconocida.", 3000, "danger")
+				return
 			}
-		}).catch((e) => {
-			if (e.code === 1) {
-				this.toast.showMsg("No hay permiso para usar la ubicación.", 3000, "danger")
-			} else if (e.code === 2) {
-				this.toast.showMsg("La ubicación no está disponible, ¿el GPS está activado?", 3000, "danger")
-			} else if (e.code === 3) {
-				this.toast.showMsg("Se excedió el tiempo de espera para obtener la ubicación.", 3000, "danger")
-			} 
-			console.error(`[MiRuta.ts] Error al obtener la ubicación: ${e}`)
-		})
+			this.map = L.map("mapId").setView([pos.lat, pos.lng], 16)
+			L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", 
+				{maxZoom: 19, attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'}
+			).addTo(this.map)
+			this.goToMyPos()
+		} catch (e) {
+			this.handleGeoError(e)
+			loading.dismiss()
+		} finally {
+			loading.dismiss()
+		}
 	}
+	
 
 	goToDUOC() { this.goToPosition(-33.44703, -70.65762, 60, "DUOC Padre Alonso de Ovalle") }
 
@@ -121,5 +123,16 @@ export class MirutaPage implements OnInit {
 		})
 		L.Marker.prototype.options.icon = iconDefault
 	}
+
+	private handleGeoError(e: any) {
+		if (e.code === 1) {
+			this.toast.showMsg("No hay permiso para usar la ubicación.", 3000, "danger");
+		} else if (e.code === 2) {
+			this.toast.showMsg("La ubicación no está disponible, ¿el GPS está activado?", 3000, "danger");
+		} else if (e.code === 3) {
+			this.toast.showMsg("Se excedió el tiempo de espera para obtener la ubicación.", 3000, "danger");
+		}
+		console.error(`[MiRuta.ts] Error al obtener la ubicación: ${e}`);
+	  }
 
 }

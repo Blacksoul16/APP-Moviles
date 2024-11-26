@@ -1,6 +1,6 @@
 import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
-import { AuthService } from 'src/app/servicios/auth.service';
-import { ToastService } from 'src/app/servicios/toast.service';
+import { AuthService } from 'src/app/services/auth.service';
+import { ToastService } from 'src/app/services/toast.service';
 import jsQR, { QRCode } from 'jsqr';
 import { TranslateModule } from '@ngx-translate/core';
 import { RouterModule } from '@angular/router';

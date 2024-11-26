@@ -26,11 +26,11 @@
 		<input type="file" #fileInput accept="image/*" style="display: none;" (change)="seleccionarArchivo($event)"> -->
 		<!-- Comentar luego -->
 
-		<ion-button *ngIf="!escaneando" (click)="initScan()" fill="outline" color="success" size="large" class="btn-custom">
+		<ion-button *ngIf="!escaneando" (click)="initScan()" fill="outline" color="success" class="btn-custom">
 			<ion-icon slot="start" name="videocam-outline"></ion-icon>{{ "button.scan_qr" | translate }}
 		</ion-button>
 
-		<ion-button *ngIf="escaneando" (click)="stopScan()" fill="outline" color="danger" size="large" class="btn-custom">
+		<ion-button *ngIf="escaneando" (click)="stopScan()" fill="outline" color="danger" class="btn-custom">
 			<ion-icon slot="start" name="stop-circle-outline"></ion-icon>{{ "button.stop_scan" | translate }}
 		</ion-button>
 	</div>

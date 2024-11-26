@@ -1,9 +1,7 @@
 <duocuc-header></duocuc-header>
 
 <ion-content>
-	<div id="mapId" class="enmarcar" style="height: 100%;">
-		<ion-loading *ngIf="isLoading" message="El mapa está cargando..." duration="5000"></ion-loading>
-	</div>
+	<div id="mapId" class="enmarcar" style="height: 100%;"></div>
 </ion-content>
 
 <ion-footer>
@@ -14,22 +12,19 @@
 					<ion-button [routerLink]="['/login']" size="small" fill="outline" shape="round" color="danger">{{ "button.go_back" | translate }}</ion-button>
 				</ion-col>
 				<ion-col size="3" style="display: flex; justify-content: end;" class="btn-group">
-					<ion-button (click)="goToDUOC()" size="small" shape="round" fill="outline" color="secondary" class="btn-custom">
+					<ion-button (click)="goToDUOC()" size="small" fill="outline" color="secondary" class="btn-custom" [disabled]="!map">
 						<ion-icon slot="start" name="school-outline"></ion-icon>DUOC
 					</ion-button>
-					<ion-button (click)="goToMyPos()" size="small" shape="round" fill="outline" color="secondary" class="btn-custom">
+					<ion-button (click)="goToMyPos()" size="small" fill="outline" color="secondary" class="btn-custom" [disabled]="!map">
 						<ion-icon slot="start" name="caret-down-circle-outline"></ion-icon>{{ "miruta.button.here" | translate }}
 					</ion-button>
-					<ion-button (click)="showRouteToDUOC()" size="small" shape="round" fill="outline" color="secondary" class="btn-custom">
+					<ion-button (click)="showRouteToDUOC()" size="small" fill="outline" color="secondary" class="btn-custom" [disabled]="!map">
 						<ion-icon slot="start" name="map-outline"></ion-icon>{{ "miruta.button.route" | translate }}
 					</ion-button>
 				</ion-col>
 			</ion-row>
 		</ion-grid>
 	
-		<div *ngIf="distance">
-			<br>
-			{{ distance }}
-		</div>
+		<div *ngIf="distance">{{ distance }}</div>
 	</ion-toolbar>
 </ion-footer>

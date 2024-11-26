@@ -1,7 +1,7 @@
 import { inject } from '@angular/core';
 import { CanActivateFn, Router } from '@angular/router';
-import { AuthService } from '../servicios/auth.service';
-import { ToastService } from '../servicios/toast.service';
+import { AuthService } from '../services/auth.service';
+import { ToastService } from '../services/toast.service';
 
 export const inicioGuard: CanActivateFn = async (route, state) => {
 

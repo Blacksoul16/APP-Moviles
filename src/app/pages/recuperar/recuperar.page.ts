@@ -4,8 +4,8 @@ import { FormsModule } from '@angular/forms';
 import { Router, RouterModule } from '@angular/router';
 import { TranslateModule, TranslateService } from '@ngx-translate/core';
 import { IonicModule } from '@ionic/angular';
-import { ToastService } from 'src/app/servicios/toast.service';
-import { DataBaseService } from 'src/app/servicios/database.service';
+import { ToastService } from 'src/app/services/toast.service';
+import { DataBaseService } from 'src/app/services/database.service';
 
 @Component({
 	selector: 'app-recuperar',

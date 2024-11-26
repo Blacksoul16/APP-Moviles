@@ -27,17 +27,15 @@
 		<ion-list>
 			<ion-item>
 				<ion-checkbox slot="start" [(ngModel)]="filtroAdmin" (ionChange)="aplicarFiltroPopover()"></ion-checkbox>
-				<ion-label>Admin</ion-label>
+				<ion-label>Administrador</ion-label>
 			</ion-item>
 			<ion-item>
 				<ion-checkbox slot="start" [(ngModel)]="filtroUsuario" (ionChange)="aplicarFiltroPopover()"></ion-checkbox>
-				<ion-label>Usuario</ion-label>
+				<ion-label>Alumno</ion-label>
 			</ion-item>
 		</ion-list>
 	</ng-template>
 </ion-popover>
-
-<ion-item-divider></ion-item-divider>
 
 <ion-list class="enmarcar">
 	<ion-item *ngFor="let u of usuariosFiltrados; let i">

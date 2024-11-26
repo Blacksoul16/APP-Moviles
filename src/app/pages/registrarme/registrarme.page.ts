@@ -1,14 +1,14 @@
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormBuilder, FormGroup, FormsModule, Validators, ReactiveFormsModule } from '@angular/forms';
-import { HeaderComponent } from 'src/app/componentes/header/header.component';
+import { HeaderComponent } from 'src/app/components/header/header.component';
 import { TranslateModule, TranslateService } from '@ngx-translate/core';
 import { RouterModule } from '@angular/router';
 import { Usuario } from 'src/app/model/usuario';
 import { NivelEducacional } from 'src/app/model/nivel-educacional';
-import { ToastService } from 'src/app/servicios/toast.service';
-import { DataBaseService } from 'src/app/servicios/database.service';
-import { AuthService } from 'src/app/servicios/auth.service';
+import { ToastService } from 'src/app/services/toast.service';
+import { DataBaseService } from 'src/app/services/database.service';
+import { AuthService } from 'src/app/services/auth.service';
 import { IonicModule } from '@ionic/angular';
 
 @Component({

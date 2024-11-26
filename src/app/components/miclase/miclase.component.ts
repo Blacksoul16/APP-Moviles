@@ -4,7 +4,7 @@ import { FormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
 import { TranslateModule, TranslateService } from '@ngx-translate/core';
 import { IonicModule } from '@ionic/angular';
-import { AuthService } from 'src/app/servicios/auth.service';
+import { AuthService } from 'src/app/services/auth.service';
 
 @Component({
 	selector: 'duocuc-miclase',

@@ -4,9 +4,9 @@ import { FormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
 import { TranslateModule, TranslateService } from '@ngx-translate/core';
 import { IonicModule } from '@ionic/angular';
-import { AuthService } from 'src/app/servicios/auth.service';
-import { ToastService } from 'src/app/servicios/toast.service';
-import { DataBaseService } from 'src/app/servicios/database.service';
+import { AuthService } from 'src/app/services/auth.service';
+import { ToastService } from 'src/app/services/toast.service';
+import { DataBaseService } from 'src/app/services/database.service';
 import { NivelEducacional } from 'src/app/model/nivel-educacional';
 import { convertirFechaAISO, convertirISOAFecha } from 'src/app/tools/funcFechas';
 

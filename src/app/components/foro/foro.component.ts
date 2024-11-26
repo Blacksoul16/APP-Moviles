@@ -4,9 +4,9 @@ import { FormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
 import { TranslateModule, TranslateService } from '@ngx-translate/core';
 import { IonicModule } from '@ionic/angular';
-import { ApiService } from 'src/app/servicios/api.service';
-import { ToastService } from 'src/app/servicios/toast.service';
-import { AuthService } from 'src/app/servicios/auth.service';
+import { ApiService } from 'src/app/services/api.service';
+import { ToastService } from 'src/app/services/toast.service';
+import { AuthService } from 'src/app/services/auth.service';
 import { Usuario } from 'src/app/model/usuario';
 
 @Component({

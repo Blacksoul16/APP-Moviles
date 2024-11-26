@@ -3,14 +3,14 @@ import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { TranslateModule, TranslateService } from '@ngx-translate/core';
 import { IonicModule } from '@ionic/angular';
-import { HeaderComponent } from 'src/app/componentes/header/header.component';
-import { FooterComponent } from 'src/app/componentes/footer/footer.component';
-import { CodigoqrComponent } from 'src/app/componentes/codigoqr/codigoqr.component';
-import { MisdatosComponent } from 'src/app/componentes/misdatos/misdatos.component';
-import { MiclaseComponent } from 'src/app/componentes/miclase/miclase.component';
-import { ForoComponent } from 'src/app/componentes/foro/foro.component';
-import { UsuariosComponent } from 'src/app/componentes/usuarios/usuarios.component';
-import { AuthService } from 'src/app/servicios/auth.service';
+import { HeaderComponent } from 'src/app/components/header/header.component';
+import { FooterComponent } from 'src/app/components/footer/footer.component';
+import { CodigoqrComponent } from 'src/app/components/codigoqr/codigoqr.component';
+import { MisdatosComponent } from 'src/app/components/misdatos/misdatos.component';
+import { MiclaseComponent } from 'src/app/components/miclase/miclase.component';
+import { ForoComponent } from 'src/app/components/foro/foro.component';
+import { UsuariosComponent } from 'src/app/components/usuarios/usuarios.component';
+import { AuthService } from 'src/app/services/auth.service';
 
 @Component({
 	selector: 'app-inicio',

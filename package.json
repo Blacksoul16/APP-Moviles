@@ -1,5 +1,5 @@
 {
-  "name": "ProyectoSemestralStandalone",
+  "name": "ProyectoSemestral",
   "version": "0.0.1",
   "author": "Seth Garday, Franco Murillo, Matías Morales, Gabriel Sepúlveda",
   "homepage": "https://ionicframework.com/",
@@ -73,6 +73,7 @@
     "jasmine-core": "~5.1.0",
     "jasmine-spec-reporter": "~5.0.0",
     "karma": "~6.4.0",
+    "karma-brave-launcher": "^1.0.0",
     "karma-chrome-launcher": "~3.2.0",
     "karma-coverage": "~2.2.0",
     "karma-jasmine": "~5.1.0",

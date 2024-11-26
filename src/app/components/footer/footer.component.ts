@@ -5,7 +5,7 @@ import { RouterModule } from '@angular/router';
 import { IonicModule } from '@ionic/angular';
 import { TranslateModule } from '@ngx-translate/core';
 import { MenuController } from '@ionic/angular/standalone';
-import { AuthService } from 'src/app/servicios/auth.service';
+import { AuthService } from 'src/app/services/auth.service';
 
 @Component({
 	selector: 'duocuc-footer',

@@ -26,6 +26,7 @@ bootstrapApplication(AppComponent, {
 		InitappService,
 		AuthService,
 		DataBaseService,
+		provideAnimations(),
 	],
 });
 
@@ -35,9 +36,9 @@ export function HttpLoaderFactory(http: HttpClient) {
 
 import { defineCustomElements as jeepSqlite} from 'jeep-sqlite/loader';
 import { Capacitor } from '@capacitor/core';
-import { InitappService } from './app/servicios/initapp.service';
-import { AuthService } from './app/servicios/auth.service';
-import { DataBaseService } from './app/servicios/database.service';
+import { InitappService } from './app/services/initapp.service';
+import { AuthService } from './app/services/auth.service';
+import { DataBaseService } from './app/services/database.service';
 import { FormGroup } from '@angular/forms';
 
 const platform = Capacitor.getPlatform()
