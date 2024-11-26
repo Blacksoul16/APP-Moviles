@@ -1,11 +1,17 @@
+import { CommonModule } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
-import { TranslateService } from '@ngx-translate/core';
+import { FormsModule } from '@angular/forms';
+import { RouterModule } from '@angular/router';
+import { TranslateModule, TranslateService } from '@ngx-translate/core';
+import { IonicModule } from '@ionic/angular';
 import { AuthService } from 'src/app/servicios/auth.service';
 
 @Component({
 	selector: 'duocuc-miclase',
 	templateUrl: './miclase.component.html',
-	styleUrls: ['./miclase.component.scss']
+	styleUrls: ['./miclase.component.scss'],
+	standalone: true,
+	imports: [CommonModule, FormsModule, IonicModule, RouterModule, TranslateModule]
 })
 export class MiclaseComponent  implements OnInit {
 

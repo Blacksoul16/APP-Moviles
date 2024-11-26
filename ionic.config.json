@@ -1,7 +1,7 @@
 {
-  "name": "ProyectoSemestral",
+  "name": "ProyectoSemestralStandalone",
   "integrations": {
     "capacitor": {}
   },
-  "type": "angular"
+  "type": "angular-standalone"
 }

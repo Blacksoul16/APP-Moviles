@@ -1,16 +1,21 @@
 import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
-import { Router } from '@angular/router';
-import jsQR, { QRCode } from 'jsqr';
 import { AuthService } from 'src/app/servicios/auth.service';
-import { ThemeService } from 'src/app/servicios/theme.service';
 import { ToastService } from 'src/app/servicios/toast.service';
+import jsQR, { QRCode } from 'jsqr';
+import { TranslateModule } from '@ngx-translate/core';
+import { RouterModule } from '@angular/router';
+import { FormsModule } from '@angular/forms';
+import { CommonModule } from '@angular/common';
+import { IonicModule } from '@ionic/angular';
 
 @Component({
 	selector: 'duocuc-codigoqr',
 	templateUrl: './codigoqr.component.html',
-	styleUrls: ['./codigoqr.component.scss']
+	styleUrls: ['./codigoqr.component.scss'],
+	standalone: true,
+	imports: [CommonModule, FormsModule, IonicModule, RouterModule, TranslateModule]
 })
-export class CodigoqrComponent implements OnInit {
+export class CodigoqrComponent  implements OnInit {
 
 	public salut: string = ""
 	public usuario: any
@@ -23,11 +28,12 @@ export class CodigoqrComponent implements OnInit {
 	public datosQR: any = ""
 
 	constructor(private auth: AuthService, private toast: ToastService) {
-		this.usuario = this.auth.usuarioAutenticado.value
 		this.salut = this.getSalut()
 	}
 
-	ngOnInit() {}
+	ngOnInit() {
+		this.auth.usuarioAutenticado.subscribe((u) => { this.usuario = u })
+	}
 
 	private getSalut(): string {
 		const h = new Date().getHours()

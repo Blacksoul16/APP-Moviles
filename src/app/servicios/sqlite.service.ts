@@ -1,11 +1,11 @@
-import { Injectable } from "@angular/core";
-import { CapacitorSQLite, CapacitorSQLitePlugin, capSQLiteUpgradeOptions, SQLiteConnection, SQLiteDBConnection } from "@capacitor-community/sqlite";
-import { Capacitor } from "@capacitor/core";
+import { Injectable } from '@angular/core';
+import { CapacitorSQLite, CapacitorSQLitePlugin, capSQLiteUpgradeOptions, SQLiteConnection, SQLiteDBConnection } from '@capacitor-community/sqlite';
+import { Capacitor } from '@capacitor/core';
 
 @Injectable({
-	providedIn: "root"
+	providedIn: 'root'
 })
-export class SQLiteService {
+export class SqliteService {
 
 	sqliteConnection!: SQLiteConnection
 	isService: boolean = false

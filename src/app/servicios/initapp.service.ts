@@ -1,17 +1,17 @@
-import { Injectable } from "@angular/core";
-import { SQLiteService } from "./sqlite.service";
-import { DataBaseService } from "./db.service";
-import { AuthService } from "./auth.service";
+import { Injectable } from '@angular/core';
+import { SqliteService } from './sqlite.service';
+import { DataBaseService } from './database.service';
+import { AuthService } from './auth.service';
 
 @Injectable({
-	providedIn: "root"
+	providedIn: 'root'
 })
-export class InitAppService {
+export class InitappService {
 	
 	isAppInit: boolean = false
 	platform!: string
 
-	constructor(private sqliteService: SQLiteService, private storageService: DataBaseService, private authService: AuthService) {}
+	constructor(private sqliteService: SqliteService, private storageService: DataBaseService, private authService: AuthService) {}
 
 	async initApp() {
 		await this.sqliteService.initPlugin().then(async (ret) => {

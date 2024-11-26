@@ -3,6 +3,15 @@
 	"lang.es": "Испанский",
 	"lang.en": "Английский",
 	"lang.fr": "Французский",
+	"lang.de": "Немецкий",
+	"lang.it": "Итальянский",
+	"lang.nl": "Нидерландский",
+	"lang.pl": "Польский",
+	"lang.pt": "Португальский",
+	"lang.ru": "Русский",
+	"lang.cn": "Китайский",
+	"lang.jp": "Японский",
+	"lang.kr": "Корейский",
 	
 	"login.title": "Войти",
 
@@ -20,6 +29,8 @@
 	"button.save_changes": "Сохранить изменения",
 	"button.go_back": "Назад",
 	"button.continue": "Продолжить",
+	"button.register": "Регистрация",
+	"button.users": "Пользователи",
 
 	"tab.home.label": "Главная",
 	"tab.my_data.label": "Мои данные",

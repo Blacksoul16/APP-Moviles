@@ -5,7 +5,7 @@ import { Geolocation, Position } from "@capacitor/geolocation"
 import { Observable } from "rxjs";
 
 @Injectable({
-	providedIn: "root"
+	providedIn: 'root'
 })
 export class GeolocationService {
 

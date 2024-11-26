@@ -3,7 +3,16 @@
 	"lang.es": "Spaans",
 	"lang.en": "Engels",
 	"lang.fr": "Frans",
-	
+	"lang.de": "Duits",
+	"lang.it": "Italiaans",
+	"lang.nl": "Nederlands",
+	"lang.pl": "Pools",
+	"lang.pt": "Portugees",
+	"lang.ru": "Russisch",
+	"lang.cn": "Chinees",
+	"lang.jp": "Japans",
+	"lang.kr": "Koreaans",
+
 	"login.title": "Inloggen",
 
 	"input.user.label": "Gebruiker",
@@ -20,6 +29,8 @@
 	"button.save_changes": "Wijzigingen opslaan",
 	"button.go_back": "Terug",
 	"button.continue": "Doorgaan",
+	"button.register": "Registreren",
+	"button.users": "Gebruikers",
 
 	"tab.home.label": "Start",
 	"tab.my_data.label": "Mijn gegevens",

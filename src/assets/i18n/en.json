@@ -3,6 +3,15 @@
 	"lang.es": "Spanish",
 	"lang.en": "English",
 	"lang.fr": "French",
+	"lang.de": "German",
+	"lang.it": "Italian",
+	"lang.nl": "Dutch",
+	"lang.pl": "Polish",
+	"lang.pt": "Portuguese",
+	"lang.ru": "Russian",
+	"lang.cn": "Chinese",
+	"lang.jp": "Japanese",
+	"lang.kr": "Korean",
 
 	"login.title": "Log in",
 
@@ -20,12 +29,16 @@
 	"button.save_changes": "Save changes",
 	"button.go_back": "Go back",
 	"button.continue": "Continue",
+	"button.register": "Register",
+	"button.users": "Users",
+	"button.create_account": "Create account",
 
 	"tab.home.label": "Home",
 	"tab.my_data.label": "My data",
 	"tab.my_class.label": "My class",
 	"tab.menu.label": "Menu",
 	"tab.forum.label": "Forum",
+	"tab.users.label": "Users",
 	
 	"label.recover_pass": "Password recovery",
 	"label.go_to_campus": "Go to DUOC",
@@ -63,6 +76,14 @@
 	"misdatos.input.dirección": "Address",
 
 	"foro.badge": "Today's Forum",
+
+	"registrarme.badge": "Register",
+	"registrarme.card.title": "Enter your personal data",
+
+	"miruta.button.here": "Here",
+	"miruta.button.route": "Route",
+
+	"usuarios.badge": "User list",
 
 	"temas.label.colortheme": "Theme",
 	"temas.color.light": "Light",

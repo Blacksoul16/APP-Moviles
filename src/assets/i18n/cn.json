@@ -29,6 +29,8 @@
 	"button.save_changes": "保存更改",
 	"button.go_back": "返回",
 	"button.continue": "继续",
+	"button.register": "注册",
+	"button.users": "用户",
   
 	"tab.home.label": "首页",
 	"tab.my_data.label": "我的数据",

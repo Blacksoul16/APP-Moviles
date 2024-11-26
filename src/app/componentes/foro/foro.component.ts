@@ -1,15 +1,20 @@
+import { CommonModule } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
-import { TranslateService } from '@ngx-translate/core';
-import { Usuario } from 'src/app/model/usuario';
-import { APIService } from 'src/app/servicios/api.service';
-import { AuthService } from 'src/app/servicios/auth.service';
-import { ThemeService } from 'src/app/servicios/theme.service';
+import { FormsModule } from '@angular/forms';
+import { RouterModule } from '@angular/router';
+import { TranslateModule, TranslateService } from '@ngx-translate/core';
+import { IonicModule } from '@ionic/angular';
+import { ApiService } from 'src/app/servicios/api.service';
 import { ToastService } from 'src/app/servicios/toast.service';
+import { AuthService } from 'src/app/servicios/auth.service';
+import { Usuario } from 'src/app/model/usuario';
 
 @Component({
 	selector: 'duocuc-foro',
 	templateUrl: './foro.component.html',
 	styleUrls: ['./foro.component.scss'],
+	standalone: true,
+	imports: [CommonModule, FormsModule, IonicModule, RouterModule, TranslateModule]
 })
 export class ForoComponent  implements OnInit {
 
@@ -32,7 +37,7 @@ export class ForoComponent  implements OnInit {
 		name: ""
 	}
 
-	constructor(private translate: TranslateService, private api: APIService, private toast: ToastService, private auth: AuthService) {
+	constructor(private translate: TranslateService, private api: ApiService, private toast: ToastService, private auth: AuthService) {
 		this.usuario = this.auth.usuarioAutenticado.value
 	}
 
@@ -62,8 +67,8 @@ export class ForoComponent  implements OnInit {
 	}
 
 	// En este caso, "d" es "data".
-	getUsers() { this.api.getUsers().subscribe(d => this.users = d) }
-	getPosts() {
+	async getUsers() { this.api.getUsers().subscribe(d => this.users = d) }
+	async getPosts() {
 		this.api.getPosts().subscribe((posts) => {
 			this.api.getUsers().subscribe((users) => {
 				posts.forEach((post: { name: any, userId: any }) => {
@@ -75,7 +80,7 @@ export class ForoComponent  implements OnInit {
 		})
 	}
 
-	savePost() {
+	async savePost() {
 		if (this.post.userID === null) {
 			this.toast.showMsg("Antes de hacer una publicación debes seleccionar un usuario.", 2500, "danger", "top")
 			return
@@ -92,7 +97,7 @@ export class ForoComponent  implements OnInit {
 		}
 	}
 
-	createPost() {
+	async createPost() {
 		const postRegistry = {
 			"userId": this.post.userID,
 			// "id": v4(),
@@ -109,7 +114,7 @@ export class ForoComponent  implements OnInit {
 		})
 	}
 
-	updatePost() {
+	async updatePost() {
 		const postRegistry = {
 			"userId": this.post.userID,
 			"id": this.post.id,
@@ -128,13 +133,13 @@ export class ForoComponent  implements OnInit {
 		})
 	}
 
-	editPost($e: any) {
+	async editPost($e: any) {
 		const post = $e
 		this.setPost(post.userId, post.id, post.title, post.body, post.name)
 		document.getElementById("top")!.scrollIntoView({block: "end", behavior: "smooth"})
 	}
 
-	deletePost($e: any) {
+	async deletePost($e: any) {
 		const postID = $e.id
 
 		this.api.deletePost(postID).subscribe({

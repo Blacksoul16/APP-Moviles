@@ -1,6 +1,6 @@
+import { inject } from '@angular/core';
 import { CanActivateFn, Router } from '@angular/router';
 import { AuthService } from '../servicios/auth.service';
-import { inject } from '@angular/core';
 
 export const loginGuard: CanActivateFn = async (route, state) => {
 
@@ -12,4 +12,4 @@ export const loginGuard: CanActivateFn = async (route, state) => {
 		return false
 	}
 	return true
-}
+};

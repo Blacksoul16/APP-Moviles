@@ -5,7 +5,7 @@
 	</div>
 	<hr>
 	<div style="display: flex; justify-content: center; align-items: center;">
-		<ion-card class="ion-padding-vertical enmarcar" style="border-radius: 8px; width: 22rem;">
+		<ion-card class="ion-padding-vertical enmarcar" style="border-radius: 8px; width: 26rem;">
 			<ion-card-title class="ion-text-center">
 				<ion-label style="font-size: 26px;">{{ "login.title" | translate }}</ion-label>
 			</ion-card-title>
@@ -14,11 +14,14 @@
 				<ion-input [(ngModel)]="correo" [clearInput]="true" color="secondary" type="text" labelPlacement="floating" fill="outline" label="{{ 'input.user.label' | translate }}" placeholder="Ej: u.suario123"></ion-input>
 				<hr>
 				<ion-input [(ngModel)]="password" color="secondary" type="password" labelPlacement="floating" fill="outline" label="{{ 'input.password.label' | translate }}" placeholder="Ej: contraseñaSegura8">
-					<ion-input-password-toggle slot="end" color="secondary"></ion-input-password-toggle>
+					<!-- <ion-input-password-toggle slot="end" color="secondary"></ion-input-password-toggle> -->
 				</ion-input>
-				<div class="ion-margin-top ion-margin-bottom" style="display: flex; justify-content: center;">
-					<ion-button (click)="login()" fill="outline" shape="round" color="secondary">
+				<div class="btn-group ion-margin-top ion-margin-bottom">
+					<ion-button (click)="login()" fill="outline" color="secondary" class="btn-custom">
 						<ion-icon slot="start" name="log-in-outline"></ion-icon>{{ "button.log_in" | translate }}
+					</ion-button>
+					<ion-button [routerLink]="['/registrarme']" fill="outline" color="secondary" class="btn-custom">
+						<ion-icon slot="start" name="document-text-outline"></ion-icon>{{ "button.register" | translate }}
 					</ion-button>
 				</div>
 				<hr>

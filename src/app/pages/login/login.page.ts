@@ -1,22 +1,28 @@
 import { Component, OnInit } from '@angular/core';
-import { PopoverController } from '@ionic/angular';
+import { CommonModule } from '@angular/common';
+import { FormsModule } from '@angular/forms';
 import { LangSelectComponent } from 'src/app/componentes/lang-select/lang-select.component';
-import { TranslateService } from '@ngx-translate/core';
 import { AuthService } from 'src/app/servicios/auth.service';
+import { TranslateModule, TranslateService } from '@ngx-translate/core';
+import { PopoverController } from '@ionic/angular';
+import { IonicModule } from '@ionic/angular';
+import { RouterModule } from '@angular/router';
 
 @Component({
 	selector: 'app-login',
 	templateUrl: './login.page.html',
 	styleUrls: ['./login.page.scss'],
+	standalone: true,
+	imports: [CommonModule, FormsModule, IonicModule, RouterModule, TranslateModule]
 })
 export class LoginPage implements OnInit {
 
-	correo: string
-	password: string
+	correo: string = ""
+	password: string = ""
 
 	constructor(private poppy: PopoverController, private translate: TranslateService, private auth: AuthService) {
-		this.correo = "sgarday"
-		this.password = "1234"
+		// this.correo = "sgarday"
+		// this.password = "1234"
 	}
 
 	ngOnInit() { this.translate.use(localStorage.getItem("selectedLang") || "es") }
@@ -35,5 +41,4 @@ export class LoginPage implements OnInit {
 		})
 		await popover.present()
 	}
-
 }

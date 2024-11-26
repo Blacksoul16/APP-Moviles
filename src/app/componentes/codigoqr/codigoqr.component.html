@@ -1,26 +1,11 @@
 <hr>
-<ion-badge style="display: flex; justify-content: center; width: 30rem; margin: 0 auto;" color="dark">
-	<ion-title class="ion-text-center" style="margin-top: 5px; margin-bottom: 5px;">¡{{ salut }}, <ion-text color="secondary">{{usuario.nombre}} {{usuario.apellido}}</ion-text>!</ion-title>
-</ion-badge>
+<div style="display: flex; justify-content: center;">
+	<ion-badge style="width: 30rem; margin: 0 auto;" color="dark">
+		<ion-title class="ion-text-center" style="margin-top: 5px; margin-bottom: 5px;">¡{{ salut }}, <ion-text color="secondary">{{usuario.nombre}} {{usuario.apellido}}</ion-text>!</ion-title>
+	</ion-badge>
+</div>
 <hr>
 <div style="display: flex; flex-direction: column; justify-content: center;">
-	<div style="display: flex; justify-content: center;">
-		<!-- Comentar luego -->
-		<ion-button (click)="fileInput.click()" fill="outline" shape="round" color="secondary">
-			<ion-icon slot="start" name="arrow-up-circle-outline"></ion-icon>{{ "button.upload_qr" | translate }}
-		</ion-button>
-		<input type="file" #fileInput accept="image/*" style="display: none;" (change)="seleccionarArchivo($event)">
-		<!-- Comentar luego -->
-
-		<ion-button *ngIf="!escaneando" (click)="initScan()" fill="outline" shape="round" color="success">
-			<ion-icon slot="start" name="videocam-outline"></ion-icon>{{ "button.scan_qr" | translate }}
-		</ion-button>
-
-		<ion-button *ngIf="escaneando" (click)="stopScan()" fill="outline" shape="round" color="danger">
-			<ion-icon slot="start" name="stop-circle-outline"></ion-icon>{{ "button.stop_scan" | translate }}
-		</ion-button>
-	</div>
-	<hr>
 	<div style="display: flex; justify-content: center;">
 		<ion-card class="enmarcar">
 			<ion-card-content style="display: flex; justify-content: center;">
@@ -32,10 +17,21 @@
 			</ion-card-content>
 		</ion-card>
 	</div>
-	<!-- <hr>
-	<div *ngIf="datosQR" style="display: flex; justify-content: center;">
-		<ion-button fill="outline" shape="round" class="custom-button-success">
-			<ion-icon slot="start" name="chevron-forward-circle-outline"></ion-icon>Ir a ver los datos del QR escaneado.
+	<hr>
+	<div class="btn-group">
+		<!-- Comentar luego -->
+		<!-- <ion-button (click)="fileInput.click()" fill="outline" color="secondary" class="btn-custom">
+			<ion-icon slot="start" name="arrow-up-circle-outline"></ion-icon>{{ "button.upload_qr" | translate }}
 		</ion-button>
-	</div> -->
+		<input type="file" #fileInput accept="image/*" style="display: none;" (change)="seleccionarArchivo($event)"> -->
+		<!-- Comentar luego -->
+
+		<ion-button *ngIf="!escaneando" (click)="initScan()" fill="outline" color="success" size="large" class="btn-custom">
+			<ion-icon slot="start" name="videocam-outline"></ion-icon>{{ "button.scan_qr" | translate }}
+		</ion-button>
+
+		<ion-button *ngIf="escaneando" (click)="stopScan()" fill="outline" color="danger" size="large" class="btn-custom">
+			<ion-icon slot="start" name="stop-circle-outline"></ion-icon>{{ "button.stop_scan" | translate }}
+		</ion-button>
+	</div>
 </div>

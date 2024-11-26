@@ -1,34 +1,46 @@
 <ion-app>
-	<ion-menu *ngIf="mostrarComponentes" side="end" contentId="main-content">
+	<ion-menu *ngIf="mostrarComponentes" side="end" menuId="menuLateral" contentId="main-content">
 		<ion-header>
 			<ion-toolbar>
 				<ion-title class="ion-text-center">{{ "label.where_we_goin" | translate }}</ion-title>
 			</ion-toolbar>
 		</ion-header>
 		<ion-content class="ion-padding">
-			<ion-grid style="display: flex; flex-direction: column; justify-content: center; align-items: center;">
-				<ion-item-divider style="margin-bottom: 2rem;"></ion-item-divider>
-				<ion-row style="display: flex; flex-direction: column; justify-content: center; align-items: center;">
-					<ion-button disabled fill="outline" shape="round" size="default" color="secondary" style="width: 14rem;">
-						<ion-icon slot="start" name="settings-outline"></ion-icon>{{ "button.settings" | translate }}
-					</ion-button>
-				</ion-row>
-				<!-- <ion-item-divider></ion-item-divider>
-				<ion-text>
-					<h4>Opciones rápidas</h4>
-				</ion-text>
-				<ion-row>
-					<ion-toggle [(ngModel)]="darkMode" (ionChange)="toggleChange($event)" labelPlacement="end" color="warning">Modo oscuro</ion-toggle>
-				</ion-row> -->
-				<ion-item-divider style="margin-bottom: 2rem;"></ion-item-divider>
-				<ion-row>
-					<ion-button (click)="cerrarSesion()" fill="outline" shape="round" size="default" color="danger" style="width: 14rem;">
-						<ion-icon slot="start" name="log-out-outline"></ion-icon>{{ "button.log_out" | translate }}
-					</ion-button>
-				</ion-row>
+			<ion-grid fixed>
+				<ion-col style="display: flex; flex-direction: column; justify-content: center; align-items: center;">
+					<ion-row style="display: flex; flex-direction: column; justify-content: center; align-items: center;">
+						<ion-card *ngIf="usuario" style="display: flex; align-items: center; border: 1px solid rgb(71, 71, 71); margin: 0; width: 16rem; position: relative;">
+							<ion-thumbnail style="width: 5rem; height: 5rem; margin-right: 1rem;">
+								<img [src]="'assets/img/users/' + usuario.imagen" alt="avatar" style="border: 1px solid rgb(71, 71, 71);">
+							</ion-thumbnail>
+							<ion-card-content style="flex: 1; padding: 0;">
+								<ion-card-title style="font-size: 14px;">
+									{{ usuario.nombre }} {{ usuario.apellido }}
+								</ion-card-title>
+								<ion-card-subtitle>
+									<ion-badge color="light" style="font-size: 9px;">
+										{{ usuario.rol === 1 ? 'Administrador' : 'Alumno' }}
+									</ion-badge>
+								</ion-card-subtitle>
+							</ion-card-content>
+							<!-- <ion-button fill="clear" size="small" color="secondary" style="position: absolute; top: 0; right: 0;">
+								<ion-icon slot="icon-only" name="create-outline"></ion-icon>
+							</ion-button> -->
+						</ion-card>
+					</ion-row>
+					<ion-item-divider style="margin-bottom: 2rem;"></ion-item-divider>
+					<ion-row>
+						<ion-button (click)="cerrarSesion()" fill="outline" shape="round" color="danger" style="width: 14rem;">
+							<ion-icon slot="start" name="log-out-outline"></ion-icon>{{ "button.log_out" | translate }}
+						</ion-button>
+					</ion-row>
+					<ion-item-divider style="margin-bottom: 2rem;"></ion-item-divider>
+					<ion-row>
+						<ion-label style="color: slategray; font-size: 12px; font-family: 'Courier New', Courier, monospace;" class="ion-text-center">Seth Garday, Franco Murillo, Matías Morales y Gabriel Sepúlveda.</ion-label>
+					</ion-row>
+				</ion-col>
 			</ion-grid>
 		</ion-content>
 	</ion-menu>
-
 	<ion-router-outlet id="main-content"></ion-router-outlet>
 </ion-app>

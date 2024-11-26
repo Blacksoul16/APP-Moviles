@@ -1,22 +1,19 @@
 import { CommonModule } from '@angular/common';
 import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { FormsModule } from '@angular/forms';
+import { RouterModule } from '@angular/router';
+import { TranslateModule, TranslateService } from '@ngx-translate/core';
 import { IonicModule } from '@ionic/angular';
-import { TranslateModule, TranslateService } from '@ngx-translate/core'
 
 @Component({
-	selector: 'duocuc-lang-select',
+	selector: 'app-lang-select',
 	templateUrl: './lang-select.component.html',
 	styleUrls: ['./lang-select.component.scss'],
 	standalone: true,
-	imports: [
-		CommonModule,
-		FormsModule,
-		IonicModule,
-		TranslateModule
-	]
+	imports: [CommonModule, FormsModule, IonicModule, RouterModule, TranslateModule]
+
 })
-export class LangSelectComponent implements OnInit {
+export class LangSelectComponent  implements OnInit {
 
 	@Output() changeCurrentLang = new EventEmitter()
 
@@ -33,11 +30,10 @@ export class LangSelectComponent implements OnInit {
 		this.langCodes.sort()
 	}
 
-	changeLang(lang: string) {
+	public changeLang(lang: string) {
 		this.translate.use(lang)
 		this.langSelected = lang
 		localStorage.setItem("selectedLang", lang)
 		this.changeCurrentLang.emit(lang)
-		// console.log(this.langSelected)
 	}
 }

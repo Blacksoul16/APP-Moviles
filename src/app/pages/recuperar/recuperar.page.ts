@@ -1,13 +1,18 @@
 import { Component, OnInit } from '@angular/core';
-import { ToastService } from '../../servicios/toast.service';
-import { Router } from '@angular/router';
-import { TranslateService } from '@ngx-translate/core';
-import { DataBaseService } from 'src/app/servicios/db.service';
+import { CommonModule } from '@angular/common';
+import { FormsModule } from '@angular/forms';
+import { Router, RouterModule } from '@angular/router';
+import { TranslateModule, TranslateService } from '@ngx-translate/core';
+import { IonicModule } from '@ionic/angular';
+import { ToastService } from 'src/app/servicios/toast.service';
+import { DataBaseService } from 'src/app/servicios/database.service';
 
 @Component({
 	selector: 'app-recuperar',
 	templateUrl: './recuperar.page.html',
 	styleUrls: ['./recuperar.page.scss'],
+	standalone: true,
+	imports: [CommonModule, FormsModule, IonicModule, RouterModule, TranslateModule]
 })
 export class RecuperarPage implements OnInit {
 	public correo: string = ""
@@ -53,5 +58,4 @@ export class RecuperarPage implements OnInit {
 			this.ruta.navigate(["correcto"], { state: { "usuario": this.usuario } })
 		}
 	}
-
 }

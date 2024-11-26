@@ -29,12 +29,16 @@
 	"button.save_changes": "Guardar cambios",
 	"button.go_back": "Volver",
 	"button.continue": "Continuar",
+	"button.register": "Registro",
+	"button.users": "Usuarios",
+	"button.create_account": "Crear cuenta",
 
 	"tab.home.label": "Inicio",
 	"tab.my_data.label": "Mis datos",
 	"tab.my_class.label": "Mi clase",
 	"tab.menu.label": "Menú",
 	"tab.forum.label": "Foro",
+	"tab.users.label": "Usuarios",
 
 	"label.recover_pass": "Recuperar contraseña",
 	"label.go_to_campus": "Ir al DUOC",
@@ -72,6 +76,14 @@
 	"misdatos.input.dirección": "Dirección",
 
 	"foro.badge": "Foro Today",
+
+	"registrarme.badge": "Registrarme",
+	"registrarme.card.title": "Ingresa tus datos personales",
+
+	"miruta.button.here": "Aquí",
+	"miruta.button.route": "Ruta",
+
+	"usuarios.badge": "Lista de usuarios",
 
 	"temas.label.colortheme": "Tema",
 	"temas.color.light": "Claro",

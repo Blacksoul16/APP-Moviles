@@ -1,20 +1,29 @@
-import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
-import { TranslateService } from '@ngx-translate/core';
+import { CommonModule } from '@angular/common';
+import { FormsModule } from '@angular/forms';
+import { RouterModule } from '@angular/router';
+import { TranslateModule, TranslateService } from '@ngx-translate/core';
+import { IonicModule } from '@ionic/angular';
+import { HeaderComponent } from 'src/app/componentes/header/header.component';
 import * as L from "leaflet";
 import { GeolocationService } from 'src/app/servicios/geolocation.service';
+import { HttpClient } from '@angular/common/http';
 import { ToastService } from 'src/app/servicios/toast.service';
+
 
 @Component({
 	selector: 'app-miruta',
 	templateUrl: './miruta.page.html',
 	styleUrls: ['./miruta.page.scss'],
+	standalone: true,
+	imports: [CommonModule, FormsModule, RouterModule, TranslateModule, IonicModule, HeaderComponent]
 })
 export class MirutaPage implements OnInit {
 
 	map: L.Map | null = null
 	addressName: string = ""
 	distance: string = ""
+	isLoading = false
 
 	constructor(private geo: GeolocationService, private http: HttpClient, private translate: TranslateService, private toast: ToastService) {}
 
@@ -25,6 +34,7 @@ export class MirutaPage implements OnInit {
 	}
 
 	async loadMap() {
+		this.isLoading = true
 		await this.geo.getCurrentPosition().then((pos: { lat: number, lng: number } | null ) => {
 			if (pos) {
 				this.map = L.map("mapId").setView([pos.lat, pos.lng], 16)
@@ -39,13 +49,10 @@ export class MirutaPage implements OnInit {
 		}).catch((e) => {
 			if (e.code === 1) {
 				this.toast.showMsg("No hay permiso para usar la ubicación.", 3000, "danger")
-				// console.error(`[MiRuta.ts] No hay permiso para usar la ubicación.`)
 			} else if (e.code === 2) {
 				this.toast.showMsg("La ubicación no está disponible, ¿el GPS está activado?", 3000, "danger")
-				// console.error(`[MiRuta.ts] La ubicación no está disponible, ¿el GPS está activado?`)
 			} else if (e.code === 3) {
 				this.toast.showMsg("Se excedió el tiempo de espera para obtener la ubicación.", 3000, "danger")
-				// console.error(`[MiRuta.ts] Se excedió el tiempo de espera para obtener la ubicación.`)
 			} 
 			console.error(`[MiRuta.ts] Error al obtener la ubicación: ${e}`)
 		})
@@ -81,8 +88,8 @@ export class MirutaPage implements OnInit {
 		})
 	}
 
-	showRouteToDUOC() {
-		this.geo.getCurrentPosition().then((pos: { lat: number, lng: number } | null) => {
+	async showRouteToDUOC() {
+		this.geo.getCurrentPosition().then((pos: { lat: number, lng: number } | null) => { //Esta vaina tarda mucho, chamo.
 			if (pos) {
 				this.goToPosition(pos.lat, pos.lng, 30, "Mi ubicación")
 				this.getRoute({ lat: pos.lat, lng: pos.lng }, { lat: -33.44703, lng: -70.65762 }, "walking")

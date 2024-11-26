@@ -1,13 +1,15 @@
 <hr>
-<ion-badge style="display: flex; justify-content: center; width: 30rem; margin: 0 auto;" color="dark">
-	<ion-title class="ion-text-center" style="margin-top: 5px; margin-bottom: 5px;">{{ "miclase.badge" | translate }}</ion-title>
-</ion-badge>
-<hr>
 <div style="display: flex; justify-content: center;">
-	<ion-button (click)="goToScan()" fill="outline" shape="round" color="secondary">
+	<ion-badge style="width: 30rem; margin: 0 auto;" color="dark">
+		<ion-title class="ion-text-center" style="margin-top: 5px; margin-bottom: 5px;">{{ "miclase.badge" | translate }}</ion-title>
+	</ion-badge>
+</div>
+<hr>
+<div class="btn-group">
+	<ion-button (click)="goToScan()" fill="outline" color="secondary" class="btn-custom">
 		<ion-icon slot="start" name="qr-code-outline"></ion-icon>{{ "button.go_scan" | translate }}
 	</ion-button>
-	<ion-button (click)="limpiarDatosQR()" fill="outline" shape="round" color="danger" [disabled]="!datosQR">
+	<ion-button (click)="limpiarDatosQR()" fill="outline" color="danger" [disabled]="!datosQR" class="btn-custom">
 		<ion-icon slot="start" name="trash-outline"></ion-icon>{{ "button.clear_qr_data" | translate }}
 	</ion-button>
 </div>

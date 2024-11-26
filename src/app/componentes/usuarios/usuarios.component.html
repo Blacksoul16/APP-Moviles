@@ -1,0 +1,61 @@
+<hr>
+<div style="display: flex; justify-content: center;">
+	<ion-badge style="width: 30rem; margin: 0 auto;" color="dark">
+		<ion-title class="ion-text-center" style="margin-top: 5px; margin-bottom: 5px;">{{ 'usuarios.badge' | translate }}</ion-title>
+	</ion-badge>
+</div>
+<hr>
+
+<ion-grid fixed>
+	<ion-row>
+		<ion-col size="10">
+			<ion-input [(ngModel)]="usuarioBusqueda" (ionInput)="debounceSearch($event)" color="warning" type="text" label="Buscar por nombre o usuario" labelPlacement="floating" fill="outline"></ion-input>
+		</ion-col>
+		<ion-col size="2" style="display: flex; justify-content: center; align-items: center;">
+			<ion-button (click)="abrirFiltros($event)" fill="outline" color="secondary">
+				<ion-icon name="filter-outline"></ion-icon>
+			</ion-button>
+		</ion-col>
+	</ion-row>
+</ion-grid>
+
+<ion-popover #opcionesFiltro>
+	<ng-template>
+		<ion-badge color="dark" class="ion-text-center" style="width: 100%;">
+			<h3>Filtrar por rol</h3>
+		</ion-badge>
+		<ion-list>
+			<ion-item>
+				<ion-checkbox slot="start" [(ngModel)]="filtroAdmin" (ionChange)="aplicarFiltroPopover()"></ion-checkbox>
+				<ion-label>Admin</ion-label>
+			</ion-item>
+			<ion-item>
+				<ion-checkbox slot="start" [(ngModel)]="filtroUsuario" (ionChange)="aplicarFiltroPopover()"></ion-checkbox>
+				<ion-label>Usuario</ion-label>
+			</ion-item>
+		</ion-list>
+	</ng-template>
+</ion-popover>
+
+<ion-item-divider></ion-item-divider>
+
+<ion-list class="enmarcar">
+	<ion-item *ngFor="let u of usuariosFiltrados; let i">
+		<ion-avatar slot="start">
+			<img [src]="'assets/img/users/' + u.imagen" alt="avatar">
+		</ion-avatar>
+		<ion-grid fixed>
+			<ion-row class="ion-justify-content-between">
+				<ion-col size="auto" style="padding: 0;">
+					<ion-label>{{ u.nombre + ' ' + u.apellido }} <ion-icon *ngIf="u.rol === 1" name="shield-sharp" style="font-size: 10px;" color="secondary"></ion-icon></ion-label> 
+					<ion-label style="font-size: 10px; color: gray;">{{ u.cuenta }} • {{ u.correo }}</ion-label>
+				</ion-col>
+				<ion-col size="3" style="display: flex; justify-content: end;">
+					<ion-button (click)="deleteUser(u.cuenta)" fill="outline" size="small" color="danger" [disabled]="u.rol === 1 || u.cuenta === usuarioAutenticado?.cuenta">
+						<ion-icon name="trash-outline"></ion-icon>
+					</ion-button>
+				</ion-col>
+			</ion-row>
+		</ion-grid>
+	</ion-item>
+</ion-list>

@@ -28,7 +28,9 @@
 	"button.clear_qr_data": "QR データをクリア",
 	"button.save_changes": "変更を保存",
 	"button.go_back": "戻る",
-	"button.Continue": "続行",
+	"button.continue": "続行",
+	"button.register": "登録",
+	"button.users": "ユーザー",
   
 	"tab.home.label": "ホーム",
 	"tab.my_data.label": "私のデータ",

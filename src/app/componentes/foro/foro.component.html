@@ -1,36 +1,29 @@
 <hr>
-<ion-badge style="display: flex; justify-content: center; width: 30rem; margin: 0 auto;" color="dark">
-	<ion-title class="ion-text-center" style="margin-top: 5px; margin-bottom: 5px;">{{ "foro.badge" | translate }}</ion-title>
-</ion-badge>
+<div style="display: flex; justify-content: center;">
+	<ion-badge style="width: 30rem; margin: 0 auto;" color="dark">
+		<ion-title class="ion-text-center" style="margin-top: 5px; margin-bottom: 5px;">{{ "foro.badge" | translate }}</ion-title>
+	</ion-badge>
+</div>
 <hr>
 <div>
 	<a id="top" href="#top"></a>
-	<ion-card class="enmarcar" style="width: 29rem;">
+	<ion-card class="enmarcar" style="width: 26rem;">
 		<ion-card-header class="ion-text-center">
 			<ion-card-title>Crear una nueva publicación</ion-card-title>
 			<ion-card-subtitle>Sesión iniciada como <ion-text color="secondary">{{selectedPost}}</ion-text>.</ion-card-subtitle>
 		</ion-card-header>
 
 		<div class="ion-padding-horizontal ion-padding-vertical" style="display: flex; justify-content: center; flex-direction: column;">
-			<!-- <ion-select [(ngModel)]="selectedUserID" (ngModelChange)="changeUser($event)" [interfaceOptions]="selectOptions" label="Selecciona usuario" [ngClass]="{'custom-select-primary': darkMode, 'custom-select-secondary': !darkMode}" fill="outline" labelPlacement="floating" cancelText="Cancelar" okText="Aceptar"> -->
-				<!-- <ion-select-option [value]="usuario.cuenta" *ngIf="usuario">
-					{{usuario.nombre}} {{usuario.apellido}}
-				</ion-select-option> -->
-				<!-- <ion-select-option *ngFor="let u of users" [value]="u.id">
-					{{u.name}}
-				</ion-select-option>
-			</ion-select> -->
-			<!-- <hr> -->
 			<ion-input [(ngModel)]="post.title" color="secondary" label="Título" labelPlacement="floating" placeholder="Un título." fill="outline"></ion-input>	
 			<hr>
 			<ion-textarea [(ngModel)]="post.body" color="secondary" label="Cuerpo de la publicación" labelPlacement="floating" placeholder="Érase una vez..." fill="outline"></ion-textarea>
 		</div>
 		<hr>
-		<div style="display: flex; justify-content: center;">
-			<ion-button (click)="savePost()" fill="outline" size="default" shape="round" color="secondary">
+		<div class="btn-group">
+			<ion-button (click)="savePost()" fill="outline" size="default" color="success" class="btn-custom">
 				<ion-icon slot="start" name="save-outline"></ion-icon>Guardar
 			</ion-button>
-			<ion-button (click)="wipePost()" fill="outline" size="default" shape="round" color="danger">
+			<ion-button (click)="wipePost()" fill="outline" size="default" color="danger" class="btn-custom">
 				<ion-icon slot="start" name="trash-outline"></ion-icon>Limpiar
 			</ion-button>
 		</div>
@@ -64,11 +57,11 @@
 					</ion-card-header>
 					
 					<hr>
-					<div style="display: flex; justify-content: center;">
-						<ion-button (click)="editPost(p)" fill="outline" shape="round" size="default" color="secondary">
+					<div class="btn-group">
+						<ion-button (click)="editPost(p)" fill="outline" size="default" color="secondary" class="btn-custom">
 							<ion-icon slot="start" name="pencil-outline"></ion-icon>Editar
 						</ion-button>
-						<ion-button (click)="deletePost(p)" fill="outline" shape="round" size="default" color="danger">
+						<ion-button (click)="deletePost(p)" fill="outline" size="default" color="danger" class="btn-custom">
 							<ion-icon slot="start" name="trash-outline"></ion-icon>Eliminar
 						</ion-button>
 					</div>
@@ -77,5 +70,4 @@
 			</ion-card-content>
 		</ion-card>
 	</div>
-
 </div>

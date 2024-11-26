@@ -1,6 +1,6 @@
 import { NivelEducacional } from "./nivel-educacional";
 import { Persona } from "./persona";
-import { convertirFechaAString } from "../herramientas/funcFechas";
+import { convertirFechaAString } from "../tools/funcFechas";
 
 export class Usuario extends Persona {
 
@@ -10,12 +10,13 @@ export class Usuario extends Persona {
 	public preguntaSecreta: string = ""
 	public respuestaSecreta: string = ""
 	public imagen: string = ""
+	public rol: number = 0
 
 	public constructor() {
 		super()
 	}
 
-	static getNewUser(cu: string, co: string, pa: string, pr: string, re: string, no: string, ap: string, ni: NivelEducacional, fe: Date, di: string, im: string) {
+	static getNewUser(cu: string, co: string, pa: string, pr: string, re: string, no: string, ap: string, ni: NivelEducacional, fe: Date, di: string, im: string, ro: number) {
 		let u = new Usuario()
 		u.cuenta = cu
 		u.correo= co
@@ -27,7 +28,8 @@ export class Usuario extends Persona {
 		u.nivelEducacional = ni
 		u.fechaNacimiento = fe,
 		u.direccion = di,
-		u.imagen = im
+		u.imagen = im,
+		u.rol = ro
 		return u
 	}
 
@@ -44,6 +46,7 @@ export class Usuario extends Persona {
 			${convertirFechaAString(this.fechaNacimiento)}
 			${this.direccion}
 			${this.imagen !== ""}
+			${this.rol}
 		`
 	}
 }

@@ -1,24 +1,28 @@
 <ion-footer>
 	<ion-toolbar>
 		
-		<ion-segment [(ngModel)]="tabSeleccionada" (ionChange)="changeTab($event)" value="codigoqr" style="height: 5rem;">
-			<ion-segment-button value="misdatos" style="font-size: 12px;">
+		<ion-segment [(ngModel)]="tabSeleccionada" [scrollable]="true" (ionChange)="changeTab($event)" value="codigoqr" style="height: 5rem;">
+			<ion-segment-button value="misdatos" style="font-size: 9px;">
 				<ion-icon name="bar-chart-outline"></ion-icon>{{ "tab.my_data.label" | translate }}
 			</ion-segment-button>
 
-			<ion-segment-button value="foro" style="font-size: 12px;">
+			<ion-segment-button value="foro" style="font-size: 9px;">
 				<ion-icon name="newspaper-outline"></ion-icon>{{ "tab.forum.label" | translate }}
 			</ion-segment-button>
 
-			<ion-segment-button value="codigoqr" style="font-size: 12px;">
+			<ion-segment-button value="codigoqr" style="font-size: 9px;">
 				<ion-icon name="qr-code-outline"></ion-icon>{{ "tab.home.label" | translate }}
 			</ion-segment-button>
 			
-			<ion-segment-button value="miclase" style="font-size: 12px;">
+			<ion-segment-button value="miclase" style="font-size: 9px;">
 				<ion-icon name="school-outline"></ion-icon>{{ "tab.my_class.label" | translate }}
 			</ion-segment-button>
 			
-			<ion-segment-button value="menulateral" (click)="togglearMenuLateral()" style="font-size: 12px;">
+			<ion-segment-button value="usuarios" style="font-size: 9px;">
+				<ion-icon name="people-outline"></ion-icon>{{ "tab.users.label" | translate }}
+			</ion-segment-button>
+			
+			<ion-segment-button value="menulateral" (click)="togglearMenuLateral()" style="font-size: 9px;">
 				<ion-icon name="menu-outline"></ion-icon>{{ "tab.menu.label" | translate }}
 			</ion-segment-button>
 		</ion-segment>

@@ -1,13 +1,13 @@
-import { Injectable } from "@angular/core";
-import { BehaviorSubject } from "rxjs";
-import { Usuario } from "../model/usuario";
-import { Router } from "@angular/router";
-import { DataBaseService } from "./db.service";
-import { Storage } from "@ionic/storage-angular"
-import { ToastService } from "./toast.service";
+import { Injectable } from '@angular/core';
+import { BehaviorSubject } from 'rxjs';
+import { Usuario } from '../model/usuario';
+import { Router } from '@angular/router';
+import { DataBaseService } from './database.service';
+import { ToastService } from './toast.service';
+import { Storage } from "@ionic/storage-angular";
 
 @Injectable({
-	providedIn: "root"
+	providedIn: 'root'
 })
 export class AuthService {
 	keyUsuario = "USUARIO_AUTENTICADO"
@@ -17,9 +17,7 @@ export class AuthService {
 	codigoQRData = new BehaviorSubject<string | null>(null)
 	tabSeleccionado = new BehaviorSubject<string>("codigoqr")
 
-	constructor(private router: Router, private bd: DataBaseService, private storage: Storage, private toast: ToastService) {
-		this.initAuth()
-	}
+	constructor(private router: Router, private bd: DataBaseService, private storage: Storage, private toast: ToastService) { this.initAuth() }
 
 	async initAuth() {
 		try {
@@ -113,4 +111,39 @@ export class AuthService {
 		}
 	}
 
+	public hasPermission(perm: string): boolean {
+		const rol = this.usuarioAutenticado.value?.rol
+		if (rol === undefined || rol === null) return false
+
+		const perms = ROLES_PERMISOS[rol] || []
+		return perms.includes(perm)
+	}
+
+	public getUserRole(): string {
+		const rol = this.usuarioAutenticado.value ? this.usuarioAutenticado.value.rol : 0
+		return ROLES[rol as keyof typeof ROLES]
+	}
+}
+
+export const ROLES = { 1: "Administrador", 0: "Alumno" }
+export const PERMS = {
+	TABS: { MISDATOS: "tab.misdatos", FORO: "tab.foro", CODIGOQR: "tab.codigoqr", MICLASE: "tab.miclase", USUARIOS: "tab.usuarios" },
+	ACCIONES: { LEER: "accion.leer", ESCRIBIR: "accion.escribir", EDITAR: "accion.editar" },
+	LOGIN: "login",
+	LOGOUT: "logout"
+}
+
+/**
+ * 1: Administrador
+ * 0: Alumno / Usuario regular
+ */
+export const ROLES_PERMISOS: any = {
+	1: [
+		PERMS.TABS.FORO, PERMS.TABS.USUARIOS, PERMS.TABS.MISDATOS, PERMS.ACCIONES.LEER, 
+		PERMS.ACCIONES.ESCRIBIR, PERMS.ACCIONES.EDITAR, PERMS.LOGIN, PERMS.LOGOUT
+	],
+	0: [
+		PERMS.TABS.CODIGOQR, PERMS.TABS.MICLASE, PERMS.ACCIONES.LEER, PERMS.LOGIN, 
+		PERMS.LOGOUT
+	]
 }

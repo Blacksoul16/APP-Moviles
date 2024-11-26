@@ -3,6 +3,15 @@
 	"lang.es": "Spagnolo",
 	"lang.en": "Inglese",
 	"lang.fr": "Francese",
+	"lang.de": "Tedesco",
+	"lang.it": "Italiano",
+	"lang.nl": "Olandese",
+	"lang.pl": "Polacco",
+	"lang.pt": "Portoghese",
+	"lang.ru": "Russo",
+	"lang.cn": "Cinese",
+	"lang.jp": "Giapponese",
+	"lang.kr": "Coreano",
 	
 	"login.title": "Accedi",
 
@@ -20,6 +29,8 @@
 	"button.save_changes": "Salva modifiche",
 	"button.go_back": "Indietro",
 	"button.continue": "Continua",
+	"button.register": "Registrazione",
+	"button.users": "Utenti",
 
 	"tab.home.label": "Home",
 	"tab.my_data.label": "I miei dati",

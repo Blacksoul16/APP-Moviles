@@ -29,3 +29,12 @@ export const convertirStringAFecha = (dS: string): Date => {
 		return new Date()
 	}
 }
+
+export const convertirFechaAISO = (f: string): string => {
+	const d = new Date(f)
+	return d.toISOString().split("T")[0]
+}
+
+export const convertirISOAFecha = (iso: string): Date => {
+	return new Date(iso)
+}

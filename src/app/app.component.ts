@@ -1,48 +1,49 @@
+import { CommonModule } from '@angular/common';
 import { Component } from '@angular/core';
-import { Router } from '@angular/router';
-import { MenuController } from '@ionic/angular';
+import { FormsModule } from '@angular/forms';
+import { Router, RouterModule } from '@angular/router';
+import { TranslateModule } from '@ngx-translate/core';
+import { IonicModule } from '@ionic/angular';
 import { ToastService } from './servicios/toast.service';
-import { ThemeService } from './servicios/theme.service';
 import { AuthService } from './servicios/auth.service';
+import { MenuController } from '@ionic/angular';
+import { addCircleOutline, arrowUpCircleOutline, barChartOutline, caretDownCircleOutline, colorPalette, createOutline, documentTextOutline, filterOutline, languageOutline, logInOutline, logOutOutline, mapOutline, menuOutline, newspaperOutline, peopleOutline, qrCodeOutline, saveOutline, schoolOutline, settingsOutline, shieldSharp, stopCircleOutline, trashOutline, videocamOutline } from 'ionicons/icons';
+import { addIcons } from 'ionicons';
 
 @Component({
 	selector: 'app-root',
 	templateUrl: 'app.component.html',
-	styleUrls: ['app.component.scss'],
+	standalone: true,
+	imports: [CommonModule, FormsModule, IonicModule, RouterModule, TranslateModule,]
 })
 export class AppComponent {
 
 	public mostrarComponentes: boolean = false
-	public darkMode: boolean = false
+	public usuario: any
 
-	constructor(private ruta: Router, private menu: MenuController, private toast: ToastService, private theme: ThemeService, private auth: AuthService) {
+	constructor(private ruta: Router, private menu: MenuController, private toast: ToastService, private auth: AuthService) {
+		addIcons({ 
+			peopleOutline, barChartOutline, newspaperOutline, arrowUpCircleOutline, videocamOutline, menuOutline, saveOutline, filterOutline,
+			trashOutline, shieldSharp, logOutOutline, createOutline, schoolOutline, caretDownCircleOutline, mapOutline, qrCodeOutline,
+			addCircleOutline, stopCircleOutline, settingsOutline, logInOutline, documentTextOutline, languageOutline, colorPalette
+		})
 		this.ruta.events.subscribe((e: any) => {
 			if (e.url) {
 				this.mostrarComponentes = this.checkComponentes(e.url)
 			}
 		})
 	}
-
-	ngOnInit() { /*this.darkMode = this.theme.getDarkMode()*/ }
-
-	// toggleChange(e: any) { 
-	// 	this.theme.toggleDarkMode(e.detail.checked)
-	// 	this.darkMode = e.detail.checked
-	// }
-
-	checkComponentes(url: string): boolean {
-		return url.includes("inicio") || url.includes("misdatos") || url.includes("miclase") || url.includes("foro")
+	
+	ngOnInit() {
+		this.auth.usuarioAutenticado.subscribe((u) => { this.usuario = u })
 	}
 
-	public togglearMenuLateral() { this.menu.toggle() }
+	checkComponentes(url: string): boolean { return url.includes("inicio") }
 
-	public cerrarSesion(): void {
-		this.menu.close().then(() => {
+	cerrarSesion(): void {
+		this.menu.close("menuLateral").then(() => {
 			this.auth.logout()
 			this.toast.showMsg("Se ha cerrado la sesión.", 2000, "success")
-			// localStorage.clear()
 		})
 	}
-
-
 }

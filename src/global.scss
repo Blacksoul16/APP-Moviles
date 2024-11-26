@@ -25,11 +25,8 @@
 @import "@ionic/angular/css/text-transformation.css";
 @import "@ionic/angular/css/flex-utils.css";
 
-/* AÑADIDOS MANUAL */
-// Necesario para que el mapa se muestre correctamente.
+/* Leaflet */
 @import "~leaflet/dist/leaflet.css";
-// 
-@import "theme/variables.scss";
 
 /**
  * Ionic Dark Mode
@@ -38,17 +35,6 @@
  * https://ionicframework.com/docs/theming/dark-mode
  */
 
-// @import "@ionic/angular/css/palettes/dark.always.css";
-@import "@ionic/angular/css/palettes/dark.class.css";
-// @import "@ionic/angular/css/palettes/dark.system.css";
-
-/* CSS Profe */
-.enmarcar {
-	max-width: 600px;              /* Define el ancho máximo del elemento en 600px */
-	width: 100%;                   /* Asegura que el elemento ocupe el 100% del ancho disponible */
-	margin: auto;                  /* Centra el elemento horizontalmente dentro de su contenedor padre */
-	border-radius: 10px;           /* Aplica un radio de 10px a las esquinas del borde, redondeándolas */
-	padding: 20px;                 /* Agrega un espacio de 20px dentro del elemento, entre el contenido y el borde */
-	border: 1px solid gray;      /* Aplica un borde de 1px de grosor con color gris alrededor del elemento */
-	//border: 5px solid blue !important; // Comentado: Estilo de borde para depuración visual
-}
+/* @import "@ionic/angular/css/palettes/dark.always.css"; */
+/* @import "@ionic/angular/css/palettes/dark.class.css"; */
+@import '@ionic/angular/css/palettes/dark.system.css';

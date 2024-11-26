@@ -2,17 +2,17 @@ import { Injectable } from "@angular/core";
 import { capSQLiteChanges, SQLiteDBConnection } from "@capacitor-community/sqlite";
 import { BehaviorSubject } from "rxjs";
 import { Usuario } from "../model/usuario";
-import { SQLiteService } from "./sqlite.service";
+import { SqliteService } from "./sqlite.service";
 import { NivelEducacional } from "../model/nivel-educacional";
-import { convertirFechaAString, convertirStringAFecha } from "../herramientas/funcFechas";
+import { convertirFechaAString, convertirStringAFecha } from "../tools/funcFechas";
 
 @Injectable({
 	providedIn: "root"
 })
 export class DataBaseService {
 
-	u1Test = Usuario.getNewUser("sgarday", "s.garday@duocuc.cl", "1234", "¿Cuál es tu color favorito?", "Negro", "Seth", "Garday", NivelEducacional.findNivelEducacional(5)!, new Date(2000, 2, 4), "Recoleta", "default-image.jpg")
-	u2Test = Usuario.getNewUser("testuser", "test@user.test", "1234", "Toc toc", "¿Quién es?", "Test", "User", NivelEducacional.findNivelEducacional(5)!, new Date(1999, 10, 5), "Puente Alto", "default-image.jpg")
+	u1Test = Usuario.getNewUser("sgarday", "s.garday@duocuc.cl", "1234", "¿Cuál es tu color favorito?", "Negro", "Seth", "Garday", NivelEducacional.findNivelEducacional(5)!, new Date(2000, 2, 4), "Recoleta", "sgarday.png", 1)
+	u2Test = Usuario.getNewUser("testuser", "test@user.test", "1234", "Toc toc", "¿Quién es?", "Test", "User", NivelEducacional.findNivelEducacional(5)!, new Date(1999, 10, 5), "Puente Alto", "default-user.webp", 0)
 
 	userUpgrades = [
 		{
@@ -29,7 +29,8 @@ export class DataBaseService {
 					nivelEducacional INTEGER NOT NULL,
 					fechaNacimiento INTEGER NOT NULL,
 					direccion TEXT NOT NULL,
-					imagen TEXT NOT NULL
+					imagen TEXT NOT NULL,
+					rol INTEGER NOT NULL
 				);
 				`]
 		}
@@ -47,15 +48,16 @@ export class DataBaseService {
 			nivelEducacional, 
 			fechaNacimiento,
 			direccion,
-			imagen
-			) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?);
+			imagen,
+			rol
+			) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?);
 	`
 
 	nombreBD = "SistemaAsistencia"
 	db!: SQLiteDBConnection
 	listaUsers: BehaviorSubject<Usuario[]> = new BehaviorSubject<Usuario[]>([])
 
-	constructor (private sqlService: SQLiteService) {}
+	constructor (private sqlService: SqliteService) {}
 
 	async initBD() {
 		try {
@@ -91,10 +93,11 @@ export class DataBaseService {
 				nivelEducacional,
 				fechaNacimiento,
 				direccion,
-				imagen
-			) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?);
+				imagen,
+				rol
+			) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?);
 			`
-			await this.db.run(this.sqlInsertUpdate, [u.cuenta, u.correo, u.password, u.preguntaSecreta, u.respuestaSecreta, u.nombre, u.apellido, u.nivelEducacional.id, convertirFechaAString(u.fechaNacimiento), u.direccion, u.imagen])
+			await this.db.run(this.sqlInsertUpdate, [u.cuenta, u.correo, u.password, u.preguntaSecreta, u.respuestaSecreta, u.nombre, u.apellido, u.nivelEducacional.id, convertirFechaAString(u.fechaNacimiento), u.direccion, u.imagen, u.rol])
 			await this.readUsers()
 		} catch (e) {
 			console.error(`[DBService.ts] Ocurrió un error en saveUser: ${e}`)
@@ -188,6 +191,8 @@ export class DataBaseService {
 			u.nivelEducacional = NivelEducacional.findNivelEducacional(row.nivelEducacional) || new NivelEducacional()
 			u.fechaNacimiento = convertirStringAFecha(row.fechaNacimiento)
 			u.direccion = row.direccion
+			u.imagen = row.imagen
+			u.rol = row.rol
 			return u
 		} catch (e) {
 			console.error(`[DBService.ts] Ocurrió un error en rowToUser: ${e}`)

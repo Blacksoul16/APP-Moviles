@@ -1,12 +1,17 @@
 import { Component, OnInit } from '@angular/core';
+import { CommonModule } from '@angular/common';
+import { FormsModule } from '@angular/forms';
 import { Usuario } from 'src/app/model/usuario';
-import { Router, ActivatedRoute } from '@angular/router';
-import { TranslateService } from '@ngx-translate/core';
+import { ActivatedRoute, Router, RouterLink } from '@angular/router';
+import { TranslateModule, TranslateService } from '@ngx-translate/core';
+import { IonicModule } from '@ionic/angular';
 
 @Component({
 	selector: 'app-correcto',
 	templateUrl: './correcto.page.html',
 	styleUrls: ['./correcto.page.scss'],
+	standalone: true,
+	imports: [CommonModule, FormsModule, IonicModule, TranslateModule, RouterLink]
 })
 export class CorrectoPage implements OnInit {
 	public usuario: Usuario = new Usuario()
@@ -22,5 +27,4 @@ export class CorrectoPage implements OnInit {
 	}
 
 	ngOnInit() { this.translate.use(localStorage.getItem("selectedLang") || "es") }
-
 }

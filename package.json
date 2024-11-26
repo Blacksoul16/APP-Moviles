@@ -1,7 +1,7 @@
 {
-  "name": "ProyectoSemestral",
+  "name": "ProyectoSemestralStandalone",
   "version": "0.0.1",
-  "author": "Ionic Framework",
+  "author": "Seth Garday, Franco Murillo, Matías Morales, Gabriel Sepúlveda",
   "homepage": "https://ionicframework.com/",
   "scripts": {
     "ng": "ng",
@@ -42,6 +42,7 @@
     "jeep-sqlite": "^2.8.0",
     "jsqr": "^1.4.0",
     "leaflet": "^1.9.4",
+    "localforage": "^1.10.0",
     "native-run": "^2.0.1",
     "rxjs": "~7.8.0",
     "sql.js": "^1.12.0",
@@ -78,8 +79,8 @@
     "karma-jasmine-html-reporter": "~2.1.0",
     "typescript": "~5.4.0"
   },
-  "description": "An Ionic project",
   "browser": {
     "crypto": false
-  }
+  },
+  "description": "Proyecto semestral de aplicaciones móviles."
 }
