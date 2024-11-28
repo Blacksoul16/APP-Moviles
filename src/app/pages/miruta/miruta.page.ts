@@ -44,8 +44,7 @@ export class MirutaPage implements OnInit {
 		try {
 			const pos = await this.geo.getCurrentPosition()
 			if (!pos) {
-				this.errorMsg = "Posición geográfica desconocida."
-				this.toast.showMsg(this.errorMsg, 3000, "danger")
+				this.toast.showMsg("Posición geográfica desconocida.", 3000, "danger")
 				return
 			}
 			this.map = L.map("mapId").setView([pos.lat, pos.lng], 16)
