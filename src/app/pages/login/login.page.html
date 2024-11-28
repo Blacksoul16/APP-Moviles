@@ -1,6 +1,6 @@
 <ion-content class="ion-padding-vertical background-container">
 	<div style="display: flex; flex-direction: column; justify-content: center; align-items: center;">
-		<img src="assets/img/isotipo_white.png" alt="duocuc_logo" style="width: 25rem; margin-top: 32px; margin-bottom: 32px;">
+		<img src="assets/img/duocuc.webp" alt="duocuc_logo" width="400" height="98" style="margin-top: 32px; margin-bottom: 32px;">
 		<ion-badge style="font-size: 18px;" color="dark">{{ "label.program_description" | translate }}</ion-badge>
 	</div>
 	<hr>
@@ -46,12 +46,12 @@
 		<ion-grid>
 			<ion-row>
 				<ion-col>
-					<ion-fab-button color="secondary" (click)="langSelector($event)">
+					<ion-fab-button color="secondary" (click)="langSelector($event)" aria-label="Cambiar idioma" role="button">
 						<ion-icon name="language-outline"></ion-icon>
 					</ion-fab-button>
 				</ion-col>
 				<ion-col>
-					<ion-fab-button color="secondary" [routerLink]="['/temas']">
+					<ion-fab-button color="secondary" [routerLink]="['/temas']" aria-label="Cambiar paleta de colores" role="button">
 						<ion-icon name="color-palette"></ion-icon>
 					</ion-fab-button>
 				</ion-col>

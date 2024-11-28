@@ -1,21 +1,22 @@
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-import { TranslateModule } from '@ngx-translate/core';
+import { TranslateModule, TranslateService } from '@ngx-translate/core';
 import { IonicModule } from '@ionic/angular';
 import { RouterLink } from '@angular/router';
+import { HeaderComponent } from 'src/app/components/header/header.component';
 
 @Component({
 	selector: 'app-incorrecto',
 	templateUrl: './incorrecto.page.html',
 	styleUrls: ['./incorrecto.page.scss'],
 	standalone: true,
-	imports: [CommonModule, FormsModule, IonicModule, TranslateModule, RouterLink]
+	imports: [CommonModule, FormsModule, IonicModule, TranslateModule, RouterLink, HeaderComponent]
 })
 export class IncorrectoPage implements OnInit {
 
-	constructor() {}
+	constructor(private translate: TranslateService) {}
 
-	ngOnInit() {}
+	ngOnInit() { this.translate.use(localStorage.getItem("selectedLang") || "es") }
 
 }

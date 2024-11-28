@@ -23,6 +23,7 @@ export class MirutaPage implements OnInit {
 	map: L.Map | null = null
 	addressName: string = ""
 	distance: string = ""
+	errorMsg: string = ""
 	
 
 	constructor(
@@ -37,7 +38,7 @@ export class MirutaPage implements OnInit {
 	}
 
 	async loadMap() {
-		const loading = await this.loading.create({ message: "El mapa está cargando...", spinner: "crescent" })
+		const loading = await this.loading.create({ message: "El mapa está cargando...", spinner: "crescent", cssClass: "custom-loading" })
 		await loading.present()
 
 		try {
@@ -126,13 +127,16 @@ export class MirutaPage implements OnInit {
 
 	private handleGeoError(e: any) {
 		if (e.code === 1) {
-			this.toast.showMsg("No hay permiso para usar la ubicación.", 3000, "danger");
+			this.errorMsg = "No hay permiso para usar la ubicación."
 		} else if (e.code === 2) {
-			this.toast.showMsg("La ubicación no está disponible, ¿el GPS está activado?", 3000, "danger");
+			this.errorMsg = "La ubicación no está disponible, ¿el GPS está activado?"
 		} else if (e.code === 3) {
-			this.toast.showMsg("Se excedió el tiempo de espera para obtener la ubicación.", 3000, "danger");
+			this.errorMsg = "Se excedió el tiempo de espera para obtener la ubicación."
+		} else {
+			this.errorMsg = e
 		}
-		console.error(`[MiRuta.ts] Error al obtener la ubicación: ${e}`);
+		this.toast.showMsg(this.errorMsg, 3000, "danger");
+		console.error(`[MiRuta.ts] Error al obtener la ubicación: ${e}`)
 	  }
 
 }

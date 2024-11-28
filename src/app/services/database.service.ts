@@ -11,7 +11,7 @@ import { convertirFechaAString, convertirStringAFecha } from "../tools/funcFecha
 })
 export class DataBaseService {
 
-	u1Test = Usuario.getNewUser("sgarday", "s.garday@duocuc.cl", "1234", "¿Cuál es tu color favorito?", "Negro", "Seth", "Garday", NivelEducacional.findNivelEducacional(5)!, new Date(2000, 2, 4), "Recoleta", "sgarday.png", 1)
+	u1Test = Usuario.getNewUser("sgarday", "s.garday@duocuc.cl", "1234", "¿Cuál es tu color favorito?", "Negro", "Seth", "Garday", NivelEducacional.findNivelEducacional(5)!, new Date(2000, 2, 4), "Recoleta", "sgarday.webp", 1)
 	u2Test = Usuario.getNewUser("testuser", "test@user.test", "1234", "Toc toc", "¿Quién es?", "Test", "User", NivelEducacional.findNivelEducacional(5)!, new Date(1999, 10, 5), "Puente Alto", "default-user.webp", 0)
 
 	userUpgrades = [

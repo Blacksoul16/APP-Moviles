@@ -20,10 +20,7 @@ export class LoginPage implements OnInit {
 	correo: string = ""
 	password: string = ""
 
-	constructor(private poppy: PopoverController, private translate: TranslateService, private auth: AuthService) {
-		// this.correo = "sgarday"
-		// this.password = "1234"
-	}
+	constructor(private poppy: PopoverController, private translate: TranslateService, private auth: AuthService) {}
 
 	ngOnInit() { this.translate.use(localStorage.getItem("selectedLang") || "es") }
 

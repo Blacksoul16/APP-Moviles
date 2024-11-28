@@ -6,13 +6,14 @@ import { TranslateModule, TranslateService } from '@ngx-translate/core';
 import { IonicModule } from '@ionic/angular';
 import { ToastService } from 'src/app/services/toast.service';
 import { DataBaseService } from 'src/app/services/database.service';
+import { HeaderComponent } from 'src/app/components/header/header.component';
 
 @Component({
 	selector: 'app-recuperar',
 	templateUrl: './recuperar.page.html',
 	styleUrls: ['./recuperar.page.scss'],
 	standalone: true,
-	imports: [CommonModule, FormsModule, IonicModule, RouterModule, TranslateModule]
+	imports: [CommonModule, FormsModule, IonicModule, RouterModule, TranslateModule, HeaderComponent]
 })
 export class RecuperarPage implements OnInit {
 	public correo: string = ""
