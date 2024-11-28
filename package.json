@@ -1,6 +1,6 @@
 {
   "name": "ProyectoSemestral",
-  "version": "0.0.1",
+  "version": "0.9.2",
   "author": "Seth Garday, Franco Murillo, Matías Morales, Gabriel Sepúlveda",
   "homepage": "https://ionicframework.com/",
   "scripts": {
@@ -47,8 +47,7 @@
     "rxjs": "~7.8.0",
     "sql.js": "^1.12.0",
     "tslib": "^2.3.0",
-    "uuid": "^11.0.2",
-    "zone.js": "~0.14.2"
+    "uuid": "^11.0.2"
   },
   "devDependencies": {
     "@angular-devkit/build-angular": "^18.0.0",
