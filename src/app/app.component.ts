@@ -7,7 +7,7 @@ import { IonicModule } from '@ionic/angular';
 import { ToastService } from './services/toast.service';
 import { AuthService } from './services/auth.service';
 import { MenuController } from '@ionic/angular';
-import { addCircleOutline, arrowUpCircleOutline, barChartOutline, caretDownCircleOutline, colorPalette, createOutline, documentTextOutline, filterOutline, homeOutline, languageOutline, logInOutline, logOutOutline, mapOutline, menuOutline, newspaperOutline, peopleOutline, qrCodeOutline, saveOutline, schoolOutline, settingsOutline, shieldSharp, stopCircleOutline, trashOutline, videocamOutline } from 'ionicons/icons';
+import { addCircleOutline, arrowUpCircleOutline, barChartOutline, caretDownCircleOutline, colorPalette, createOutline, documentTextOutline, filterOutline, homeOutline, languageOutline, logInOutline, logOutOutline, mapOutline, menuOutline, newspaperOutline, pencilOutline, peopleOutline, qrCodeOutline, saveOutline, schoolOutline, settingsOutline, shieldSharp, stopCircleOutline, trashOutline, videocamOutline } from 'ionicons/icons';
 import { addIcons } from 'ionicons';
 
 @Component({
@@ -26,7 +26,7 @@ export class AppComponent {
 			peopleOutline, barChartOutline, newspaperOutline, arrowUpCircleOutline, videocamOutline, menuOutline, saveOutline, filterOutline,
 			trashOutline, shieldSharp, logOutOutline, createOutline, schoolOutline, caretDownCircleOutline, mapOutline, qrCodeOutline,
 			addCircleOutline, stopCircleOutline, settingsOutline, logInOutline, documentTextOutline, languageOutline, colorPalette,
-			homeOutline
+			homeOutline, pencilOutline
 		})
 		this.ruta.events.subscribe((e: any) => {
 			if (e.url) {

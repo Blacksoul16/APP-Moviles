@@ -15,7 +15,7 @@ import { convertirFechaAISO, convertirISOAFecha } from 'src/app/tools/funcFechas
 	templateUrl: './misdatos.component.html',
 	styleUrls: ['./misdatos.component.scss'],
 	standalone: true,
-	imports: [CommonModule, FormsModule, IonicModule, RouterModule, TranslateModule]
+	imports: [CommonModule, FormsModule, IonicModule, RouterModule, TranslateModule],
 })
 export class MisdatosComponent  implements OnInit {
 

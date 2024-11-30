@@ -14,16 +14,16 @@
 		</ion-card-header>
 
 		<div class="ion-padding-horizontal ion-padding-vertical" style="display: flex; justify-content: center; flex-direction: column;">
-			<ion-input [(ngModel)]="post.title" color="secondary" label="Título" labelPlacement="floating" placeholder="Un título." fill="outline"></ion-input>	
+			<ion-input [(ngModel)]="post.title" type="text" color="secondary" label="Título" labelPlacement="floating" placeholder="Un título." fill="outline" id="post_titulo"></ion-input>	
 			<hr>
-			<ion-textarea [(ngModel)]="post.body" color="secondary" label="Cuerpo de la publicación" labelPlacement="floating" placeholder="Érase una vez..." fill="outline"></ion-textarea>
+			<ion-textarea [(ngModel)]="post.body" color="secondary" label="Cuerpo de la publicación" labelPlacement="floating" placeholder="Érase una vez..." fill="outline" id="post_cuerpo"></ion-textarea>
 		</div>
 		<hr>
 		<div class="btn-group">
-			<ion-button (click)="savePost()" fill="outline" size="default" color="success" class="btn-custom">
+			<ion-button (click)="savePost()" fill="outline" size="default" color="success" class="btn-custom" id="post_submit">
 				<ion-icon slot="start" name="save-outline"></ion-icon>Guardar
 			</ion-button>
-			<ion-button (click)="wipePost()" fill="outline" size="default" color="danger" class="btn-custom">
+			<ion-button (click)="wipePost()" fill="outline" size="default" color="danger" class="btn-custom" id="post_clear">
 				<ion-icon slot="start" name="trash-outline"></ion-icon>Limpiar
 			</ion-button>
 		</div>
@@ -58,10 +58,10 @@
 					
 					<hr>
 					<div class="btn-group">
-						<ion-button (click)="editPost(p)" fill="outline" size="default" color="secondary" class="btn-custom">
+						<ion-button (click)="editPost(p)" fill="outline" size="default" color="secondary" class="btn-custom" id="post_edit">
 							<ion-icon slot="start" name="pencil-outline"></ion-icon>Editar
 						</ion-button>
-						<ion-button (click)="deletePost(p)" fill="outline" size="default" color="danger" class="btn-custom">
+						<ion-button (click)="deletePost(p)" fill="outline" size="default" color="danger" class="btn-custom" id="post_delete">
 							<ion-icon slot="start" name="trash-outline"></ion-icon>Eliminar
 						</ion-button>
 					</div>

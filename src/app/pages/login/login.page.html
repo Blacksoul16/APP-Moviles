@@ -11,13 +11,13 @@
 			</ion-card-title>
 
 			<ion-card-content>
-				<ion-input [(ngModel)]="correo" [clearInput]="true" color="secondary" type="text" labelPlacement="floating" fill="outline" label="{{ 'input.user.label' | translate }}" placeholder="Ej: u.suario123"></ion-input>
+				<ion-input [(ngModel)]="correo" [clearInput]="true" color="secondary" type="text" labelPlacement="floating" fill="outline" label="{{ 'input.user.label' | translate }}" placeholder="Ej: u.suario123" id="input_usuario"></ion-input>
 				<hr>
-				<ion-input [(ngModel)]="password" color="secondary" type="password" labelPlacement="floating" fill="outline" label="{{ 'input.password.label' | translate }}" placeholder="Ej: contraseñaSegura8">
+				<ion-input [(ngModel)]="password" color="secondary" type="password" labelPlacement="floating" fill="outline" label="{{ 'input.password.label' | translate }}" placeholder="Ej: contraseñaSegura8" id="input_password">
 					<!-- <ion-input-password-toggle slot="end" color="secondary"></ion-input-password-toggle> -->
 				</ion-input>
 				<div class="btn-group ion-margin-top ion-margin-bottom">
-					<ion-button (click)="login()" fill="outline" color="secondary" class="btn-custom">
+					<ion-button (click)="login()" fill="outline" color="secondary" class="btn-custom" id="btn_login">
 						<ion-icon slot="start" name="log-in-outline"></ion-icon>{{ "button.log_in" | translate }}
 					</ion-button>
 					<ion-button [routerLink]="['/registrarme']" fill="outline" color="secondary" class="btn-custom">
