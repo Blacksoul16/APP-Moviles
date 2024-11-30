@@ -39,7 +39,6 @@ import { Capacitor } from '@capacitor/core';
 import { InitappService } from './app/services/initapp.service';
 import { AuthService } from './app/services/auth.service';
 import { DataBaseService } from './app/services/database.service';
-import { FormGroup } from '@angular/forms';
 
 const platform = Capacitor.getPlatform()
 if (platform === "web") {
