@@ -7,6 +7,8 @@ import { RouterModule } from '@angular/router';
 import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { IonicModule } from '@ionic/angular';
+import { Capacitor } from '@capacitor/core';
+import { BarcodeScanner, SupportedFormat } from '@capacitor-community/barcode-scanner';
 
 @Component({
 	selector: 'duocuc-codigoqr',
@@ -25,6 +27,7 @@ export class CodigoqrComponent  implements OnInit {
 	@ViewChild("canvas")
 	private canvas!: ElementRef
 	public escaneando = false
+	public nativo = Capacitor.isNativePlatform()
 	public datosQR: any = ""
 
 	constructor(private auth: AuthService, private toast: ToastService) {
@@ -77,9 +80,7 @@ export class CodigoqrComponent  implements OnInit {
 		const qrCode: QRCode | null = jsQR(imgData.data, w, h, { inversionAttempts: "dontInvert" })
 		if (qrCode && qrCode.data !== "") {
 			this.showQRData(qrCode.data)
-			if (esVideo) {
-				this.stopScan()
-			}
+			this.stopScan()
 			return true
 		} else {
 			if (!esVideo) {
@@ -88,9 +89,6 @@ export class CodigoqrComponent  implements OnInit {
 			return false
 		}
 	}
-
-	// public procesarIMG(img: HTMLImageElement): void { this.procesarQR(img) }
-	// public procesarVideo(): boolean { return this.procesarQR(this.video.nativeElement, true) }
 
 	async checkVideo() {
 		if (this.video.nativeElement.readyState === this.video.nativeElement.HAVE_ENOUGH_DATA) {
@@ -101,33 +99,62 @@ export class CodigoqrComponent  implements OnInit {
 		}
 	}
 
-	public stopScan(): void {
+	async stopScan() {
 		this.escaneando = false
-		const stream = this.video.nativeElement.srcObject as MediaStream
-		if (stream) {
-			const tracks = stream.getTracks()
-			tracks.forEach(track => { track.stop() })
+		if (Capacitor.isNativePlatform()) {
+			await BarcodeScanner.stopScan()
+		} else {
+			const stream = this.video.nativeElement.srcObject as MediaStream
+			if (stream) {
+				const tracks = stream.getTracks()
+				tracks.forEach(track => { track.stop() })
+			}
+			this.video.nativeElement.srcObject = null
 		}
-		this.video.nativeElement.srcObject = null
 	}
 
-	public async initScan() {
+	async initScan() {
 		try {
-			const devices = await navigator.mediaDevices.enumerateDevices()
-			const tieneCamara = devices.some(device => device.kind === "videoinput")
-			if (!tieneCamara) {
-				this.toast.showMsg("No se detectó una cámara en el dispositivo.", 2500, "danger")
-				return
+			if (Capacitor.isNativePlatform()) {
+				//Nativo
+				const status = await BarcodeScanner.checkPermission({ force: true })
+				if (!status.granted) {
+					this.toast.showMsg("Sin permisos para usar la cámara.", 2500, "danger")
+					return
+				}
+				this.escaneando = true
+				await BarcodeScanner.hideBackground()
+				document.querySelector('body')?.classList.add('scanner-active')
+				const scanResult = await BarcodeScanner.startScan({ targetedFormats: [SupportedFormat.QR_CODE] })
+				if (scanResult.hasContent) {
+					this.showQRData(scanResult.content)
+					this.toast.showMsg("QR escaneado con éxito.", 2500, "success")
+				} else {
+					this.toast.showMsg("No se detectó contenido en el QR.", 2500, "warning")
+				}
+				document.querySelector('body')?.classList.remove('scanner-active')
+				await BarcodeScanner.showBackground()
+				this.escaneando = false
+
+			} else {
+				//Web
+				const devices = await navigator.mediaDevices.enumerateDevices()
+				const tieneCamara = devices.some(device => device.kind === "videoinput")
+				if (!tieneCamara) {
+					this.toast.showMsg("No se detectó una cámara en el dispositivo.", 2500, "danger")
+					return
+				}
+				const mediaProvider: MediaProvider = await navigator.mediaDevices.getUserMedia({ video: { facingMode: "environment" } })
+				this.video.nativeElement.srcObject = mediaProvider
+				this.video.nativeElement.setAttribute("playsinline", "true")
+				this.video.nativeElement.play()
+				this.escaneando = true
+				requestAnimationFrame(this.checkVideo.bind(this))
 			}
-			const mediaProvider: MediaProvider = await navigator.mediaDevices.getUserMedia({ video: { facingMode: "environment" } })
-			this.video.nativeElement.srcObject = mediaProvider
-			this.video.nativeElement.setAttribute("playsinline", "true")
-			this.video.nativeElement.play()
-			this.escaneando = true
-			requestAnimationFrame(this.checkVideo.bind(this))
 		} catch (e) {
-			this.toast.showMsg(`Hubo un error al intentar acceder a la cámara: ${e}`, 3000, "danger")
-			console.error("Error al intentar acceder a la cámara:", e)
+			this.escaneando = false
+			this.toast.showMsg(`No se pudo acceder a la cámara: ${e}`, 3000, "danger")
+			console.error("No se pudo acceder a la cámara:", e)
 		}
 	}
 	
