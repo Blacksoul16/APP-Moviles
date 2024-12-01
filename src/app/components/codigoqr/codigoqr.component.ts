@@ -1,4 +1,4 @@
-import { Component, ElementRef, OnDestroy, OnInit, ViewChild } from '@angular/core';
+import { Component, ElementRef, NgZone, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { AuthService } from 'src/app/services/auth.service';
 import { ToastService } from 'src/app/services/toast.service';
 import jsQR, { QRCode } from 'jsqr';
@@ -8,9 +8,9 @@ import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { IonicModule } from '@ionic/angular';
 import { Capacitor } from '@capacitor/core';
-import { BarcodeScanner, SupportedFormat } from '@capacitor-community/barcode-scanner';
 import { Subscription } from 'rxjs';
 import { MenuStateService } from 'src/app/services/menu-state.service';
+import { BarcodeScanner } from '@capacitor-mlkit/barcode-scanning'
 
 @Component({
 	selector: 'duocuc-codigoqr',
@@ -24,6 +24,7 @@ export class CodigoqrComponent implements OnInit, OnDestroy {
 	public salut: string = this.getSalut()
 	public usuario: any
 
+	private scanTimeout: any
 	private subs: Subscription = new Subscription()
 
 	@ViewChild("video")
@@ -34,7 +35,7 @@ export class CodigoqrComponent implements OnInit, OnDestroy {
 	public nativo = Capacitor.isNativePlatform()
 	public datosQR: any = ""
 
-	constructor(private auth: AuthService, private toast: ToastService, private menuState: MenuStateService) {}
+	constructor(private auth: AuthService, private toast: ToastService, private menuState: MenuStateService, private zone: NgZone) {}
 
 	ngOnInit() { 
 		this.subs.add(this.auth.userAuth$.subscribe((u) => { this.usuario = u }))
@@ -106,8 +107,9 @@ export class CodigoqrComponent implements OnInit, OnDestroy {
 	async stopScan() {
 		this.escaneando = false
 		if (this.nativo) {
+			await BarcodeScanner.removeAllListeners()
 			await BarcodeScanner.stopScan()
-			document.querySelector("body")?.classList.remove("scanner-active")
+			if (this.scanTimeout) { clearTimeout(this.scanTimeout); this.scanTimeout = null }
 		} else {
 			const stream = this.video.nativeElement.srcObject as MediaStream
 			if (stream) {
@@ -122,23 +124,24 @@ export class CodigoqrComponent implements OnInit, OnDestroy {
 		try {
 			if (this.nativo) {
 				//Nativo
-				const status = await BarcodeScanner.checkPermission({ force: true })
-				if (!status.granted) {
+				const status = await BarcodeScanner.checkPermissions()
+				if (!status.camera) {
 					this.toast.showMsg("Sin permisos para usar la cámara.", 2500, "danger")
 					return
 				}
-				this.escaneando = true
-				document.querySelector("body")?.classList.add("scanner-active")
-				const scanResult = await BarcodeScanner.startScan({ targetedFormats: [SupportedFormat.QR_CODE] })
-				if (scanResult.hasContent) {
-					this.showQRData(scanResult.content)
+				this.scanTimeout = setTimeout(() => {
+					this.stopScan()
+					this.toast.showMsg("Se excedió el tiempo de escaneo.", 2500, "danger")
+				}, 15000)
+				document.querySelector("body")?.classList.add("barcode-scanner-active")
+				await BarcodeScanner.addListener("barcodeScanned", async result => {
+					document.querySelector("body")?.classList.remove("barcode-scanner-active")
 					this.toast.showMsg("QR escaneado con éxito.", 2500, "success")
-				} else {
-					this.toast.showMsg("No se detectó contenido en el QR.", 2500, "warning")
-				}
-				document.querySelector("body")?.classList.remove("scanner-active")
-				this.escaneando = false
-
+					await this.stopScan()
+					this.showQRData(result.barcode.rawValue)
+				})
+				this.escaneando = true
+				await BarcodeScanner.startScan()
 			} else {
 				//Web
 				const devices = await navigator.mediaDevices.enumerateDevices()
@@ -163,8 +166,10 @@ export class CodigoqrComponent implements OnInit, OnDestroy {
 	
 	public showQRData(datosQR: string): void {
 		const objetoDatosQR = JSON.parse(datosQR)
-		this.auth.codigoQRData.next(objetoDatosQR)
-		this.auth.tabSeleccionado.next("miclase")
+		this.zone.run(() => {
+			this.auth.codigoQRData.next(objetoDatosQR)
+			this.auth.tabSeleccionado.next("miclase")
+		})
 	}
 	
 }

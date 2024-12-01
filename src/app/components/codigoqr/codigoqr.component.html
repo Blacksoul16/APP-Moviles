@@ -7,7 +7,7 @@
 <hr>
 <div style="display: flex; flex-direction: column; justify-content: center;">
 	<div style="display: flex; justify-content: center;">
-		<ion-card class="enmarcar" [class.transparent-card]="escaneando && nativo">
+		<ion-card class="enmarcar">
 			<ion-card-content style="display: flex; justify-content: center;">
 				<div *ngIf="!nativo" style="display: flex; justify-content: center; width: 24rem; height: 18rem;">
 					<h1 *ngIf="!escaneando" style="display: flex; align-self: center; height: auto;">{{ "label.camera_text" | translate }}</h1>
