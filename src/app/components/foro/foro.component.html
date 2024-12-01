@@ -9,22 +9,22 @@
 	<a id="top" href="#top"></a>
 	<ion-card class="enmarcar" style="width: 26rem;">
 		<ion-card-header class="ion-text-center">
-			<ion-card-title>Crear una nueva publicación</ion-card-title>
-			<ion-card-subtitle>Sesión iniciada como <ion-text color="secondary">{{selectedPost}}</ion-text>.</ion-card-subtitle>
+			<ion-card-title>{{ "foro.card.title" | translate }}</ion-card-title>
+			<ion-card-subtitle>{{ "foro.card.subtitle" | translate }} <ion-text color="secondary">{{selectedPost}}</ion-text>.</ion-card-subtitle>
 		</ion-card-header>
 
 		<div class="ion-padding-horizontal ion-padding-vertical" style="display: flex; justify-content: center; flex-direction: column;">
-			<ion-input [(ngModel)]="post.title" type="text" color="secondary" label="Título" labelPlacement="floating" placeholder="Un título." fill="outline" id="post_titulo"></ion-input>	
+			<ion-input [(ngModel)]="post.title" type="text" color="secondary" label="{{ 'foro.input.title' | translate }}" labelPlacement="floating" placeholder="{{ 'foro.input.title.placeholder' | translate }}" fill="outline" id="post_titulo"></ion-input>	
 			<hr>
-			<ion-textarea [(ngModel)]="post.body" color="secondary" label="Cuerpo de la publicación" labelPlacement="floating" placeholder="Érase una vez..." fill="outline" id="post_cuerpo"></ion-textarea>
+			<ion-textarea [(ngModel)]="post.body" color="secondary" label="{{ 'foro.input.body' | translate }}" labelPlacement="floating" placeholder="{{ 'foro.input.body.placeholder' | translate }}" fill="outline" id="post_cuerpo"></ion-textarea>
 		</div>
 		<hr>
 		<div class="btn-group">
 			<ion-button (click)="savePost()" fill="outline" size="default" color="success" class="btn-custom" id="post_submit">
-				<ion-icon slot="start" name="save-outline"></ion-icon>Guardar
+				<ion-icon slot="start" name="save-outline"></ion-icon>{{ "button.save" | translate }}
 			</ion-button>
 			<ion-button (click)="wipePost()" fill="outline" size="default" color="danger" class="btn-custom" id="post_clear">
-				<ion-icon slot="start" name="trash-outline"></ion-icon>Limpiar
+				<ion-icon slot="start" name="trash-outline"></ion-icon>{{ "button.limpiar" | translate }}
 			</ion-button>
 		</div>
 		<hr>
@@ -35,18 +35,18 @@
 	<div style="display: flex; justify-content: center;">
 		<ion-card style="width: 32rem;">
 			<ion-card-header class="ion-text-center">
-				<ion-card-title>Publicaciones recientes</ion-card-title>
+				<ion-card-title>{{ "foro.posts.title" | translate }}</ion-card-title>
 			</ion-card-header>
 	
 			<ion-card-content *ngIf="!posts" class="ion-text-center ion-padding-vertical">
-				<ion-card-subtitle>No hay publicaciones recientes.</ion-card-subtitle>
+				<ion-card-subtitle>{{ "foro.posts.noposts" | translate }}</ion-card-subtitle>
 			</ion-card-content>
 	
 			<ion-card-content *ngIf="posts">
 				<ion-card *ngFor="let p of posts; let i=index; trackBy: getPostItemID" class="enmarcar" style="margin-bottom: 1.78rem;">
 					<ion-grid fixed>
 						<ion-row class="ion-justify-content-between">
-							<ion-col size="auto">Autor: {{p.name}}</ion-col>
+							<ion-col size="auto">{{ "foro.posts.authorlabel" | translate }}: {{p.name}}</ion-col>
 							<ion-col size="3" style="display: flex; justify-content: end;">#{{p.id}}</ion-col>
 						</ion-row>
 					</ion-grid>
@@ -59,10 +59,10 @@
 					<hr>
 					<div class="btn-group">
 						<ion-button (click)="editPost(p)" fill="outline" size="default" color="secondary" class="btn-custom" id="post_edit">
-							<ion-icon slot="start" name="pencil-outline"></ion-icon>Editar
+							<ion-icon slot="start" name="pencil-outline"></ion-icon>{{ "button.editar" | translate}}
 						</ion-button>
 						<ion-button (click)="deletePost(p)" fill="outline" size="default" color="danger" class="btn-custom" id="post_delete">
-							<ion-icon slot="start" name="trash-outline"></ion-icon>Eliminar
+							<ion-icon slot="start" name="trash-outline"></ion-icon>{{ "button.eliminar" | translate }}
 						</ion-button>
 					</div>
 					<hr>

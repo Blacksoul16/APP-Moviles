@@ -14,57 +14,63 @@
 	"lang.kr": "韩语",
   
 	"login.title": "登录",
-  
+
 	"input.user.label": "用户",
 	"input.password.label": "密码",
-  
+
 	"button.upload_qr": "上传二维码",
 	"button.scan_qr": "扫描二维码",
 	"button.stop_scan": "停止扫描",
-	"button.log_in": "输入",
-	"button.log_out": "退出",
+	"button.log_in": "登录",
+	"button.log_out": "登出",
 	"button.settings": "设置",
-	"button.go_scan": "前往扫描",
+	"button.go_scan": "去扫描",
 	"button.clear_qr_data": "清除二维码数据",
 	"button.save_changes": "保存更改",
 	"button.go_back": "返回",
 	"button.continue": "继续",
 	"button.register": "注册",
 	"button.users": "用户",
-  
+	"button.create_account": "创建帐户",
+	"button.save": "保存",
+	"button.limpiar": "清除",
+	"button.editar": "编辑",
+	"button.eliminar": "删除",
+
 	"tab.home.label": "首页",
 	"tab.my_data.label": "我的数据",
 	"tab.my_class.label": "我的班级",
 	"tab.menu.label": "菜单",
 	"tab.forum.label": "论坛",
-  
-	"label.recover_pass": "恢复密码",
+	"tab.users.label": "用户",
+
+	"label.recover_pass": "找回密码",
 	"label.go_to_campus": "前往DUOC",
-	"label.camera_text": "在这里你会看到你的相机",
-	"label.where_we_goin": "我们要去哪里？",
-	"label.program_description": "辅助系统",
+	"label.camera_text": "这里是你的摄像头",
+	"label.where_we_goin": "我们去哪儿？",
+	"label.program_description": "出勤系统",
 	"label.recover_pass.step": "步骤",
-  
+
 	"correcto.text": "正确答案！",
-	"correcto.descripcion": "您的密码是",
-  
+	"correcto.descripcion": "你的密码是",
+
 	"incorrecto.text": "错误答案！",
-	"incorrecto.descripcion": "如果您回答错误的秘密问题，我们将无法显示您的密码！",
-  
-	"recuperar.mail.text": "输入您的电子邮件",
-	"recuperar.mail.label": "邮件",
+	"incorrecto.descripcion": "如果你答错了秘密问题，我们无法显示你的密码！",
+
+	"recuperar.correo.text": "请输入你的邮箱",
+	"recuperar.correo.label": "邮箱",
 	"recuperar.preguntasecreta.text": "回答秘密问题",
-	"recuperar.preguntasecreta.label": "回答",
-  
+	"recuperar.preguntasecreta.label": "答案",
+
 	"miclase.badge": "我的班级数据",
 	"miclase.card.title": "二维码数据",
-	"miclase.card.content1": "尚未扫描数据。",
+	"miclase.card.content1": "还没有扫描数据。",
 	"miclase.card.content2": "尝试上传二维码或使用设备的摄像头扫描二维码。",
-  
+
 	"misdatos.badge": "我的个人数据",
-	"misdatos.input.cuenta": "账户",
-	"misdatos.input.correo": "电子邮件",
-	"misdatos.input.nombre": "名称",
+	"misdatos.input.cuenta": "帐户",
+	"misdatos.input.correo": "邮箱",
+	"misdatos.input.nombre": "名字",
 	"misdatos.input.apellido": "姓氏",
 	"misdatos.input.preguntasecreta": "秘密问题",
 	"misdatos.input.respuestasecreta": "秘密答案",
@@ -72,8 +78,29 @@
 	"misdatos.input.contraseña": "密码",
 	"misdatos.input.nuevacontraseña": "新密码",
 	"misdatos.input.dirección": "地址",
-  
+
 	"foro.badge": "今日论坛",
+	"foro.card.title": "创建新帖子",
+	"foro.card.subtitle": "已登录为",
+	"foro.posts.title": "最近帖子",
+	"foro.posts.noposts": "没有帖子可显示",
+	"foro.posts.authorlabel": "作者",
+	"foro.input.title": "标题",
+	"foro.input.title.placeholder": "一个标题。",
+	"foro.input.body": "帖子内容",
+	"foro.input.body.placeholder": "从前有个...",
+
+	"registrarme.badge": "注册",
+	"registrarme.card.title": "输入个人信息",
+
+	"miruta.button.here": "这里",
+	"miruta.button.route": "路线",
+
+	"usuarios.badge": "用户列表",
+	"usuarios.input.label": "按姓名或用户搜索",
+	"usuarios.filter.label": "按角色筛选",
+	"usuarios.role.1": "管理员",
+	"usuarios.role.0": "学生",
   
 	"temas.label.colortheme": "主题",
 	"temas.color.light": "光",

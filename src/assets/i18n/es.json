@@ -32,6 +32,10 @@
 	"button.register": "Registro",
 	"button.users": "Usuarios",
 	"button.create_account": "Crear cuenta",
+	"button.save": "Guardar",
+	"button.limpiar": "Limpiar",
+	"button.editar": "Editar",
+	"button.eliminar": "Eliminar",
 
 	"tab.home.label": "Inicio",
 	"tab.my_data.label": "Mis datos",
@@ -76,6 +80,15 @@
 	"misdatos.input.dirección": "Dirección",
 
 	"foro.badge": "Foro Today",
+	"foro.card.title": "Crear una nueva publicación",
+	"foro.card.subtitle": "Sesión iniciada como",
+	"foro.posts.title": "Publicaciones recientes",
+	"foro.posts.noposts": "No hay publicaciones para mostrar",
+	"foro.posts.authorlabel": "Autor",
+	"foro.input.title": "Título",
+	"foro.input.title.placeholder": "Un título.",
+	"foro.input.body": "Cuerpo de la publicación",
+	"foro.input.body.placeholder": "Érase una vez...",
 
 	"registrarme.badge": "Registrarme",
 	"registrarme.card.title": "Ingresa tus datos personales",
@@ -84,6 +97,10 @@
 	"miruta.button.route": "Ruta",
 
 	"usuarios.badge": "Lista de usuarios",
+	"usuarios.input.label": "Buscar por nombre o usuario",
+	"usuarios.filter.label": "Filtrar por rol",
+	"usuarios.role.1": "Administrador",
+	"usuarios.role.0": "Alumno",
 
 	"temas.label.colortheme": "Tema",
 	"temas.color.light": "Claro",

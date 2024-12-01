@@ -19,13 +19,10 @@
 								</ion-card-title>
 								<ion-card-subtitle>
 									<ion-badge color="light" style="font-size: 9px;">
-										{{ usuario.rol === 1 ? 'Administrador' : 'Alumno' }}
+										{{ roleKey | translate }}
 									</ion-badge>
 								</ion-card-subtitle>
 							</ion-card-content>
-							<!-- <ion-button fill="clear" size="small" color="secondary" style="position: absolute; top: 0; right: 0;">
-								<ion-icon slot="icon-only" name="create-outline"></ion-icon>
-							</ion-button> -->
 						</ion-card>
 					</ion-row>
 					<ion-item-divider style="margin-bottom: 2rem;"></ion-item-divider>

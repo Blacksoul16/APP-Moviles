@@ -18,25 +18,31 @@
 	"input.user.label": "Usuário",
 	"input.password.label": "Senha",
 
-	"button.upload_qr": "Carregar um QR",
+	"button.upload_qr": "Carregar QR",
 	"button.scan_qr": "Escanear QR",
-	"button.stop_scan": "Parar escaneamento",
+	"button.stop_scan": "Parar de escanear",
 	"button.log_in": "Entrar",
 	"button.log_out": "Sair",
 	"button.settings": "Configurações",
 	"button.go_scan": "Ir para escanear",
 	"button.clear_qr_data": "Limpar dados QR",
-	"button.save_changes": "Salvar alterações",
+	"button.save_changes": "Salvar mudanças",
 	"button.go_back": "Voltar",
 	"button.continue": "Continuar",
 	"button.register": "Registrar",
 	"button.users": "Usuários",
+	"button.create_account": "Criar conta",
+	"button.save": "Salvar",
+	"button.limpiar": "Limpar",
+	"button.editar": "Editar",
+	"button.eliminar": "Excluir",
 
 	"tab.home.label": "Início",
 	"tab.my_data.label": "Meus dados",
 	"tab.my_class.label": "Minha classe",
 	"tab.menu.label": "Menu",
 	"tab.forum.label": "Fórum",
+	"tab.users.label": "Usuários",
 
 	"label.recover_pass": "Recuperar senha",
 	"label.go_to_campus": "Ir para o DUOC",
@@ -50,15 +56,15 @@
 
 	"incorrecto.text": "Resposta incorreta!",
 	"incorrecto.descripcion": "Não podemos mostrar sua senha se você responder errado à pergunta secreta!",
-	
+
 	"recuperar.correo.text": "Digite seu e-mail",
 	"recuperar.correo.label": "E-mail",
 	"recuperar.preguntasecreta.text": "Responda à pergunta secreta",
 	"recuperar.preguntasecreta.label": "Resposta",
 
 	"miclase.badge": "Dados da minha classe",
-	"miclase.card.title": "Dados do QR Code",
-	"miclase.card.content1": "Ainda não há dados escaneados.",
+	"miclase.card.title": "Dados do código QR",
+	"miclase.card.content1": "Nenhum dado escaneado ainda.",
 	"miclase.card.content2": "Tente carregar um QR ou use a câmera do seu dispositivo para escanear um.",
 
 	"misdatos.badge": "Meus dados pessoais",
@@ -73,7 +79,28 @@
 	"misdatos.input.nuevacontraseña": "Nova senha",
 	"misdatos.input.dirección": "Endereço",
 
-	"foro.badge": "Forum Today",
+	"foro.badge": "Fórum Today",
+	"foro.card.title": "Criar nova publicação",
+	"foro.card.subtitle": "Conectado como",
+	"foro.posts.title": "Publicações recentes",
+	"foro.posts.noposts": "Sem publicações para mostrar",
+	"foro.posts.authorlabel": "Autor",
+	"foro.input.title": "Título",
+	"foro.input.title.placeholder": "Um título.",
+	"foro.input.body": "Corpo da publicação",
+	"foro.input.body.placeholder": "Era uma vez...",
+
+	"registrarme.badge": "Registrar",
+	"registrarme.card.title": "Digite seus dados pessoais",
+
+	"miruta.button.here": "Aqui",
+	"miruta.button.route": "Rota",
+
+	"usuarios.badge": "Lista de usuários",
+	"usuarios.input.label": "Pesquisar por nome ou usuário",
+	"usuarios.filter.label": "Filtrar por papel",
+	"usuarios.role.1": "Administrador",
+	"usuarios.role.0": "Aluno",
 
 	"temas.label.colortheme": "Tema",
 	"temas.color.light": "Claro",

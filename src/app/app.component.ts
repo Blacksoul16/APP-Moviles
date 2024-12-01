@@ -20,6 +20,7 @@ export class AppComponent {
 
 	public mostrarComponentes: boolean = false
 	public usuario: any
+	public roleKey: string = "0"
 
 	constructor(private ruta: Router, private menu: MenuController, private toast: ToastService, private auth: AuthService) {
 		addIcons({ 
@@ -28,6 +29,7 @@ export class AppComponent {
 			addCircleOutline, stopCircleOutline, settingsOutline, logInOutline, documentTextOutline, languageOutline, colorPalette,
 			homeOutline, pencilOutline
 		})
+		this.auth.usuarioAutenticado.subscribe((u) => { this.usuario = u; this.roleKey = `usuarios.role.${u?.rol}` })
 		this.ruta.events.subscribe((e: any) => {
 			if (e.url) {
 				this.mostrarComponentes = this.checkComponentes(e.url)
@@ -35,9 +37,7 @@ export class AppComponent {
 		})
 	}
 	
-	ngOnInit() {
-		this.auth.usuarioAutenticado.subscribe((u) => { this.usuario = u })
-	}
+	ngOnInit() {}
 
 	checkComponentes(url: string): boolean { return url.includes("inicio") }
 
