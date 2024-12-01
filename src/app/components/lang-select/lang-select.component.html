@@ -6,8 +6,8 @@
 		<ion-grid>
 			<ion-row>
 				<ion-col size="4" *ngFor="let lang of langCodes" style="display: flex; justify-content: center;">
-					<div class="flag-container" [class.selected]="langSelected === lang" (click)="changeLang(lang)">
-						<img [src]="'assets/flags/' + lang + '.svg'" alt="{{lang}}" class="flag-icon"/>
+					<div class="f-c" [class.selected]="langSelected === lang" (click)="changeLang(lang)">
+						<img [src]="'assets/flags/' + lang + '.svg'" alt="{{lang}}" class="f-i"/>
 					</div>
 				</ion-col>
 			</ion-row>

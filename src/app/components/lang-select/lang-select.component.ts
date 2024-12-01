@@ -13,22 +13,20 @@ import { IonicModule } from '@ionic/angular';
 	imports: [CommonModule, FormsModule, IonicModule, RouterModule, TranslateModule]
 
 })
-export class LangSelectComponent  implements OnInit {
+export class LangSelectComponent implements OnInit {
 
 	@Output() changeCurrentLang = new EventEmitter()
 
 	langSelected = "es"
-	langCodes = ["es", "en", "pt", "de", "fr", "ru", "it", "nl", "pl", "cn", "jp", "kr"]
+	langCodes = ["es", "en", "pt", "de", "fr", "it", "ru", "nl", "pl", "cn", "jp", "kr"]
 
 	constructor(private translate: TranslateService) {
 		const storedLang = localStorage.getItem("selectedLang") || "es"
 		this.langSelected = storedLang
 		this.translate.use(storedLang)
 	}
-
-	ngOnInit() {
-		this.langCodes.sort()
-	}
+	
+	ngOnInit() {}
 
 	public changeLang(lang: string) {
 		this.translate.use(lang)

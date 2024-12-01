@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
 import { TranslateModule, TranslateService } from '@ngx-translate/core';
@@ -8,6 +8,7 @@ import { ApiService } from 'src/app/services/api.service';
 import { ToastService } from 'src/app/services/toast.service';
 import { AuthService } from 'src/app/services/auth.service';
 import { Usuario } from 'src/app/model/usuario';
+import { Subscription } from 'rxjs';
 
 @Component({
 	selector: 'duocuc-foro',
@@ -16,40 +17,31 @@ import { Usuario } from 'src/app/model/usuario';
 	standalone: true,
 	imports: [CommonModule, FormsModule, IonicModule, RouterModule, TranslateModule]
 })
-export class ForoComponent  implements OnInit {
+export class ForoComponent implements OnInit, OnDestroy {
 
-	public usuario: Usuario | null
-	protected selectOptions = {
-		message: "La publicación se hará bajo el usuario que selecciones."
-	}
+	private subs: Subscription = new Subscription()
+	public usuario: any
+	protected selectOptions = { message: "La publicación se hará bajo el usuario que selecciones." }
 
 	selectedUserID: number | any
 	selectedPost: string | any
 
 	users: any
 	posts: any
+
+	post: any = { userID: null, id: null, title: "", body: "", name: "" }
+
+	constructor(private translate: TranslateService, private api: ApiService, private toast: ToastService, private auth: AuthService) {}
 	
-	post: any = {
-		userID: null,
-		id: null,
-		title: "",
-		body: "",
-		name: ""
-	}
-
-	constructor(private translate: TranslateService, private api: ApiService, private toast: ToastService, private auth: AuthService) {
-		this.usuario = this.auth.usuarioAutenticado.value
-	}
-
 	ngOnInit() {
+		this.subs.add(this.auth.userAuth$.subscribe((u) => { this.usuario = u }))
 		this.translate.use(localStorage.getItem("selectedLang") || "es")
 		this.selectedUserID = null
 		this.setPost(this.usuario?.cuenta, null, "", "", "")
 		this.getUsers()
 		this.getPosts()
 	}
-
-	changeUser($e: number) { this.setPost($e, null, "", "", "") }
+	ngOnDestroy() { this.subs.unsubscribe() }
 
 	wipePost() { this.setPost(this.usuario?.cuenta, null, "", "", "") }
 	

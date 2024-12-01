@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
 import { TranslateModule, TranslateService } from '@ngx-translate/core';
@@ -9,6 +9,7 @@ import { ToastService } from 'src/app/services/toast.service';
 import { DataBaseService } from 'src/app/services/database.service';
 import { NivelEducacional } from 'src/app/model/nivel-educacional';
 import { convertirFechaAISO, convertirISOAFecha } from 'src/app/tools/funcFechas';
+import { Subscription } from 'rxjs';
 
 @Component({
 	selector: 'duocuc-misdatos',
@@ -17,22 +18,24 @@ import { convertirFechaAISO, convertirISOAFecha } from 'src/app/tools/funcFechas
 	standalone: true,
 	imports: [CommonModule, FormsModule, IonicModule, RouterModule, TranslateModule],
 })
-export class MisdatosComponent  implements OnInit {
+export class MisdatosComponent implements OnInit, OnDestroy {
 
+	private subs: Subscription = new Subscription()
 	public usuario: any
 	public usuarioCopia: any
 	public fechaNacimientoISO: any
 	public nuevaPassword: any
 
 	constructor(private auth: AuthService, private toast: ToastService, private translate: TranslateService, private bd: DataBaseService) {
-		this.usuario = this.auth.usuarioAutenticado.value
 		this.usuarioCopia = {...this.usuario}
 	}
 
 	ngOnInit() {
+		this.subs.add(this.auth.userAuth$.subscribe((u) => { this.usuario = u }))
 		this.translate.use(localStorage.getItem("selectedLang") || "es")
 		this.fechaNacimientoISO = convertirFechaAISO(this.usuario.fechaNacimiento)
 	}
+	ngOnDestroy() { this.subs.unsubscribe() }
 
  	public listaNivelesEducacionales = NivelEducacional.getNivelesEducacionales();
 	public actualizarNivelEducacional(event: any) { this.usuario.nivelEducacional = NivelEducacional.findNivelEducacional(event.detail.value)!; }

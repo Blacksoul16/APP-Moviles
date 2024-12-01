@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
 import { IonicModule } from '@ionic/angular';
@@ -8,6 +8,7 @@ import { Usuario } from 'src/app/model/usuario';
 import { DataBaseService } from 'src/app/services/database.service';
 import { IonPopover } from '@ionic/angular';
 import { AuthService } from 'src/app/services/auth.service';
+import { Subscription } from 'rxjs';
 
 @Component({
 	selector: 'duocuc-usuarios',
@@ -16,14 +17,15 @@ import { AuthService } from 'src/app/services/auth.service';
 	standalone: true,
 	imports: [CommonModule, FormsModule, IonicModule, RouterModule, TranslateModule]
 })
-export class UsuariosComponent  implements OnInit {
+export class UsuariosComponent implements OnInit, OnDestroy {
 
+	private subs: Subscription = new Subscription()
 	users: Usuario[] = []
 	usuariosFiltrados: Usuario[] = []
 	usuarioBusqueda: string = ""
 	rolesSeleccionados: number[] = []
 
-	usuarioAutenticado: Usuario | undefined
+	usuario: any
 
 	filtroAdmin: boolean = false
 	filtroUsuario: boolean = false
@@ -32,14 +34,10 @@ export class UsuariosComponent  implements OnInit {
 
 	@ViewChild("opcionesFiltro", { static: true }) poppy!: IonPopover
 
-	constructor(private db: DataBaseService, private auth: AuthService) {
-		this.auth.usuarioAutenticado.subscribe((u) => {
-			this.usuarioAutenticado = u!
-		})
-		this.cargarUsuarios()
-	}
+	constructor(private db: DataBaseService, private auth: AuthService) { this.cargarUsuarios() }
 
-	ngOnInit() {}
+	ngOnInit() { this.subs.add(this.auth.userAuth$.subscribe((u) => { this.usuario = u })) }
+	ngOnDestroy() { this.subs.unsubscribe() }
 
 	async cargarUsuarios() {
 		this.db.readUsers().then(users => {

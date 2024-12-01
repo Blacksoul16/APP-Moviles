@@ -10,12 +10,13 @@ import { Storage } from "@ionic/storage-angular";
 	providedIn: 'root'
 })
 export class AuthService {
-	keyUsuario = "USUARIO_AUTENTICADO"
-	keyQR = "CODIGO_QR"
-	usuarioAutenticado = new BehaviorSubject<Usuario | null>(null)
+	private userSubject = new BehaviorSubject<Usuario | null>(null)
+	userAuth$ = this.userSubject.asObservable()
 	primerInicioSesion = new BehaviorSubject<boolean>(false)
 	codigoQRData = new BehaviorSubject<string | null>(null)
 	tabSeleccionado = new BehaviorSubject<string>("codigoqr")
+	keyUsuario = "USUARIO_AUTENTICADO"
+	keyQR = "CODIGO_QR"
 
 	constructor(private router: Router, private bd: DataBaseService, private storage: Storage, private toast: ToastService) { this.initAuth() }
 
@@ -39,7 +40,7 @@ export class AuthService {
 	async readAuthUser(): Promise<Usuario | null> {
 		try {
 			const u = (await this.storage.get(this.keyUsuario)) as Usuario | null
-			this.usuarioAutenticado.next(u ?? null)
+			this.userSubject.next(u ?? null)
 			return u
 		} catch (e) {
 			console.error(`[auth.service.ts] Error en readAuthUser: ${e}`)
@@ -50,7 +51,7 @@ export class AuthService {
 	async saveAuthUser(u: Usuario) {
 		try {
 			await this.storage.set(this.keyUsuario, u)
-			this.usuarioAutenticado.next(u)
+			this.userSubject.next(u)
 			return u
 		} catch (e) {
 			console.error(`[auth.service.ts] Error en saveAuthUser: ${e}`)
@@ -61,7 +62,7 @@ export class AuthService {
 	async deleteAuthUser(): Promise<boolean> {
 		try {
 			await this.storage.remove(this.keyUsuario)
-			this.usuarioAutenticado.next(null)
+			this.userSubject.next(null)
 			return true
 		} catch (e) {
 			console.error(`[auth.servicve.ts] Error en deleteAuthUser: ${e}`)
@@ -74,8 +75,9 @@ export class AuthService {
 			const authUser = await this.storage.get(this.keyUsuario)
 			if (authUser) {
 				this.toast.showMsg("Inicio de sesión exitoso (via storage).", 2000, "success")
-				this.usuarioAutenticado.next(authUser)
+				this.userSubject.next(authUser)
 				this.primerInicioSesion.next(false)
+				this.tabSeleccionado.next("codigoqr")
 				await this.router.navigate(["/inicio"])
 				return true
 			}
@@ -84,6 +86,7 @@ export class AuthService {
 				this.toast.showMsg("Inicio de sesión exitoso (via bd).", 2000, "success")
 				await this.saveAuthUser(user)
 				this.primerInicioSesion.next(true)
+				this.tabSeleccionado.next("codigoqr")
 				await this.router.navigate(["/inicio"])
 				return true
 			}
@@ -111,39 +114,39 @@ export class AuthService {
 		}
 	}
 
-	public hasPermission(perm: string): boolean {
-		const rol = this.usuarioAutenticado.value?.rol
-		if (rol === undefined || rol === null) return false
+	// public hasPermission(perm: string): boolean {
+	// 	const rol = this.userSubject.value?.rol
+	// 	if (rol === undefined || rol === null) return false
 
-		const perms = ROLES_PERMISOS[rol] || []
-		return perms.includes(perm)
-	}
+	// 	const perms = ROLES_PERMISOS[rol] || []
+	// 	return perms.includes(perm)
+	// }
 
-	public getUserRole(): string {
-		const rol = this.usuarioAutenticado.value ? this.usuarioAutenticado.value.rol : 0
-		return ROLES[rol as keyof typeof ROLES]
-	}
+	// public getUserRole(): string {
+	// 	const rol = this.userSubject.value ? this.userSubject.value.rol : 0
+	// 	return ROLES[rol as keyof typeof ROLES]
+	// }
 }
 
-export const ROLES = { 1: "Administrador", 0: "Alumno" }
-export const PERMS = {
-	TABS: { MISDATOS: "tab.misdatos", FORO: "tab.foro", CODIGOQR: "tab.codigoqr", MICLASE: "tab.miclase", USUARIOS: "tab.usuarios" },
-	ACCIONES: { LEER: "accion.leer", ESCRIBIR: "accion.escribir", EDITAR: "accion.editar" },
-	LOGIN: "login",
-	LOGOUT: "logout"
-}
+// export const ROLES = { 1: "Administrador", 0: "Alumno" }
+// export const PERMS = {
+// 	TABS: { MISDATOS: "tab.misdatos", FORO: "tab.foro", CODIGOQR: "tab.codigoqr", MICLASE: "tab.miclase", USUARIOS: "tab.usuarios" },
+// 	ACCIONES: { LEER: "accion.leer", ESCRIBIR: "accion.escribir", EDITAR: "accion.editar" },
+// 	LOGIN: "login",
+// 	LOGOUT: "logout"
+// }
 
 /**
  * 1: Administrador
  * 0: Alumno / Usuario regular
  */
-export const ROLES_PERMISOS: any = {
-	1: [
-		PERMS.TABS.FORO, PERMS.TABS.USUARIOS, PERMS.TABS.MISDATOS, PERMS.ACCIONES.LEER, 
-		PERMS.ACCIONES.ESCRIBIR, PERMS.ACCIONES.EDITAR, PERMS.LOGIN, PERMS.LOGOUT
-	],
-	0: [
-		PERMS.TABS.CODIGOQR, PERMS.TABS.MICLASE, PERMS.ACCIONES.LEER, PERMS.LOGIN, 
-		PERMS.LOGOUT
-	]
-}
+// export const ROLES_PERMISOS: any = {
+// 	1: [
+// 		PERMS.TABS.FORO, PERMS.TABS.USUARIOS, PERMS.TABS.MISDATOS, PERMS.ACCIONES.LEER, 
+// 		PERMS.ACCIONES.ESCRIBIR, PERMS.ACCIONES.EDITAR, PERMS.LOGIN, PERMS.LOGOUT
+// 	],
+// 	0: [
+// 		PERMS.TABS.CODIGOQR, PERMS.TABS.MICLASE, PERMS.ACCIONES.LEER, PERMS.LOGIN, 
+// 		PERMS.LOGOUT
+// 	]
+// }

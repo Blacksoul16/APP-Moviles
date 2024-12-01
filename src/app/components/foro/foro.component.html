@@ -20,10 +20,10 @@
 		</div>
 		<hr>
 		<div class="btn-group">
-			<ion-button (click)="savePost()" fill="outline" size="default" color="success" class="btn-custom" id="post_submit">
+			<ion-button (click)="savePost()" color="success" class="btn-custom" id="post_submit">
 				<ion-icon slot="start" name="save-outline"></ion-icon>{{ "button.save" | translate }}
 			</ion-button>
-			<ion-button (click)="wipePost()" fill="outline" size="default" color="danger" class="btn-custom" id="post_clear">
+			<ion-button (click)="wipePost()" color="danger" class="btn-custom" id="post_clear">
 				<ion-icon slot="start" name="trash-outline"></ion-icon>{{ "button.limpiar" | translate }}
 			</ion-button>
 		</div>
@@ -58,10 +58,10 @@
 					
 					<hr>
 					<div class="btn-group">
-						<ion-button (click)="editPost(p)" fill="outline" size="default" color="secondary" class="btn-custom" id="post_edit">
+						<ion-button (click)="editPost(p)" color="secondary" class="btn-custom" id="post_edit">
 							<ion-icon slot="start" name="pencil-outline"></ion-icon>{{ "button.editar" | translate}}
 						</ion-button>
-						<ion-button (click)="deletePost(p)" fill="outline" size="default" color="danger" class="btn-custom" id="post_delete">
+						<ion-button (click)="deletePost(p)" color="danger" class="btn-custom" id="post_delete">
 							<ion-icon slot="start" name="trash-outline"></ion-icon>{{ "button.eliminar" | translate }}
 						</ion-button>
 					</div>

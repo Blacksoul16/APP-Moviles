@@ -1,6 +1,6 @@
 <hr>
 <div style="display: flex; justify-content: center;">
-	<ion-badge style="width: 30rem; margin: 0 auto;" color="dark">
+	<ion-badge *ngIf="!escaneando || !nativo" style="width: 30rem; margin: 0 auto;" color="dark">
 		<ion-title class="ion-text-center" style="margin-top: 5px; margin-bottom: 5px;">¡{{ salut }}, <ion-text color="secondary">{{ usuario ? (usuario.nombre + " " + usuario.apellido) : "Invitado" }}</ion-text>!</ion-title>
 	</ion-badge>
 </div>
@@ -29,11 +29,11 @@
 		<input type="file" #fileInput accept="image/*" style="display: none;" (change)="seleccionarArchivo($event)"> -->
 		<!-- Comentar luego -->
 
-		<ion-button *ngIf="!escaneando" (click)="initScan()" fill="outline" color="success" class="btn-custom">
+		<ion-button *ngIf="!escaneando" (click)="initScan()" color="success" class="btn-custom">
 			<ion-icon slot="start" name="videocam-outline"></ion-icon>{{ "button.scan_qr" | translate }}
 		</ion-button>
 
-		<ion-button *ngIf="escaneando" (click)="stopScan()" fill="outline" color="danger" class="btn-custom">
+		<ion-button *ngIf="escaneando" (click)="stopScan()" color="danger" class="btn-custom">
 			<ion-icon slot="start" name="stop-circle-outline"></ion-icon>{{ "button.stop_scan" | translate }}
 		</ion-button>
 	</div>

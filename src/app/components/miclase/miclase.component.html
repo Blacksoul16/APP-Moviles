@@ -6,10 +6,10 @@
 </div>
 <hr>
 <div class="btn-group">
-	<ion-button (click)="goToScan()" fill="outline" color="secondary" class="btn-custom">
+	<ion-button (click)="goToScan()" color="secondary" class="btn-custom">
 		<ion-icon slot="start" name="qr-code-outline"></ion-icon>{{ "button.go_scan" | translate }}
 	</ion-button>
-	<ion-button (click)="limpiarDatosQR()" fill="outline" color="danger" [disabled]="!datosQR" class="btn-custom">
+	<ion-button (click)="limpiarDatosQR()" color="danger" [disabled]="!datosQR" class="btn-custom">
 		<ion-icon slot="start" name="trash-outline"></ion-icon>{{ "button.clear_qr_data" | translate }}
 	</ion-button>
 </div>

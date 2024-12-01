@@ -29,7 +29,7 @@ export class AppComponent {
 			addCircleOutline, stopCircleOutline, settingsOutline, logInOutline, documentTextOutline, languageOutline, colorPalette,
 			homeOutline, pencilOutline
 		})
-		this.auth.usuarioAutenticado.subscribe((u) => { this.usuario = u; this.roleKey = `usuarios.role.${u?.rol}` })
+		this.auth.userAuth$.subscribe((u) => { this.usuario = u; this.roleKey = `usuarios.role.${u?.rol}` })
 		this.ruta.events.subscribe((e: any) => {
 			if (e.url) {
 				this.mostrarComponentes = this.checkComponentes(e.url)

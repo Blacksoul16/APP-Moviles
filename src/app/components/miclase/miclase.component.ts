@@ -20,7 +20,7 @@ export class MiclaseComponent  implements OnInit {
 	public datosQRKeys: any[] = []
 
 	constructor(private auth: AuthService, private translate: TranslateService) {
-		this.usuario = this.auth.usuarioAutenticado.value
+		this.auth.userAuth$.subscribe((u) => { this.usuario = u })
 		if (this.auth.codigoQRData.value) {
 			this.datosQR = this.auth.codigoQRData.value
 			this.datosQRKeys = Object.keys(this.datosQR).map(k => {

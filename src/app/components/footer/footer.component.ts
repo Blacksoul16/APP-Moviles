@@ -22,7 +22,7 @@ export class FooterComponent implements OnInit {
 	constructor(public auth: AuthService, private menu: MenuController) {}
 	
 	ngOnInit() {
-		this.auth.usuarioAutenticado.subscribe((u) => { this.usuario = u })
+		this.auth.userAuth$.subscribe((u) => { this.usuario = u })
 		this.auth.tabSeleccionado.subscribe((tab) => { this.tabSeleccionada = tab })
 	}
 

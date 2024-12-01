@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { animate, keyframes, style, transition, trigger } from '@angular/animations';
 import { TranslateModule } from '@ngx-translate/core';
 import { IonicModule } from '@ionic/angular';
@@ -25,10 +25,4 @@ import { CommonModule } from '@angular/common';
 	],
 	imports: [CommonModule, FormsModule, IonicModule, RouterModule, TranslateModule]
 })
-export class HeaderComponent implements OnInit {
-
-	constructor() {}
-
-	ngOnInit() {}
-
-}
+export class HeaderComponent {}

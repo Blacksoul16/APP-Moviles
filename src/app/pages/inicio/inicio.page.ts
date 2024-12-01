@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { TranslateModule, TranslateService } from '@ngx-translate/core';
@@ -23,16 +23,16 @@ import { AuthService } from 'src/app/services/auth.service';
 		MiclaseComponent, ForoComponent, UsuariosComponent
 	]
 })
-export class InicioPage implements OnInit {
+export class InicioPage implements OnInit, OnDestroy {
 
 	public tabSeleccionado: string = "codigoqr"
 
-	constructor(private auth: AuthService, private translate: TranslateService) {
-		this.auth.tabSeleccionado.subscribe((tab) => {
-			this.tabSeleccionado = tab
-		})
-	}
+	constructor(private auth: AuthService, private translate: TranslateService) {}
 
-  	ngOnInit() { this.translate.use(localStorage.getItem("selectedLang") || "es") }
+  	ngOnInit() {
+		this.auth.tabSeleccionado.subscribe((t) => { this.tabSeleccionado = t })
+		this.translate.use(localStorage.getItem("selectedLang") || "es")
+	}
+	ngOnDestroy() {}
 
 }
