@@ -9,6 +9,7 @@ import { AuthService } from './services/auth.service';
 import { MenuController } from '@ionic/angular';
 import { addCircleOutline, arrowUpCircleOutline, barChartOutline, caretDownCircleOutline, colorPalette, createOutline, documentTextOutline, filterOutline, homeOutline, languageOutline, logInOutline, logOutOutline, mapOutline, menuOutline, newspaperOutline, pencilOutline, peopleOutline, qrCodeOutline, saveOutline, schoolOutline, settingsOutline, shieldSharp, stopCircleOutline, trashOutline, videocamOutline } from 'ionicons/icons';
 import { addIcons } from 'ionicons';
+import { MenuStateService } from './services/menu-state.service';
 
 @Component({
 	selector: 'app-root',
@@ -22,7 +23,7 @@ export class AppComponent {
 	public usuario: any
 	public roleKey: string = "0"
 
-	constructor(private ruta: Router, private menu: MenuController, private toast: ToastService, private auth: AuthService) {
+	constructor(private ruta: Router, private menu: MenuController, private toast: ToastService, private auth: AuthService, private menuState: MenuStateService) {
 		addIcons({ 
 			peopleOutline, barChartOutline, newspaperOutline, arrowUpCircleOutline, videocamOutline, menuOutline, saveOutline, filterOutline,
 			trashOutline, shieldSharp, logOutOutline, createOutline, schoolOutline, caretDownCircleOutline, mapOutline, qrCodeOutline,
@@ -38,6 +39,9 @@ export class AppComponent {
 	}
 	
 	ngOnInit() {}
+
+	onMenuOpen() { this.menuState.setMenuOpen(true) }
+	onMenuClose() { this.menuState.setMenuOpen(false) }
 
 	checkComponentes(url: string): boolean { return url.includes("inicio") }
 

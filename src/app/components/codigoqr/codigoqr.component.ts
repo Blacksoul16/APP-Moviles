@@ -10,6 +10,7 @@ import { IonicModule } from '@ionic/angular';
 import { Capacitor } from '@capacitor/core';
 import { BarcodeScanner, SupportedFormat } from '@capacitor-community/barcode-scanner';
 import { Subscription } from 'rxjs';
+import { MenuStateService } from 'src/app/services/menu-state.service';
 
 @Component({
 	selector: 'duocuc-codigoqr',
@@ -33,10 +34,13 @@ export class CodigoqrComponent implements OnInit, OnDestroy {
 	public nativo = Capacitor.isNativePlatform()
 	public datosQR: any = ""
 
-	constructor(private auth: AuthService, private toast: ToastService) {}
+	constructor(private auth: AuthService, private toast: ToastService, private menuState: MenuStateService) {}
 
-	ngOnInit() { this.subs.add(this.auth.userAuth$.subscribe((u) => { this.usuario = u })) }
-	ngOnDestroy() { this.subs.unsubscribe() }
+	ngOnInit() { 
+		this.subs.add(this.auth.userAuth$.subscribe((u) => { this.usuario = u }))
+		this.subs.add(this.menuState.menuOpen$.subscribe((i) => { if (i && this.escaneando) { this.stopScan() } }))
+	}
+	ngOnDestroy() { this.subs.unsubscribe(); this.stopScan() }
 	
 	private getSalut(): string {
 		const h = new Date().getHours()
@@ -101,8 +105,9 @@ export class CodigoqrComponent implements OnInit, OnDestroy {
 
 	async stopScan() {
 		this.escaneando = false
-		if (Capacitor.isNativePlatform()) {
+		if (this.nativo) {
 			await BarcodeScanner.stopScan()
+			document.querySelector("body")?.classList.remove("scanner-active")
 		} else {
 			const stream = this.video.nativeElement.srcObject as MediaStream
 			if (stream) {
@@ -115,7 +120,7 @@ export class CodigoqrComponent implements OnInit, OnDestroy {
 
 	async initScan() {
 		try {
-			if (Capacitor.isNativePlatform()) {
+			if (this.nativo) {
 				//Nativo
 				const status = await BarcodeScanner.checkPermission({ force: true })
 				if (!status.granted) {
@@ -123,8 +128,7 @@ export class CodigoqrComponent implements OnInit, OnDestroy {
 					return
 				}
 				this.escaneando = true
-				// document.querySelector('body')?.classList.add('scanner-active')
-				await BarcodeScanner.hideBackground()
+				document.querySelector("body")?.classList.add("scanner-active")
 				const scanResult = await BarcodeScanner.startScan({ targetedFormats: [SupportedFormat.QR_CODE] })
 				if (scanResult.hasContent) {
 					this.showQRData(scanResult.content)
@@ -132,8 +136,7 @@ export class CodigoqrComponent implements OnInit, OnDestroy {
 				} else {
 					this.toast.showMsg("No se detectó contenido en el QR.", 2500, "warning")
 				}
-				// document.querySelector('body')?.classList.remove('scanner-active')
-				await BarcodeScanner.showBackground()
+				document.querySelector("body")?.classList.remove("scanner-active")
 				this.escaneando = false
 
 			} else {

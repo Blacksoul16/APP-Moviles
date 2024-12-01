@@ -1,5 +1,5 @@
 <ion-app>
-	<ion-menu *ngIf="mostrarComponentes" side="end" menuId="menuLateral" contentId="main-content">
+	<ion-menu *ngIf="mostrarComponentes" side="end" menuId="menuLateral" contentId="main-content" (ionWillOpen)="onMenuOpen()" (ionWillClose)="onMenuClose()">
 		<ion-header>
 			<ion-toolbar>
 				<ion-title class="ion-text-center">{{ "label.where_we_goin" | translate }}</ion-title>
