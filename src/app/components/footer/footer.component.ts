@@ -2,9 +2,8 @@ import { CommonModule } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
-import { IonicModule } from '@ionic/angular';
 import { TranslateModule } from '@ngx-translate/core';
-import { MenuController } from '@ionic/angular/standalone';
+import { MenuController, IonFooter, IonToolbar, IonIcon, IonSegmentButton, IonSegment } from '@ionic/angular/standalone';
 import { AuthService } from 'src/app/services/auth.service';
 
 @Component({
@@ -12,7 +11,7 @@ import { AuthService } from 'src/app/services/auth.service';
 	templateUrl: './footer.component.html',
 	styleUrls: ['./footer.component.scss'],
 	standalone: true,
-	imports: [CommonModule, FormsModule, IonicModule, RouterModule, TranslateModule]
+	imports: [IonSegment, IonSegmentButton, IonIcon, IonToolbar, IonFooter, CommonModule, FormsModule, RouterModule, TranslateModule]
 })
 export class FooterComponent implements OnInit {
 

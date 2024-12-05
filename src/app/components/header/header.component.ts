@@ -1,10 +1,10 @@
 import { Component } from '@angular/core';
 import { animate, keyframes, style, transition, trigger } from '@angular/animations';
 import { TranslateModule } from '@ngx-translate/core';
-import { IonicModule } from '@ionic/angular';
 import { RouterModule } from '@angular/router';
 import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
+import { IonHeader, IonToolbar, IonCol, IonRow, IonGrid, IonTitle } from "@ionic/angular/standalone";
 
 @Component({
 	selector: 'duocuc-header',
@@ -23,6 +23,6 @@ import { CommonModule } from '@angular/common';
 			])
 		])
 	],
-	imports: [CommonModule, FormsModule, IonicModule, RouterModule, TranslateModule]
+	imports: [IonTitle, IonGrid, IonRow, IonCol, IonToolbar, IonHeader, CommonModule, FormsModule, RouterModule, TranslateModule]
 })
 export class HeaderComponent {}

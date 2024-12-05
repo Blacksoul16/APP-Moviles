@@ -3,8 +3,6 @@ import { provideRouter } from '@angular/router'
 import { AppComponent } from './app.component'
 import { Storage } from '@ionic/storage'
 import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core'
-import { Usuario } from './model/usuario'
-import { NivelEducacional } from './model/nivel-educacional'
 
 const storageMock: any = {
 	get: () => jasmine.createSpy("get").and.returnValue(Promise.resolve(null)),

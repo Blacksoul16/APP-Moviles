@@ -4,8 +4,7 @@ import { FormsModule } from '@angular/forms';
 import { LangSelectComponent } from 'src/app/components/lang-select/lang-select.component';
 import { AuthService } from 'src/app/services/auth.service';
 import { TranslateModule, TranslateService } from '@ngx-translate/core';
-import { PopoverController } from '@ionic/angular';
-import { IonicModule } from '@ionic/angular';
+import { PopoverController, IonContent, IonBadge, IonCard, IonCardTitle, IonCardContent, IonLabel, IonButton, IonIcon, IonGrid, IonRow, IonCol, IonFab, IonFabButton, IonInput } from '@ionic/angular/standalone';
 import { RouterModule } from '@angular/router';
 
 @Component({
@@ -13,7 +12,11 @@ import { RouterModule } from '@angular/router';
 	templateUrl: './login.page.html',
 	styleUrls: ['./login.page.scss'],
 	standalone: true,
-	imports: [CommonModule, FormsModule, IonicModule, RouterModule, TranslateModule]
+	imports: [
+		IonFab, IonContent, IonBadge, IonCard, IonCardTitle, IonCardContent, IonLabel, 
+		IonButton, IonIcon, IonGrid, IonRow, IonCol, IonFab, IonFabButton, IonInput,
+		CommonModule, FormsModule, RouterModule, TranslateModule
+	]
 })
 export class LoginPage implements OnInit {
 

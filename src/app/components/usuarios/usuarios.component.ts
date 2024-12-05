@@ -2,20 +2,23 @@ import { CommonModule } from '@angular/common';
 import { Component, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
-import { IonicModule } from '@ionic/angular';
 import { TranslateModule } from '@ngx-translate/core';
 import { Usuario } from 'src/app/model/usuario';
 import { DataBaseService } from 'src/app/services/database.service';
-import { IonPopover } from '@ionic/angular';
 import { AuthService } from 'src/app/services/auth.service';
 import { Subscription } from 'rxjs';
+import { IonInput, IonBadge, IonTitle, IonGrid, IonRow, IonCol, IonIcon, IonButton, IonPopover, IonList, IonAvatar, IonLabel, IonItem } from "@ionic/angular/standalone";
 
 @Component({
 	selector: 'duocuc-usuarios',
 	templateUrl: './usuarios.component.html',
 	styleUrls: ['./usuarios.component.scss'],
 	standalone: true,
-	imports: [CommonModule, FormsModule, IonicModule, RouterModule, TranslateModule]
+	imports: [
+		IonItem, IonLabel, IonAvatar, IonList, IonInput, IonPopover, 
+		IonButton, IonIcon, IonCol, IonRow, IonGrid, IonTitle, IonBadge, 
+		CommonModule, FormsModule, RouterModule, TranslateModule
+	]
 })
 export class UsuariosComponent implements OnInit, OnDestroy {
 

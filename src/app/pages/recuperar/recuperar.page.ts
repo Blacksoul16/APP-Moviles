@@ -3,17 +3,20 @@ import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { Router, RouterModule } from '@angular/router';
 import { TranslateModule, TranslateService } from '@ngx-translate/core';
-import { IonicModule } from '@ionic/angular';
 import { ToastService } from 'src/app/services/toast.service';
 import { DataBaseService } from 'src/app/services/database.service';
 import { HeaderComponent } from 'src/app/components/header/header.component';
+import { IonContent, IonCard, IonGrid, IonCol, IonRow, IonCardTitle, IonLabel, IonCardSubtitle, IonText, IonCardContent, IonInput, IonButton } from "@ionic/angular/standalone";
 
 @Component({
 	selector: 'app-recuperar',
 	templateUrl: './recuperar.page.html',
 	styleUrls: ['./recuperar.page.scss'],
 	standalone: true,
-	imports: [CommonModule, FormsModule, IonicModule, RouterModule, TranslateModule, HeaderComponent]
+	imports: [
+		IonButton, IonInput, IonCardContent, IonText, IonCardSubtitle, IonLabel, IonCardTitle, IonRow, 
+		IonCol, IonGrid, IonCard, IonContent, CommonModule, FormsModule, RouterModule, TranslateModule, HeaderComponent
+	]
 })
 export class RecuperarPage implements OnInit {
 	public correo: string = ""

@@ -9,14 +9,18 @@ import { NivelEducacional } from 'src/app/model/nivel-educacional';
 import { ToastService } from 'src/app/services/toast.service';
 import { DataBaseService } from 'src/app/services/database.service';
 import { AuthService } from 'src/app/services/auth.service';
-import { IonicModule } from '@ionic/angular';
+import { IonContent, IonBadge, IonTitle, IonCard, IonCardTitle, IonGrid, IonRow, IonCol, IonInput, IonSelectOption, IonSelect, IonFooter, IonToolbar, IonButton, IonIcon } from "@ionic/angular/standalone";
 
 @Component({
 	selector: 'app-registrarme',
 	templateUrl: './registrarme.page.html',
 	styleUrls: ['./registrarme.page.scss'],
 	standalone: true,
-	imports: [CommonModule, IonicModule, FormsModule, HeaderComponent, TranslateModule, RouterModule, ReactiveFormsModule]
+	imports: [
+		IonIcon, IonButton, IonToolbar, IonFooter, IonCol, IonRow, IonGrid, IonCardTitle, 
+		IonCard, IonTitle, IonBadge, IonContent, IonInput, IonSelectOption, IonSelect,
+		CommonModule, FormsModule, HeaderComponent, TranslateModule, RouterModule, ReactiveFormsModule
+	]
 })
 export class RegistrarmePage implements OnInit {
 

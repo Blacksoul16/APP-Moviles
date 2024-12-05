@@ -1,22 +1,25 @@
-import { Component, NgZone, OnInit } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
 import { TranslateModule, TranslateService } from '@ngx-translate/core';
-import { IonicModule, LoadingController } from '@ionic/angular';
+import { LoadingController } from '@ionic/angular';
 import { HeaderComponent } from 'src/app/components/header/header.component';
 import * as L from "leaflet";
 import { GeolocationService } from 'src/app/services/geolocation.service';
 import { HttpClient } from '@angular/common/http';
 import { ToastService } from 'src/app/services/toast.service';
-
+import { IonContent, IonBadge, IonFooter, IonToolbar, IonGrid, IonRow, IonCol, IonButton, IonIcon } from "@ionic/angular/standalone";
 
 @Component({
 	selector: 'app-miruta',
 	templateUrl: './miruta.page.html',
 	styleUrls: ['./miruta.page.scss'],
 	standalone: true,
-	imports: [CommonModule, FormsModule, RouterModule, TranslateModule, IonicModule, HeaderComponent]
+	imports: [
+		IonIcon, IonButton, IonCol, IonRow, IonGrid, IonToolbar, IonFooter, IonBadge, IonContent, 
+		CommonModule, FormsModule, RouterModule, TranslateModule, HeaderComponent
+	]
 })
 export class MirutaPage implements OnInit {
 

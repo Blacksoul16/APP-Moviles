@@ -2,7 +2,6 @@ import { Component, OnDestroy, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { TranslateModule, TranslateService } from '@ngx-translate/core';
-import { IonicModule } from '@ionic/angular';
 import { HeaderComponent } from 'src/app/components/header/header.component';
 import { FooterComponent } from 'src/app/components/footer/footer.component';
 import { CodigoqrComponent } from 'src/app/components/codigoqr/codigoqr.component';
@@ -11,6 +10,7 @@ import { MiclaseComponent } from 'src/app/components/miclase/miclase.component';
 import { ForoComponent } from 'src/app/components/foro/foro.component';
 import { UsuariosComponent } from 'src/app/components/usuarios/usuarios.component';
 import { AuthService } from 'src/app/services/auth.service';
+import { IonContent } from "@ionic/angular/standalone";
 
 @Component({
 	selector: 'app-inicio',
@@ -18,7 +18,7 @@ import { AuthService } from 'src/app/services/auth.service';
 	styleUrls: ['./inicio.page.scss'],
 	standalone: true,
 	imports: [
-		CommonModule, FormsModule, IonicModule, TranslateModule,
+		IonContent, CommonModule, FormsModule, TranslateModule,
 		HeaderComponent, FooterComponent, CodigoqrComponent, MisdatosComponent,
 		MiclaseComponent, ForoComponent, UsuariosComponent
 	]

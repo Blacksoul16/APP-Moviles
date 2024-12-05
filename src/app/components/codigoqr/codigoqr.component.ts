@@ -6,18 +6,21 @@ import { TranslateModule } from '@ngx-translate/core';
 import { RouterModule } from '@angular/router';
 import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
-import { IonicModule } from '@ionic/angular';
 import { Capacitor } from '@capacitor/core';
 import { Subscription } from 'rxjs';
 import { MenuStateService } from 'src/app/services/menu-state.service';
 import { BarcodeScanner } from '@capacitor-mlkit/barcode-scanning'
+import { IonTitle, IonBadge, IonCard, IonCardContent, IonButton, IonIcon, IonText } from "@ionic/angular/standalone";
 
 @Component({
 	selector: 'duocuc-codigoqr',
 	templateUrl: './codigoqr.component.html',
 	styleUrls: ['./codigoqr.component.scss'],
 	standalone: true,
-	imports: [CommonModule, FormsModule, IonicModule, RouterModule, TranslateModule]
+	imports: [
+		IonText, IonIcon, IonButton, IonCardContent, IonCard, IonBadge, IonTitle, 
+		CommonModule, FormsModule, RouterModule, TranslateModule
+	]
 })
 export class CodigoqrComponent implements OnInit, OnDestroy {
 

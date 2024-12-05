@@ -3,19 +3,22 @@ import { Component, OnDestroy, OnInit } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
 import { TranslateModule, TranslateService } from '@ngx-translate/core';
-import { IonicModule } from '@ionic/angular';
 import { ApiService } from 'src/app/services/api.service';
 import { ToastService } from 'src/app/services/toast.service';
 import { AuthService } from 'src/app/services/auth.service';
-import { Usuario } from 'src/app/model/usuario';
 import { Subscription } from 'rxjs';
+import { IonInput, IonTextarea, IonBadge, IonCard, IonTitle, IonCardHeader, IonCardTitle, IonCardSubtitle, IonText, IonButton, IonIcon, IonCardContent, IonRow, IonCol, IonGrid } from "@ionic/angular/standalone";
 
 @Component({
 	selector: 'duocuc-foro',
 	templateUrl: './foro.component.html',
 	styleUrls: ['./foro.component.scss'],
 	standalone: true,
-	imports: [CommonModule, FormsModule, IonicModule, RouterModule, TranslateModule]
+	imports: [
+		IonInput, IonTextarea, IonGrid, IonCol, IonRow, IonCardContent, IonIcon, IonButton, 
+		IonText, IonCardSubtitle, IonCardTitle, IonCardHeader, IonTitle, IonCard, IonBadge, 
+		CommonModule, FormsModule, RouterModule, TranslateModule
+	]
 })
 export class ForoComponent implements OnInit, OnDestroy {
 

@@ -3,14 +3,14 @@ import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
 import { TranslateModule, TranslateService } from '@ngx-translate/core';
-import { IonicModule } from '@ionic/angular';
+import { IonBadge, IonGrid, IonCol, IonRow } from "@ionic/angular/standalone";
 
 @Component({
 	selector: 'app-lang-select',
 	templateUrl: './lang-select.component.html',
 	styleUrls: ['./lang-select.component.scss'],
 	standalone: true,
-	imports: [CommonModule, FormsModule, IonicModule, RouterModule, TranslateModule]
+	imports: [IonRow, IonCol, IonGrid, IonBadge, CommonModule, FormsModule, RouterModule, TranslateModule]
 
 })
 export class LangSelectComponent implements OnInit {

@@ -3,20 +3,24 @@ import { Component, OnDestroy, OnInit } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
 import { TranslateModule, TranslateService } from '@ngx-translate/core';
-import { IonicModule } from '@ionic/angular';
 import { AuthService } from 'src/app/services/auth.service';
 import { ToastService } from 'src/app/services/toast.service';
 import { DataBaseService } from 'src/app/services/database.service';
 import { NivelEducacional } from 'src/app/model/nivel-educacional';
 import { convertirFechaAISO, convertirISOAFecha } from 'src/app/tools/funcFechas';
 import { Subscription } from 'rxjs';
+import { IonBadge, IonTitle, IonCard, IonCardContent, IonGrid, IonRow, IonCol, IonInput, IonSelectOption, IonSelect, IonButton, IonIcon } from "@ionic/angular/standalone";
 
 @Component({
 	selector: 'duocuc-misdatos',
 	templateUrl: './misdatos.component.html',
 	styleUrls: ['./misdatos.component.scss'],
 	standalone: true,
-	imports: [CommonModule, FormsModule, IonicModule, RouterModule, TranslateModule],
+	imports: [
+		IonIcon, IonButton, IonSelect, IonSelectOption, IonInput, IonCol, 
+		IonRow, IonGrid, IonCardContent, IonCard, IonTitle, IonBadge, 
+		CommonModule, FormsModule, RouterModule, TranslateModule
+	],
 })
 export class MisdatosComponent implements OnInit, OnDestroy {
 

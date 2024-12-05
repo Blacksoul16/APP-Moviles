@@ -4,15 +4,18 @@ import { FormsModule } from '@angular/forms';
 import { Usuario } from 'src/app/model/usuario';
 import { ActivatedRoute, Router, RouterLink } from '@angular/router';
 import { TranslateModule, TranslateService } from '@ngx-translate/core';
-import { IonicModule } from '@ionic/angular';
 import { HeaderComponent } from 'src/app/components/header/header.component';
+import { IonContent, IonCard, IonGrid, IonCol, IonRow, IonCardTitle, IonBadge, IonLabel, IonCardContent } from "@ionic/angular/standalone";
 
 @Component({
 	selector: 'app-correcto',
 	templateUrl: './correcto.page.html',
 	styleUrls: ['./correcto.page.scss'],
 	standalone: true,
-	imports: [CommonModule, FormsModule, IonicModule, TranslateModule, RouterLink, HeaderComponent]
+	imports: [
+		IonCardContent, IonLabel, IonBadge, IonCardTitle, IonRow, IonCol, IonGrid, IonCard, 
+		IonContent, CommonModule, FormsModule, TranslateModule, RouterLink, HeaderComponent
+	]
 })
 export class CorrectoPage implements OnInit {
 	public usuario: Usuario = new Usuario()
