@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { Component, EventEmitter, OnInit, Output } from '@angular/core';
+import { Component, EventEmitter, Output } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
 import { TranslateModule, TranslateService } from '@ngx-translate/core';
@@ -11,9 +11,8 @@ import { IonBadge, IonGrid, IonCol, IonRow } from "@ionic/angular/standalone";
 	styleUrls: ['./lang-select.component.scss'],
 	standalone: true,
 	imports: [IonRow, IonCol, IonGrid, IonBadge, CommonModule, FormsModule, RouterModule, TranslateModule]
-
 })
-export class LangSelectComponent implements OnInit {
+export class LangSelectComponent {
 
 	@Output() changeCurrentLang = new EventEmitter()
 
@@ -25,8 +24,6 @@ export class LangSelectComponent implements OnInit {
 		this.langSelected = storedLang
 		this.translate.use(storedLang)
 	}
-	
-	ngOnInit() {}
 
 	public changeLang(lang: string) {
 		this.translate.use(lang)

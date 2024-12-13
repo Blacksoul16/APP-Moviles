@@ -1,15 +1,15 @@
 import { CommonModule } from '@angular/common';
-import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Component, inject, OnDestroy, OnInit } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
 import { TranslateModule, TranslateService } from '@ngx-translate/core';
 import { AuthService } from 'src/app/services/auth.service';
-import { ToastService } from 'src/app/services/toast.service';
+import { ToastsService } from 'src/app/services/toasts.service';
 import { DataBaseService } from 'src/app/services/database.service';
 import { NivelEducacional } from 'src/app/model/nivel-educacional';
 import { convertirFechaAISO, convertirISOAFecha } from 'src/app/tools/funcFechas';
 import { Subscription } from 'rxjs';
-import { IonBadge, IonTitle, IonCard, IonCardContent, IonGrid, IonRow, IonCol, IonInput, IonSelectOption, IonSelect, IonButton, IonIcon } from "@ionic/angular/standalone";
+import { IonDatetime, IonBadge, IonTitle, IonCard, IonCardContent, IonGrid, IonRow, IonCol, IonInput, IonSelectOption, IonSelect, IonButton, IonIcon } from "@ionic/angular/standalone";
 
 @Component({
 	selector: 'duocuc-misdatos',
@@ -17,22 +17,24 @@ import { IonBadge, IonTitle, IonCard, IonCardContent, IonGrid, IonRow, IonCol, I
 	styleUrls: ['./misdatos.component.scss'],
 	standalone: true,
 	imports: [
-		IonIcon, IonButton, IonSelect, IonSelectOption, IonInput, IonCol, 
+		IonDatetime, IonIcon, IonButton, IonSelect, IonSelectOption, IonInput, IonCol, 
 		IonRow, IonGrid, IonCardContent, IonCard, IonTitle, IonBadge, 
 		CommonModule, FormsModule, RouterModule, TranslateModule
 	],
 })
 export class MisdatosComponent implements OnInit, OnDestroy {
 
+	private auth = inject(AuthService)
+	private toast = inject(ToastsService)
+	private translate = inject(TranslateService)
+	private bd = inject(DataBaseService)
 	private subs: Subscription = new Subscription()
 	public usuario: any
 	public usuarioCopia: any
 	public fechaNacimientoISO: any
 	public nuevaPassword: any
 
-	constructor(private auth: AuthService, private toast: ToastService, private translate: TranslateService, private bd: DataBaseService) {
-		this.usuarioCopia = {...this.usuario}
-	}
+	constructor() { this.usuarioCopia = {...this.usuario} }
 
 	ngOnInit() {
 		this.subs.add(this.auth.userAuth$.subscribe((u) => { this.usuario = u }))
@@ -58,9 +60,5 @@ export class MisdatosComponent implements OnInit, OnDestroy {
 		} catch (e) {
 			console.error(`[misdatos.page.ts] Error en guardarCambios: ${e}`)
 		}
-	}
-
-	public compareUsers(): boolean {
-		return JSON.stringify(this.usuario) !== JSON.stringify(this.usuarioCopia) || this.nuevaPassword || this.fechaNacimientoISO !== convertirFechaAISO(this.usuarioCopia.fechaNacimiento)
 	}
 }

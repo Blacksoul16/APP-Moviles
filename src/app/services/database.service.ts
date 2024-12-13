@@ -1,4 +1,4 @@
-import { Injectable } from "@angular/core";
+import { inject, Injectable } from "@angular/core";
 import { capSQLiteChanges, SQLiteDBConnection } from "@capacitor-community/sqlite";
 import { BehaviorSubject } from "rxjs";
 import { Usuario } from "../model/usuario";
@@ -6,10 +6,10 @@ import { SqliteService } from "./sqlite.service";
 import { NivelEducacional } from "../model/nivel-educacional";
 import { convertirFechaAString, convertirStringAFecha } from "../tools/funcFechas";
 
-@Injectable({
-	providedIn: "root"
-})
+@Injectable({ providedIn: "root" })
 export class DataBaseService {
+
+	private sqlServ = inject(SqliteService)
 
 	u1Test = Usuario.getNewUser("sgarday", "s.garday@duocuc.cl", "1234", "¿Cuál es tu color favorito?", "Negro", "Seth", "Garday", NivelEducacional.findNivelEducacional(5)!, new Date(2000, 2, 4), "Recoleta", "sgarday.webp", 1)
 	u2Test = Usuario.getNewUser("testuser", "test@user.test", "1234", "Toc toc", "¿Quién es?", "Test", "User", NivelEducacional.findNivelEducacional(5)!, new Date(1999, 10, 5), "Puente Alto", "default-user.webp", 0)
@@ -53,16 +53,14 @@ export class DataBaseService {
 			) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?);
 	`
 
-	nombreBD = "SistemaAsistencia"
+	nombreBD: string = "SistemaAsistencia"
 	db!: SQLiteDBConnection
 	listaUsers: BehaviorSubject<Usuario[]> = new BehaviorSubject<Usuario[]>([])
 
-	constructor (private sqlService: SqliteService) {}
-
 	async initBD() {
 		try {
-			await this.sqlService.createDB({ database: this.nombreBD, upgrade: this.userUpgrades })
-			this.db = await this.sqlService.openDB(this.nombreBD, false, "no-encryption", 1, false)
+			await this.sqlServ.createDB({ database: this.nombreBD, upgrade: this.userUpgrades })
+			this.db = await this.sqlServ.openDB(this.nombreBD, false, "no-encryption", 1, false)
 			await this.createTestUsers()
 			await this.readUsers()
 		} catch (e) {

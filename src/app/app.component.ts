@@ -1,54 +1,52 @@
-import { CommonModule } from '@angular/common';
-import { Component } from '@angular/core';
-import { FormsModule } from '@angular/forms';
-import { Router, RouterModule } from '@angular/router';
-import { TranslateModule } from '@ngx-translate/core';
-import { IonicModule } from '@ionic/angular';
-import { ToastService } from './services/toast.service';
-import { AuthService } from './services/auth.service';
-import { MenuController } from '@ionic/angular';
-import { addCircleOutline, arrowUpCircleOutline, barChartOutline, caretDownCircleOutline, colorPalette, createOutline, documentTextOutline, filterOutline, homeOutline, languageOutline, logInOutline, logOutOutline, mapOutline, menuOutline, newspaperOutline, pencilOutline, peopleOutline, qrCodeOutline, saveOutline, schoolOutline, settingsOutline, shieldSharp, stopCircleOutline, trashOutline, videocamOutline } from 'ionicons/icons';
+import { Component, inject, OnInit } from '@angular/core';
+import { IonMenu, IonThumbnail, IonApp, IonRouterOutlet, IonHeader, IonToolbar, IonTitle, IonContent, IonGrid, IonCol, IonRow, IonCard, IonCardTitle, IonCardContent, IonCardSubtitle, IonBadge, IonItemDivider, IonButton, IonIcon, IonLabel } from '@ionic/angular/standalone';
 import { addIcons } from 'ionicons';
+import { bookOutline, shieldCheckmarkOutline, addCircleOutline, alertCircleOutline, arrowUpCircleOutline, barChartOutline, caretDownCircleOutline, checkmarkCircleOutline, colorPalette, createOutline, documentTextOutline, filterOutline, homeOutline, informationCircleOutline, languageOutline, logInOutline, logOutOutline, mapOutline, menuOutline, newspaperOutline, pencilOutline, peopleOutline, qrCodeOutline, saveOutline, schoolOutline, settingsOutline, shieldSharp, stopCircleOutline, trashOutline, videocamOutline, warningOutline } from 'ionicons/icons';
+import { MenuController } from "@ionic/angular/standalone"
+import { TranslateModule } from '@ngx-translate/core';
+import { Router } from '@angular/router';
+import { AuthService } from './services/auth.service';
 import { MenuStateService } from './services/menu-state.service';
+import { CommonModule } from '@angular/common';
+import { ChangeDetectorRef } from '@angular/core';
 
 @Component({
 	selector: 'app-root',
 	templateUrl: 'app.component.html',
 	standalone: true,
-	imports: [CommonModule, FormsModule, IonicModule, RouterModule, TranslateModule,]
+	imports: [
+		CommonModule, TranslateModule, IonMenu, IonThumbnail, IonLabel, IonIcon, IonButton, IonItemDivider, 
+		IonBadge, IonCardSubtitle, IonCardContent, IonCardTitle, IonCard, IonRow, IonCol, IonGrid, IonContent, 
+		IonTitle, IonToolbar, IonHeader, IonApp, IonRouterOutlet
+	],
 })
-export class AppComponent {
+export class AppComponent implements OnInit {
 
-	public mostrarComponentes: boolean = false
+	private ruta = inject(Router)
+	private auth = inject(AuthService)
+	private menu = inject(MenuController)
+	private menuState = inject(MenuStateService)
+	private cdr = inject(ChangeDetectorRef)
+
 	public usuario: any
 	public roleKey: string = "0"
+	public showMenu: boolean = false
 
-	constructor(private ruta: Router, private menu: MenuController, private toast: ToastService, private auth: AuthService, private menuState: MenuStateService) {
+	constructor() {
 		addIcons({ 
 			peopleOutline, barChartOutline, newspaperOutline, arrowUpCircleOutline, videocamOutline, menuOutline, saveOutline, filterOutline,
 			trashOutline, shieldSharp, logOutOutline, createOutline, schoolOutline, caretDownCircleOutline, mapOutline, qrCodeOutline,
 			addCircleOutline, stopCircleOutline, settingsOutline, logInOutline, documentTextOutline, languageOutline, colorPalette,
-			homeOutline, pencilOutline
+			homeOutline, pencilOutline, alertCircleOutline, warningOutline, checkmarkCircleOutline, informationCircleOutline,
+			shieldCheckmarkOutline, bookOutline
 		})
 		this.auth.userAuth$.subscribe((u) => { this.usuario = u; this.roleKey = `usuarios.role.${u?.rol}` })
-		this.ruta.events.subscribe((e: any) => {
-			if (e.url) {
-				this.mostrarComponentes = this.checkComponentes(e.url)
-			}
-		})
+		this.ruta.events.subscribe((e: any) => { if (e && e.url) { this.showMenu = e.url.includes("inicio"); this.cdr.detectChanges() } })
 	}
-	
+
 	ngOnInit() {}
 
 	onMenuOpen() { this.menuState.setMenuOpen(true) }
 	onMenuClose() { this.menuState.setMenuOpen(false) }
-
-	checkComponentes(url: string): boolean { return url.includes("inicio") }
-
-	cerrarSesion(): void {
-		this.menu.close("menuLateral").then(() => {
-			this.auth.logout()
-			this.toast.showMsg("Se ha cerrado la sesión.", 2000, "success")
-		})
-	}
+	cerrarSesion() { this.menu.close("menuLateral").then(() => { this.auth.logout() }) }
 }

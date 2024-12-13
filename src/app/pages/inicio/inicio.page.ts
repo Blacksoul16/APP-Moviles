@@ -20,7 +20,7 @@ import { IonContent } from "@ionic/angular/standalone";
 	imports: [
 		IonContent, CommonModule, FormsModule, TranslateModule,
 		HeaderComponent, FooterComponent, CodigoqrComponent, MisdatosComponent,
-		MiclaseComponent, ForoComponent, UsuariosComponent
+		MiclaseComponent, ForoComponent, UsuariosComponent,
 	]
 })
 export class InicioPage implements OnInit, OnDestroy {

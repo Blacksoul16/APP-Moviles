@@ -1,14 +1,14 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, inject, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
 import { TranslateModule, TranslateService } from '@ngx-translate/core';
-import { LoadingController } from '@ionic/angular';
+import { LoadingController } from '@ionic/angular/standalone';
 import { HeaderComponent } from 'src/app/components/header/header.component';
 import * as L from "leaflet";
 import { GeolocationService } from 'src/app/services/geolocation.service';
 import { HttpClient } from '@angular/common/http';
-import { ToastService } from 'src/app/services/toast.service';
+import { ToastsService } from 'src/app/services/toasts.service';
 import { IonContent, IonBadge, IonFooter, IonToolbar, IonGrid, IonRow, IonCol, IonButton, IonIcon } from "@ionic/angular/standalone";
 
 @Component({
@@ -23,16 +23,19 @@ import { IonContent, IonBadge, IonFooter, IonToolbar, IonGrid, IonRow, IonCol, I
 })
 export class MirutaPage implements OnInit {
 
+	private geo = inject(GeolocationService)
+	private http = inject(HttpClient)
+	private translate = inject(TranslateService)
+	private toast = inject(ToastsService)
+	private loading = inject(LoadingController)
+
 	map: L.Map | null = null
 	addressName: string = ""
 	distance: string = ""
 	errorMsg: string = ""
 	
 
-	constructor(
-		private geo: GeolocationService, private http: HttpClient, private translate: TranslateService, 
-		private toast: ToastService, private loading: LoadingController, 
-	) {}
+	constructor() {}
 
 	ngOnInit() {
 		this.translate.use(localStorage.getItem("selectedLang") || "es")

@@ -1,28 +1,30 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, inject, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-import { Usuario } from 'src/app/model/usuario';
+import { IonContent, IonCard, IonGrid, IonCol, IonRow, IonCardTitle, IonBadge, IonLabel, IonCardContent, IonButton } from '@ionic/angular/standalone';
 import { ActivatedRoute, Router, RouterLink } from '@angular/router';
 import { TranslateModule, TranslateService } from '@ngx-translate/core';
-import { HeaderComponent } from 'src/app/components/header/header.component';
-import { IonContent, IonCard, IonGrid, IonCol, IonRow, IonCardTitle, IonBadge, IonLabel, IonCardContent } from "@ionic/angular/standalone";
+import { Usuario } from 'src/app/model/usuario';
+import { HeaderComponent } from "../../components/header/header.component";
 
 @Component({
 	selector: 'app-correcto',
 	templateUrl: './correcto.page.html',
 	styleUrls: ['./correcto.page.scss'],
 	standalone: true,
-	imports: [
-		IonCardContent, IonLabel, IonBadge, IonCardTitle, IonRow, IonCol, IonGrid, IonCard, 
-		IonContent, CommonModule, FormsModule, TranslateModule, RouterLink, HeaderComponent
-	]
+	imports: [IonButton, IonCardContent, IonLabel, IonBadge, IonCardTitle, IonRow, IonCol, IonGrid, IonCard, IonContent, CommonModule, FormsModule, RouterLink, TranslateModule, HeaderComponent]
 })
 export class CorrectoPage implements OnInit {
-	public usuario: Usuario = new Usuario()
 
-	constructor(private rutaActivada: ActivatedRoute, private ruta: Router, private translate: TranslateService) { 
-		this.rutaActivada.queryParams.subscribe(() => {
-			const nav = this.ruta.getCurrentNavigation();
+	private rutaActiva = inject(ActivatedRoute)
+	private ruta = inject(Router)
+	private translate = inject(TranslateService)
+
+	protected usuario: Usuario = new Usuario()
+
+	constructor() {
+		this.rutaActiva.queryParams.subscribe(() => {
+			const nav = this.ruta.getCurrentNavigation()
 			if (nav && nav.extras.state && nav.extras.state["usuario"]) {
 				this.usuario = nav.extras.state["usuario"]
 				return
@@ -31,4 +33,5 @@ export class CorrectoPage implements OnInit {
 	}
 
 	ngOnInit() { this.translate.use(localStorage.getItem("selectedLang") || "es") }
+
 }

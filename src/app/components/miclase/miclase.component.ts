@@ -32,9 +32,7 @@ export class MiclaseComponent  implements OnInit {
 		}
 	}
 
-	ngOnInit() {
-		this.translate.use(localStorage.getItem("selectedLang") || "es")
-	}
+	ngOnInit() { this.translate.use(localStorage.getItem("selectedLang") || "es") }
 
 	public limpiarDatosQR(): void { this.datosQR = null; this.datosQRKeys = []; this.auth.codigoQRData.next(null) }
 	public goToScan() { this.auth.tabSeleccionado.next("codigoqr") }

@@ -12,9 +12,7 @@ export class Usuario extends Persona {
 	public imagen: string = ""
 	public rol: number = 0
 
-	public constructor() {
-		super()
-	}
+	public constructor() { super() }
 
 	static getNewUser(cu: string, co: string, pa: string, pr: string, re: string, no: string, ap: string, ni: NivelEducacional, fe: Date, di: string, im: string, ro: number) {
 		let u = new Usuario()

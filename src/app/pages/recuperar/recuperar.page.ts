@@ -1,36 +1,39 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, inject, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-import { Router, RouterModule } from '@angular/router';
+import { IonInput, IonContent, IonCard, IonGrid, IonCol, IonRow, IonCardTitle, IonLabel, IonCardSubtitle, IonText, IonCardContent, IonButton } from '@ionic/angular/standalone';
 import { TranslateModule, TranslateService } from '@ngx-translate/core';
-import { ToastService } from 'src/app/services/toast.service';
+import { Router, RouterModule } from '@angular/router';
+import { ToastsService } from 'src/app/services/toasts.service';
+import { HeaderComponent } from "../../components/header/header.component";
 import { DataBaseService } from 'src/app/services/database.service';
-import { HeaderComponent } from 'src/app/components/header/header.component';
-import { IonContent, IonCard, IonGrid, IonCol, IonRow, IonCardTitle, IonLabel, IonCardSubtitle, IonText, IonCardContent, IonInput, IonButton } from "@ionic/angular/standalone";
 
 @Component({
 	selector: 'app-recuperar',
 	templateUrl: './recuperar.page.html',
 	styleUrls: ['./recuperar.page.scss'],
 	standalone: true,
-	imports: [
-		IonButton, IonInput, IonCardContent, IonText, IonCardSubtitle, IonLabel, IonCardTitle, IonRow, 
-		IonCol, IonGrid, IonCard, IonContent, CommonModule, FormsModule, RouterModule, TranslateModule, HeaderComponent
-	]
+	imports: [IonInput, IonButton, IonCardContent, IonText, IonCardSubtitle, IonLabel, IonCardTitle, IonRow, IonCol, IonGrid, IonCard, IonContent, CommonModule, FormsModule, RouterModule, TranslateModule, HeaderComponent]
 })
 export class RecuperarPage implements OnInit {
-	public correo: string = ""
-	public usuario: any
-	public tab: string = "validarCorreo"
-	public respuestaSecreta: string = ""
 
-	constructor(private ruta: Router, private toast: ToastService, private translate: TranslateService, private bd: DataBaseService) {}
+	private ruta = inject(Router)
+	private toast = inject(ToastsService)
+	private translate = inject(TranslateService)
+	private bd = inject(DataBaseService)
+
+	protected correo: string = ""
+	protected usuario: any = ""
+	protected tab: string = "validarCorreo"
+	protected respuestaSecreta: string = "" 
+
+	constructor() {}
 
 	ngOnInit() { this.translate.use(localStorage.getItem("selectedLang") || "es") }
 
-	public seleccionarTab(tab: string): void { this.tab = tab }
+	protected async seleccionarTab(tab: string) { this.tab = tab }
 
-	public async validarCorreo() {
+	protected async validarCorreo() {
 		const emailRegex = /^[a-zA-Z0-9._+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/
 		const usuarioEncontrado = await this.bd.findUserEmail(this.correo)
 		if (this.correo.length === 0) {

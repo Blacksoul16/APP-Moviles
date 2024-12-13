@@ -2,9 +2,7 @@ import { Injectable } from '@angular/core';
 import { CapacitorSQLite, CapacitorSQLitePlugin, capSQLiteUpgradeOptions, SQLiteConnection, SQLiteDBConnection } from '@capacitor-community/sqlite';
 import { Capacitor } from '@capacitor/core';
 
-@Injectable({
-	providedIn: 'root'
-})
+@Injectable({ providedIn: 'root' })
 export class SqliteService {
 
 	sqliteConnection!: SQLiteConnection
@@ -12,8 +10,6 @@ export class SqliteService {
 	platform!: string
 	sqlitePlugin!: CapacitorSQLitePlugin
 	native: boolean = false
-
-	constructor() {}
 
 	async initPlugin(): Promise<boolean> {
 		try {

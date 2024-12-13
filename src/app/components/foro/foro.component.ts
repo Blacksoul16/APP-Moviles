@@ -1,10 +1,10 @@
 import { CommonModule } from '@angular/common';
-import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Component, inject, OnDestroy, OnInit } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
 import { TranslateModule, TranslateService } from '@ngx-translate/core';
 import { ApiService } from 'src/app/services/api.service';
-import { ToastService } from 'src/app/services/toast.service';
+import { ToastsService } from 'src/app/services/toasts.service';
 import { AuthService } from 'src/app/services/auth.service';
 import { Subscription } from 'rxjs';
 import { IonInput, IonTextarea, IonBadge, IonCard, IonTitle, IonCardHeader, IonCardTitle, IonCardSubtitle, IonText, IonButton, IonIcon, IonCardContent, IonRow, IonCol, IonGrid } from "@ionic/angular/standalone";
@@ -22,19 +22,21 @@ import { IonInput, IonTextarea, IonBadge, IonCard, IonTitle, IonCardHeader, IonC
 })
 export class ForoComponent implements OnInit, OnDestroy {
 
+	private translate = inject(TranslateService)
+	private api = inject(ApiService)
+	private toast = inject(ToastsService)
+	private auth = inject(AuthService)
 	private subs: Subscription = new Subscription()
 	public usuario: any
+	
 	protected selectOptions = { message: "La publicación se hará bajo el usuario que selecciones." }
-
 	selectedUserID: number | any
 	selectedPost: string | any
-
 	users: any
 	posts: any
-
 	post: any = { userID: null, id: null, title: "", body: "", name: "" }
 
-	constructor(private translate: TranslateService, private api: ApiService, private toast: ToastService, private auth: AuthService) {}
+	constructor() {}
 	
 	ngOnInit() {
 		this.subs.add(this.auth.userAuth$.subscribe((u) => { this.usuario = u }))
@@ -58,7 +60,6 @@ export class ForoComponent implements OnInit, OnDestroy {
 		const uid = userID === null ? "Sin seleccionar" : userID
 		const pid = postID === null ? "Nueva ID" : postID
 		this.selectedPost = `${uid}`
-		// this.selectedPost = `(UserID: ${uid} | PostID: ${pid})`
 	}
 
 	// En este caso, "d" es "data".
@@ -124,7 +125,7 @@ export class ForoComponent implements OnInit, OnDestroy {
 				this.getPosts()
 				
 			},
-			error: (error) => this.toast.showMsg(`No se pudo actualizar la publicación.`, 3000, "danger")
+			error: (e) => this.toast.showMsg(`No se pudo actualizar la publicación.`, 3000, "danger")
 		})
 	}
 
@@ -138,7 +139,7 @@ export class ForoComponent implements OnInit, OnDestroy {
 		const postID = $e.id
 
 		this.api.deletePost(postID).subscribe({
-			next: (data) => {
+			next: (d) => {
 				this.toast.showMsg(`Se eliminó la publicación con id ${postID}.`, 2500, "success")
 				this.wipePost()
 				this.getPosts()

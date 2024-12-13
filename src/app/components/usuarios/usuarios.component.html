@@ -19,19 +19,21 @@
 	</ion-row>
 </ion-grid>
 
-<ion-popover #opcionesFiltro>
+<ion-popover #opcionesFiltro aria-hidden="false">
 	<ng-template>
 		<ion-badge color="dark" class="ion-text-center" style="width: 100%;">
-			<h3>{{ 'usuarios.filter.label' | translate }}</h3>
+			<h3>{{ "usuarios.filter.label" | translate }}</h3>
 		</ion-badge>
 		<ion-list>
 			<ion-item>
-				<ion-checkbox slot="start" [(ngModel)]="filtroAdmin" (ionChange)="aplicarFiltroPopover()"></ion-checkbox>
-				<ion-label>{{ 'usuarios.role.1' | translate }}</ion-label>
+				<ion-checkbox slot="start" labelPlacement="end" color="secondary" [(ngModel)]="filtroAdmin" (ionChange)="aplicarFiltroPopover()" ngDefaultControl>
+					{{ "usuarios.role.1" | translate }}
+				</ion-checkbox>
 			</ion-item>
 			<ion-item>
-				<ion-checkbox slot="start" [(ngModel)]="filtroUsuario" (ionChange)="aplicarFiltroPopover()"></ion-checkbox>
-				<ion-label>{{ 'usuarios.role.0' | translate }}</ion-label>
+				<ion-checkbox slot="start" labelPlacement="end" color="secondary" [(ngModel)]="filtroUsuario" (ionChange)="aplicarFiltroPopover()" ngDefaultControl>
+					{{ "usuarios.role.0" | translate }}
+				</ion-checkbox>
 			</ion-item>
 		</ion-list>
 	</ng-template>

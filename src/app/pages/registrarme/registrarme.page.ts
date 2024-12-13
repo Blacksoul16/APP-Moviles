@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, inject, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormBuilder, FormGroup, FormsModule, Validators, ReactiveFormsModule } from '@angular/forms';
 import { HeaderComponent } from 'src/app/components/header/header.component';
@@ -6,7 +6,7 @@ import { TranslateModule, TranslateService } from '@ngx-translate/core';
 import { RouterModule } from '@angular/router';
 import { Usuario } from 'src/app/model/usuario';
 import { NivelEducacional } from 'src/app/model/nivel-educacional';
-import { ToastService } from 'src/app/services/toast.service';
+import { ToastsService } from 'src/app/services/toasts.service';
 import { DataBaseService } from 'src/app/services/database.service';
 import { AuthService } from 'src/app/services/auth.service';
 import { IonContent, IonBadge, IonTitle, IonCard, IonCardTitle, IonGrid, IonRow, IonCol, IonInput, IonSelectOption, IonSelect, IonFooter, IonToolbar, IonButton, IonIcon } from "@ionic/angular/standalone";
@@ -24,10 +24,16 @@ import { IonContent, IonBadge, IonTitle, IonCard, IonCardTitle, IonGrid, IonRow,
 })
 export class RegistrarmePage implements OnInit {
 
+	private translate = inject(TranslateService)
+	private toast = inject(ToastsService)
+	private fb = inject(FormBuilder)
+	private db = inject(DataBaseService)
+	private auth = inject(AuthService)
+
 	public listaNivelesEducacionales = NivelEducacional.getNivelesEducacionales()
 	public registroForm!: FormGroup
 
-	constructor(private translate: TranslateService, private fb: FormBuilder, private toast: ToastService, private db: DataBaseService, private auth: AuthService) {}
+	constructor() {}
 
 	ngOnInit() {
 		this.translate.use(localStorage.getItem("selectedLang") || "es")
@@ -46,12 +52,8 @@ export class RegistrarmePage implements OnInit {
 
 	getErrorMsg(field: string): string {
 		const control = this.registroForm.get(field)
-		if (control?.hasError("required")) {
-			return "Campo obligatorio."
-		}
-		if (control?.hasError("email")) {
-			return "Ingresa un correo válido."
-		}
+		if (control?.hasError("required")) { return "Campo obligatorio." }
+		if (control?.hasError("email")) { return "Ingresa un correo válido." }
 		if (control?.hasError("minlength")) {
 			const requiredLength = control.errors?.["minlength"]?.requiredLength
 			return `Deben ser al menos ${requiredLength} caracteres.`

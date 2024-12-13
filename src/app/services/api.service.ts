@@ -1,31 +1,20 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { Injectable } from '@angular/core';
+import { inject, Injectable } from '@angular/core';
 import { Observable, retry } from 'rxjs';
 
-@Injectable({
-	providedIn: 'root'
-})
+@Injectable({ providedIn: 'root' })
 export class ApiService {
 
-	httpOptions = {
-		headers: new HttpHeaders({
-			"content-type": "application/json"
-			// "access-control-allow-origin": "*"
-		})
-	}
+	private http = inject(HttpClient)
+	private url = "http://localhost:3000"
+	private params = { headers: new HttpHeaders({ "content-type": "application/json" }) }
 
-	apiURL = "http://localhost:3000"
-
-	constructor(private http: HttpClient) {}
-
-	getUser(id: number): Observable<any> { return this.http.get(this.apiURL + "/users/" + id).pipe(retry(1)) }
-	getUsers(): Observable<any> { return this.http.get(this.apiURL + "/users/").pipe(retry(1)) }
-	
-	getPosts(): Observable<any> { return this.http.get(this.apiURL + "/posts/").pipe(retry(1)) }
-	getPost(id: number): Observable<any> { return this.http.get(this.apiURL + "/posts/" + id).pipe(retry(1)) }
-	createPost(post: any): Observable<any> { return this.http.post(this.apiURL + "/posts/", post, this.httpOptions).pipe(retry(1)) }
-	updatePost(post: any): Observable<any> { return this.http.put(this.apiURL + "/posts/" + post.id, post, this.httpOptions).pipe(retry(1)) }
-	deletePost(postID: any): Observable<any> { return this.http.delete(this.apiURL + "/posts/" + postID, this.httpOptions).pipe(retry(1)) }
-
+	getUsers(): Observable<any> { return this.http.get(this.url + "/users/").pipe(retry(1)) }
+	getPosts(): Observable<any> { return this.http.get(this.url + "/posts/").pipe(retry(1)) }
+	getUser(id: number): Observable<any> { return this.http.get(this.url + "/users/" + id).pipe(retry(1)) }
+	getPost(id: number): Observable<any> { return this.http.get(this.url + "/posts/" + id).pipe(retry(1)) }
+	deletePost(id: any): Observable<any> { return this.http.delete(this.url + "/posts/" + id, this.params).pipe(retry(1)) }
+	createPost(post: any): Observable<any> { return this.http.post(this.url + "/posts/", post, this.params).pipe(retry(1)) }
+	updatePost(post: any): Observable<any> { return this.http.put(this.url + "/posts/" + post.id, post, this.params).pipe(retry(1)) }
 
 }

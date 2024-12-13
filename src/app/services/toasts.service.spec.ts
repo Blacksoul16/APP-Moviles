@@ -1,5 +1,5 @@
 import { TestBed } from '@angular/core/testing'
-import { ToastService } from './toast.service'
+import { ToastsService } from './toasts.service'
 import { ToastController } from '@ionic/angular'
 
 class MockToastController {
@@ -8,17 +8,17 @@ class MockToastController {
 	})
 }
 
-describe("ToastService", () => {
-	let toastService: ToastService
+describe("ToastsService", () => {
+	let toastService: ToastsService
 	let mockToastController: MockToastController
 
 	beforeEach(() => {
 		mockToastController = new MockToastController()
 		TestBed.configureTestingModule({
-			providers: [ToastService, { provide: ToastController, useValue: mockToastController }]
+			providers: [ToastsService, { provide: ToastController, useValue: mockToastController }]
 		})
 		
-		toastService = TestBed.inject(ToastService)
+		toastService = TestBed.inject(ToastsService)
 	})
 
 	it("debería ser creado", () => { expect(toastService).toBeTruthy() })

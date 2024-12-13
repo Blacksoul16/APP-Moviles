@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { Component, OnDestroy, OnInit, ViewChild } from '@angular/core';
+import { Component, inject, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
 import { TranslateModule } from '@ngx-translate/core';
@@ -7,7 +7,7 @@ import { Usuario } from 'src/app/model/usuario';
 import { DataBaseService } from 'src/app/services/database.service';
 import { AuthService } from 'src/app/services/auth.service';
 import { Subscription } from 'rxjs';
-import { IonInput, IonBadge, IonTitle, IonGrid, IonRow, IonCol, IonIcon, IonButton, IonPopover, IonList, IonAvatar, IonLabel, IonItem } from "@ionic/angular/standalone";
+import { IonCheckbox, IonInput, IonBadge, IonTitle, IonGrid, IonRow, IonCol, IonIcon, IonButton, IonPopover, IonList, IonAvatar, IonLabel, IonItem } from "@ionic/angular/standalone";
 
 @Component({
 	selector: 'duocuc-usuarios',
@@ -15,29 +15,30 @@ import { IonInput, IonBadge, IonTitle, IonGrid, IonRow, IonCol, IonIcon, IonButt
 	styleUrls: ['./usuarios.component.scss'],
 	standalone: true,
 	imports: [
-		IonItem, IonLabel, IonAvatar, IonList, IonInput, IonPopover, 
+		IonCheckbox, IonItem, IonLabel, IonAvatar, IonList, IonInput, IonPopover, 
 		IonButton, IonIcon, IonCol, IonRow, IonGrid, IonTitle, IonBadge, 
 		CommonModule, FormsModule, RouterModule, TranslateModule
 	]
 })
 export class UsuariosComponent implements OnInit, OnDestroy {
 
+	private db = inject(DataBaseService)
+	private auth = inject(AuthService)
 	private subs: Subscription = new Subscription()
-	users: Usuario[] = []
-	usuariosFiltrados: Usuario[] = []
-	usuarioBusqueda: string = ""
-	rolesSeleccionados: number[] = []
+	private users: Usuario[] = []
+	private debounceTimer: any
+	private rolesSeleccionados: number[] = []
+	protected usuariosFiltrados: Usuario[] = []
+	protected usuarioBusqueda: string = ""
 
-	usuario: any
+	protected usuario: any
 
-	filtroAdmin: boolean = false
-	filtroUsuario: boolean = false
-
-	debounceTimer: any
+	protected filtroAdmin: boolean = false
+	protected filtroUsuario: boolean = false
 
 	@ViewChild("opcionesFiltro", { static: true }) poppy!: IonPopover
 
-	constructor(private db: DataBaseService, private auth: AuthService) { this.cargarUsuarios() }
+	constructor() { this.cargarUsuarios() }
 
 	ngOnInit() { this.subs.add(this.auth.userAuth$.subscribe((u) => { this.usuario = u })) }
 	ngOnDestroy() { this.subs.unsubscribe() }
@@ -49,17 +50,11 @@ export class UsuariosComponent implements OnInit, OnDestroy {
 		})
 	}
 
-	async deleteUser(u: string) {
-		this.db.deleteUserByAccount(u).then(() => {
-			this.cargarUsuarios()
-		})
-	}
+	async deleteUser(u: string) { this.db.deleteUserByAccount(u).then(() => { this.cargarUsuarios() }) }
 
 	async debounceSearch(e: any) {
 		clearTimeout(this.debounceTimer)
-		this.debounceTimer = setTimeout(() => {
-			this.filtrarUsuarios()
-		}, 500)
+		this.debounceTimer = setTimeout(() => { this.filtrarUsuarios() }, 500)
 	}
 
 	async filtrarUsuarios() {
@@ -82,10 +77,7 @@ export class UsuariosComponent implements OnInit, OnDestroy {
 		})
 	}
 
-	async abrirFiltros(event: Event) {
-		this.poppy.event = event
-		this.poppy.present()
-	}
+	async abrirFiltros(e: Event) { this.poppy.event = e; this.poppy.present() }
 
 	async aplicarFiltroPopover() {
 		this.rolesSeleccionados = []

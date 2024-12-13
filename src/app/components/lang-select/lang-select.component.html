@@ -2,7 +2,7 @@
 	<ion-badge color="dark" class="ion-text-center" style="width: 100%;">
 		<h3>{{ "lang" | translate }}</h3>
 	</ion-badge>
-	<ion-radio-group [(ngModel)]="langSelected" (ionChange)="changeLang($event.detail.value)">
+	<ion-radio-group [(ngModel)]="langSelected" (ionChange)="changeLang($event.detail.value)" ngDefaultControl>
 		<ion-grid>
 			<ion-row>
 				<ion-col size="4" *ngFor="let lang of langCodes" style="display: flex; justify-content: center;">

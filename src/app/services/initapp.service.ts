@@ -1,27 +1,25 @@
-import { Injectable } from '@angular/core';
+import { inject, Injectable } from '@angular/core';
 import { SqliteService } from './sqlite.service';
 import { DataBaseService } from './database.service';
 import { AuthService } from './auth.service';
 
-@Injectable({
-	providedIn: 'root'
-})
+@Injectable({ providedIn: 'root' })
 export class InitappService {
-	
-	isAppInit: boolean = false
-	platform!: string
 
-	constructor(private sqliteService: SqliteService, private storageService: DataBaseService, private authService: AuthService) {}
+	private sqlServ = inject(SqliteService)
+	private stgServ = inject(DataBaseService)
+	private authServ = inject(AuthService)
+	
+	public isAppInit: boolean = false
 
 	async initApp() {
-		await this.sqliteService.initPlugin().then(async (ret) => {
-			this.platform = this.sqliteService.platform
+		await this.sqlServ.initPlugin().then(async (ret) => {
 			try {
-				if (this.sqliteService.platform === "web") {
-					await this.sqliteService.initWebStorage()
+				if (this.sqlServ.platform === "web") {
+					await this.sqlServ.initWebStorage()
 				}
-				await this.storageService.initBD()
-				this.authService.initAuth()
+				await this.stgServ.initBD()
+				this.authServ.initAuth()
 				this.isAppInit = true
 			} catch (e) {
 				console.log(`[initapp.service.ts] Error en initApp: ${e}`)

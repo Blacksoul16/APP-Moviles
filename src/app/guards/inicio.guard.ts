@@ -1,13 +1,13 @@
 import { inject } from '@angular/core';
 import { CanActivateFn, Router } from '@angular/router';
 import { AuthService } from '../services/auth.service';
-import { ToastService } from '../services/toast.service';
+import { ToastsService } from '../services/toasts.service';
 
 export const inicioGuard: CanActivateFn = async (route, state) => {
 
 	const authService = inject(AuthService)
 	const router = inject(Router)
-	const toast = inject(ToastService)
+	const toast = inject(ToastsService)
 
 	if (await authService.isAuthed()) {
 		return true

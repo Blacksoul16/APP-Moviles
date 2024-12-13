@@ -1,6 +1,6 @@
-import { Component, ElementRef, NgZone, OnDestroy, OnInit, ViewChild } from '@angular/core';
+import { Component, ElementRef, inject, NgZone, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { AuthService } from 'src/app/services/auth.service';
-import { ToastService } from 'src/app/services/toast.service';
+import { ToastsService } from 'src/app/services/toasts.service';
 import jsQR, { QRCode } from 'jsqr';
 import { TranslateModule } from '@ngx-translate/core';
 import { RouterModule } from '@angular/router';
@@ -24,8 +24,13 @@ import { IonTitle, IonBadge, IonCard, IonCardContent, IonButton, IonIcon, IonTex
 })
 export class CodigoqrComponent implements OnInit, OnDestroy {
 
-	public salut: string = this.getSalut()
-	public usuario: any
+	private auth = inject(AuthService)
+	private toast = inject(ToastsService)
+	private menuState = inject(MenuStateService)
+	private zone = inject(NgZone)
+
+	protected salut: string = this.getSalut()
+	protected usuario: any
 
 	private scanTimeout: any
 	private subs: Subscription = new Subscription()
@@ -34,11 +39,11 @@ export class CodigoqrComponent implements OnInit, OnDestroy {
 	private video!: ElementRef
 	@ViewChild("canvas")
 	private canvas!: ElementRef
-	public escaneando = false
-	public nativo = Capacitor.isNativePlatform()
-	public datosQR: any = ""
+	protected escaneando = false
+	protected nativo = Capacitor.isNativePlatform()
+	protected datosQR: any = ""
 
-	constructor(private auth: AuthService, private toast: ToastService, private menuState: MenuStateService, private zone: NgZone) {}
+	constructor() {}
 
 	ngOnInit() { 
 		this.subs.add(this.auth.userAuth$.subscribe((u) => { this.usuario = u }))
@@ -53,22 +58,22 @@ export class CodigoqrComponent implements OnInit, OnDestroy {
 		else { return "Buenas noches" }
 	}
 
-	public seleccionarArchivo(e: Event) {
-		const fileInput = e.target as HTMLInputElement
-		if (fileInput.files && fileInput.files.length > 0) {
-			const file = fileInput.files[0]
-			const reader = new FileReader()
-			reader.onload = (e: ProgressEvent<FileReader>) => {
-				const img = new Image()
-				img.src = e.target?.result as string
-				img.onload = () => {
-					this.procesarQR(img)
-					fileInput.value = ""
-				}
-			}
-			reader.readAsDataURL(file)
-		}
-	}
+	// public seleccionarArchivo(e: Event) {
+	// 	const fileInput = e.target as HTMLInputElement
+	// 	if (fileInput.files && fileInput.files.length > 0) {
+	// 		const file = fileInput.files[0]
+	// 		const reader = new FileReader()
+	// 		reader.onload = (e: ProgressEvent<FileReader>) => {
+	// 			const img = new Image()
+	// 			img.src = e.target?.result as string
+	// 			img.onload = () => {
+	// 				this.procesarQR(img)
+	// 				fileInput.value = ""
+	// 			}
+	// 		}
+	// 		reader.readAsDataURL(file)
+	// 	}
+	// }
 
 	public procesarQR(source: HTMLImageElement | HTMLVideoElement, esVideo: boolean = false): boolean {
 		let w: number, h: number
@@ -112,6 +117,7 @@ export class CodigoqrComponent implements OnInit, OnDestroy {
 		if (this.nativo) {
 			await BarcodeScanner.removeAllListeners()
 			await BarcodeScanner.stopScan()
+			document.querySelector("body")?.classList.remove("barcode-scanner-active")
 			if (this.scanTimeout) { clearTimeout(this.scanTimeout); this.scanTimeout = null }
 		} else {
 			const stream = this.video.nativeElement.srcObject as MediaStream
@@ -133,12 +139,11 @@ export class CodigoqrComponent implements OnInit, OnDestroy {
 					return
 				}
 				this.scanTimeout = setTimeout(() => {
-					this.stopScan()
 					this.toast.showMsg("Se excedió el tiempo de escaneo.", 2500, "danger")
+					this.stopScan()
 				}, 15000)
 				document.querySelector("body")?.classList.add("barcode-scanner-active")
-				await BarcodeScanner.addListener("barcodeScanned", async result => {
-					document.querySelector("body")?.classList.remove("barcode-scanner-active")
+				await BarcodeScanner.addListener("barcodeScanned", async (result: { barcode: { rawValue: string; }; }) => {
 					this.toast.showMsg("QR escaneado con éxito.", 2500, "success")
 					await this.stopScan()
 					this.showQRData(result.barcode.rawValue)
@@ -168,11 +173,15 @@ export class CodigoqrComponent implements OnInit, OnDestroy {
 	}
 	
 	public showQRData(datosQR: string): void {
-		const objetoDatosQR = JSON.parse(datosQR)
-		this.zone.run(() => {
-			this.auth.codigoQRData.next(objetoDatosQR)
-			this.auth.tabSeleccionado.next("miclase")
-		})
+		try {
+			const objetoDatosQR = JSON.parse(datosQR)
+			this.zone.run(() => {
+				this.auth.codigoQRData.next(objetoDatosQR)
+				this.auth.tabSeleccionado.next("miclase")
+			})
+		} catch (e) {
+			this.toast.showMsg("El código QR no contiene un JSON válido.", 2000, "danger")
+		}
 	}
 	
 }
