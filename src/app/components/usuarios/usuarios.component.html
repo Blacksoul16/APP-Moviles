@@ -39,7 +39,7 @@
 	</ng-template>
 </ion-popover>
 
-<ion-list class="enmarcar">
+<ion-list *ngIf="usuario" class="enmarcar">
 	<ion-item *ngFor="let u of usuariosFiltrados; let i">
 		<ion-avatar slot="start">
 			<img [src]="'assets/img/users/' + u.imagen" alt="avatar">

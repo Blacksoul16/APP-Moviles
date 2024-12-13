@@ -93,9 +93,11 @@ export class UsuariosComponent implements OnInit, OnDestroy {
 
 	async confirmDeleteUser(cuenta: string) {
 		if (this.confirmDelete === cuenta) {
+			this.toast.showMsg(`Se eliminó al usuario ${cuenta}.`, 2500, "success")
 			await this.deleteUser(cuenta)
 			this.resetConfirmState()
 		} else {
+			if (this.confirmDelete) { this.resetConfirmState() }
 			this.toast.showMsg("Presiona de nuevo para confirmar.", 2500, "tertiary")
 			this.confirmDelete = cuenta
 			this.timer = 5
