@@ -5,11 +5,13 @@ import { ToastController } from '@ionic/angular/standalone';
 export class ToastsService {
 
 	private toastController = inject(ToastController)
-	private icons: Record<"danger" | "warning" | "success" | "info", string> = {
+	private icons: Record<"danger" | "warning" | "success" | "tertiary" | "secondary" | "dark", string> = {
 		danger: "alert-circle-outline",
 		warning: "warning-outline",
 		success: "checkmark-circle-outline",
-		info: "information-circle-outline"
+		tertiary: "information-circle-outline",
+		secondary: "information-circle-outline",
+		dark: "information-circle-outline"
 	}
 
 	async showMsg(msg: string, tiempo: number = 2500, color: keyof typeof this.icons | "primary" = "primary", posicion: "top" | "bottom" | "middle" = "top") {

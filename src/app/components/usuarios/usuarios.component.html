@@ -51,8 +51,8 @@
 					<ion-label style="font-size: 10px; color: gray;">{{ u.cuenta }} • {{ u.correo }}</ion-label>
 				</ion-col>
 				<ion-col size="3" style="display: flex; justify-content: end;">
-					<ion-button (click)="deleteUser(u.cuenta)" size="small" color="danger" [disabled]="u.rol !== 0 || u.cuenta === usuario.cuenta">
-						<ion-icon name="trash-outline"></ion-icon>
+					<ion-button (click)="confirmDeleteUser(u.cuenta)" size="small" [color]="confirmDelete === u.cuenta ? 'tertiary' : 'danger'" [disabled]="usuario.rol === 0 || u.rol === 1 || u.cuenta === usuario.cuenta">
+						<ion-icon *ngIf="confirmDelete !== u.cuenta" name="trash-outline"></ion-icon>{{ confirmDelete === u.cuenta ? timer + "s" : "" }}
 					</ion-button>
 				</ion-col>
 			</ion-row>

@@ -8,6 +8,7 @@ import { DataBaseService } from 'src/app/services/database.service';
 import { AuthService } from 'src/app/services/auth.service';
 import { Subscription } from 'rxjs';
 import { IonCheckbox, IonInput, IonBadge, IonTitle, IonGrid, IonRow, IonCol, IonIcon, IonButton, IonPopover, IonList, IonAvatar, IonLabel, IonItem } from "@ionic/angular/standalone";
+import { ToastsService } from 'src/app/services/toasts.service';
 
 @Component({
 	selector: 'duocuc-usuarios',
@@ -24,17 +25,21 @@ export class UsuariosComponent implements OnInit, OnDestroy {
 
 	private db = inject(DataBaseService)
 	private auth = inject(AuthService)
+	private toast = inject(ToastsService)
 	private subs: Subscription = new Subscription()
 	private users: Usuario[] = []
 	private debounceTimer: any
 	private rolesSeleccionados: number[] = []
+	
 	protected usuariosFiltrados: Usuario[] = []
 	protected usuarioBusqueda: string = ""
-
 	protected usuario: any
-
 	protected filtroAdmin: boolean = false
 	protected filtroUsuario: boolean = false
+
+	protected confirmDelete: string | null = null
+	protected timer: number = 0
+	private confirmTimeout: any
 
 	@ViewChild("opcionesFiltro", { static: true }) poppy!: IonPopover
 
@@ -84,5 +89,26 @@ export class UsuariosComponent implements OnInit, OnDestroy {
 		if (this.filtroAdmin) this.rolesSeleccionados.push(1)
 		if (this.filtroUsuario) this.rolesSeleccionados.push(0)
 		this.aplicarFiltro()
+	}
+
+	async confirmDeleteUser(cuenta: string) {
+		if (this.confirmDelete === cuenta) {
+			await this.deleteUser(cuenta)
+			this.resetConfirmState()
+		} else {
+			this.toast.showMsg("Presiona de nuevo para confirmar.", 2500, "tertiary")
+			this.confirmDelete = cuenta
+			this.timer = 5
+			this.confirmTimeout = setInterval(() => {
+				this.timer--
+				if (this.timer <= 0) { this.resetConfirmState() }
+			}, 1000)
+		}
+	}
+
+	private resetConfirmState() {
+		this.confirmDelete = null
+		this.timer = 0
+		clearInterval(this.confirmTimeout)
 	}
 }

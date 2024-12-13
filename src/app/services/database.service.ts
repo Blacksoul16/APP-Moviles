@@ -13,6 +13,7 @@ export class DataBaseService {
 
 	u1Test = Usuario.getNewUser("sgarday", "s.garday@duocuc.cl", "1234", "¿Cuál es tu color favorito?", "Negro", "Seth", "Garday", NivelEducacional.findNivelEducacional(5)!, new Date(2000, 2, 4), "Recoleta", "sgarday.webp", 1)
 	u2Test = Usuario.getNewUser("testuser", "test@user.test", "1234", "Toc toc", "¿Quién es?", "Test", "User", NivelEducacional.findNivelEducacional(5)!, new Date(1999, 10, 5), "Puente Alto", "default-user.webp", 0)
+	u3Test = Usuario.getNewUser("admin", "admin@duocuc.cl", "1234", "Alo", "¿Con quién hablo?", "Admin", "DuocUC", NivelEducacional.findNivelEducacional(6)!, new Date(1999, 10, 30), "Dubai", "default-user.webp", 1)
 
 	userUpgrades = [
 		{
@@ -72,6 +73,7 @@ export class DataBaseService {
 		try {
 			if (!await this.readUser(this.u1Test.cuenta)) { await this.saveUser(this.u1Test) }
 			if (!await this.readUser(this.u2Test.cuenta)) { await this.saveUser(this.u2Test) }
+			if (!await this.readUser(this.u3Test.cuenta)) { await this.saveUser(this.u3Test) }
 		} catch (e) {
 			console.error(`[DBService.ts] Ocurrió un error en createTestUsers: ${e}`)
 		}
