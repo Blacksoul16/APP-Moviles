@@ -78,13 +78,13 @@ export class ForoComponent implements OnInit, OnDestroy {
 
 	async savePost() {
 		if (this.post.userID === null) {
-			this.toast.showMsg("Antes de hacer una publicación debes seleccionar un usuario.", 2500, "danger", "top")
+			this.toast.showMsg("Antes de hacer una publicación debes seleccionar un usuario.", 3000, "danger", "top")
 			return
 		} else if (this.post.title.trim() === "") {
-			this.toast.showMsg("Antes de hacer una publicación debes llenar el título.", 2500, "danger", "top")
+			this.toast.showMsg("Antes de hacer una publicación debes llenar el título.", 3000, "danger", "top")
 			return
 		} else if (this.post.body.trim() === "") {
-			this.toast.showMsg("Antes de hacer una poublicación debes llenar el cuerpo.", 2500, "danger", "top")
+			this.toast.showMsg("Antes de hacer una poublicación debes llenar el cuerpo.", 3000, "danger", "top")
 			return
 		} else if (this.post.id === null) {
 			this.createPost()
@@ -123,7 +123,6 @@ export class ForoComponent implements OnInit, OnDestroy {
 				this.toast.showMsg(`Se actualizó la publicación: "${data.title}" (ID: ${data.id}).`, 2500, "success")
 				this.wipePost()
 				this.getPosts()
-				
 			},
 			error: (e) => this.toast.showMsg(`No se pudo actualizar la publicación.`, 3000, "danger")
 		})
