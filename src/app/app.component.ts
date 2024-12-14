@@ -45,7 +45,6 @@ export class AppComponent implements OnInit {
 	}
 
 	ngOnInit() {}
-
 	onMenuOpen() { this.menuState.setMenuOpen(true) }
 	onMenuClose() { this.menuState.setMenuOpen(false) }
 	cerrarSesion() { this.menu.close("menuLateral").then(() => { this.auth.logout() }) }

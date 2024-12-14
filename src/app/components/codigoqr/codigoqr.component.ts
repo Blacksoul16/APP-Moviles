@@ -35,10 +35,8 @@ export class CodigoqrComponent implements OnInit, OnDestroy {
 	private scanTimeout: any
 	private subs: Subscription = new Subscription()
 
-	@ViewChild("video")
-	private video!: ElementRef
-	@ViewChild("canvas")
-	private canvas!: ElementRef
+	@ViewChild("video") private video!: ElementRef
+	@ViewChild("canvas") private canvas!: ElementRef
 	protected escaneando = false
 	protected nativo = Capacitor.isNativePlatform()
 	protected datosQR: any = ""
@@ -57,23 +55,6 @@ export class CodigoqrComponent implements OnInit, OnDestroy {
 		else if (h >= 12 && h < 18) { return "Buenas tardes" }
 		else { return "Buenas noches" }
 	}
-
-	// public seleccionarArchivo(e: Event) {
-	// 	const fileInput = e.target as HTMLInputElement
-	// 	if (fileInput.files && fileInput.files.length > 0) {
-	// 		const file = fileInput.files[0]
-	// 		const reader = new FileReader()
-	// 		reader.onload = (e: ProgressEvent<FileReader>) => {
-	// 			const img = new Image()
-	// 			img.src = e.target?.result as string
-	// 			img.onload = () => {
-	// 				this.procesarQR(img)
-	// 				fileInput.value = ""
-	// 			}
-	// 		}
-	// 		reader.readAsDataURL(file)
-	// 	}
-	// }
 
 	public procesarQR(source: HTMLImageElement | HTMLVideoElement, esVideo: boolean = false): boolean {
 		let w: number, h: number
@@ -97,13 +78,13 @@ export class CodigoqrComponent implements OnInit, OnDestroy {
 			return true
 		} else {
 			if (!esVideo) {
-				this.toast.showMsg("No se detectó un código QR. Por favor, seleccione un archivo válido.", 2000, "danger")
+				this.toast.showMsg("No se detectó un código QR. Por favor, selecciona un archivo válido.", 3000, "danger")
 			}
 			return false
 		}
 	}
 
-	async checkVideo() {
+	private async checkVideo() {
 		if (this.video.nativeElement.readyState === this.video.nativeElement.HAVE_ENOUGH_DATA) {
 			if (this.procesarQR(this.video.nativeElement, true) || !this.escaneando) { return }
 			requestAnimationFrame(this.checkVideo.bind(this))
@@ -112,7 +93,7 @@ export class CodigoqrComponent implements OnInit, OnDestroy {
 		}
 	}
 
-	async stopScan() {
+	protected async stopScan() {
 		this.escaneando = false
 		if (this.nativo) {
 			await BarcodeScanner.removeAllListeners()
@@ -129,7 +110,7 @@ export class CodigoqrComponent implements OnInit, OnDestroy {
 		}
 	}
 
-	async initScan() {
+	protected async initScan() {
 		try {
 			if (this.nativo) {
 				//Nativo
@@ -166,9 +147,8 @@ export class CodigoqrComponent implements OnInit, OnDestroy {
 				requestAnimationFrame(this.checkVideo.bind(this))
 			}
 		} catch (e) {
-			this.escaneando = false
 			this.toast.showMsg(`No se pudo acceder a la cámara: ${e}`, 3000, "danger")
-			console.error("No se pudo acceder a la cámara:", e)
+			if (this.escaneando) { this.stopScan() }
 		}
 	}
 	
@@ -180,7 +160,8 @@ export class CodigoqrComponent implements OnInit, OnDestroy {
 				this.auth.tabSeleccionado.next("miclase")
 			})
 		} catch (e) {
-			this.toast.showMsg("El código QR no contiene un JSON válido.", 2000, "danger")
+			this.toast.showMsg("El código QR no contiene un JSON válido.", 3000, "danger")
+			if (this.escaneando) { this.stopScan() }
 		}
 	}
 	

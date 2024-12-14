@@ -34,7 +34,6 @@ export const convertirFechaAISO = (f: string): string => {
 	const d = new Date(f)
 	const tzOffset = d.getTimezoneOffset()
 	d.setMinutes(d.getMinutes() - tzOffset)
-	// console.log(`[Fecha → ISO]: ${f} → ${d.toISOString()}`)
 	return d.toISOString()
 }
 
@@ -42,6 +41,5 @@ export const convertirISOAFecha = (iso: string): Date => {
 	const d = new Date(iso)
 	const tzOffset = d.getTimezoneOffset()
 	d.setMinutes(d.getMinutes() + tzOffset)
-	// console.log(`[ISO → Fecha]: ${iso} → ${d}`)
 	return d
 }

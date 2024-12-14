@@ -33,6 +33,7 @@ bootstrapApplication(AppComponent, {
 });
 
 export function HttpLoaderFactory(http: HttpClient) { return new TranslateHttpLoader(http, "assets/i18n/", ".json") }
+export function initFactory(init: InitappService) { return () => init.initApp() }
 
 const platform = Capacitor.getPlatform()
 if (platform === "web") {
@@ -43,5 +44,3 @@ if (platform === "web") {
 		jeepEl.autoSave = true
 	})
 }
-
-export function initFactory(init: InitappService) { return () => init.initApp() }

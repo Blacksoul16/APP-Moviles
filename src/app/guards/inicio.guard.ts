@@ -15,4 +15,4 @@ export const inicioGuard: CanActivateFn = async (route, state) => {
 	toast.showMsg("Debes iniciar sesión para acceder a esta página.", 2000, "danger")
 	router.navigate(["/login"])
 	return false
-};
+}

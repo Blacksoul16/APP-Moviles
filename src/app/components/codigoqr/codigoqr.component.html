@@ -22,13 +22,6 @@
 	</div>
 	<hr>
 	<div class="btn-group">
-		<!-- Comentar luego -->
-		<!-- <ion-button (click)="fileInput.click()" fill="outline" color="secondary" class="btn-custom">
-			<ion-icon slot="start" name="arrow-up-circle-outline"></ion-icon>{{ "button.upload_qr" | translate }}
-		</ion-button>
-		<input type="file" #fileInput accept="image/*" style="display: none;" (change)="seleccionarArchivo($event)"> -->
-		<!-- Comentar luego -->
-
 		<ion-button *ngIf="!escaneando" (click)="initScan()" color="success" class="btn-custom">
 			<ion-icon slot="start" name="videocam-outline"></ion-icon>{{ "button.scan_qr" | translate }}
 		</ion-button>

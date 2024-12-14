@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { Component, EventEmitter, Output } from '@angular/core';
+import { Component } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
 import { TranslateModule, TranslateService } from '@ngx-translate/core';
@@ -14,10 +14,8 @@ import { IonBadge, IonGrid, IonCol, IonRow } from "@ionic/angular/standalone";
 })
 export class LangSelectComponent {
 
-	@Output() changeCurrentLang = new EventEmitter()
-
-	langSelected = "es"
-	langCodes = ["es", "en", "pt", "de", "fr", "it", "ru", "nl", "pl", "cn", "jp", "kr"]
+	protected langSelected = "es"
+	protected langCodes = ["es", "en", "pt", "de", "fr", "it", "ru", "nl", "pl", "cn", "jp", "kr"]
 
 	constructor(private translate: TranslateService) {
 		const storedLang = localStorage.getItem("selectedLang") || "es"
@@ -29,6 +27,5 @@ export class LangSelectComponent {
 		this.translate.use(lang)
 		this.langSelected = lang
 		localStorage.setItem("selectedLang", lang)
-		this.changeCurrentLang.emit(lang)
 	}
 }

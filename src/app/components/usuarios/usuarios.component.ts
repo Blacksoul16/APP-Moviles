@@ -48,26 +48,26 @@ export class UsuariosComponent implements OnInit, OnDestroy {
 	ngOnInit() { this.subs.add(this.auth.userAuth$.subscribe((u) => { this.usuario = u })) }
 	ngOnDestroy() { this.subs.unsubscribe() }
 
-	async cargarUsuarios() {
+	private async cargarUsuarios() {
 		this.db.readUsers().then(users => {
 			this.users = users
 			this.usuariosFiltrados = [...this.users]
 		})
 	}
 
-	async deleteUser(u: string) { this.db.deleteUserByAccount(u).then(() => { this.cargarUsuarios() }) }
+	private async deleteUser(u: string) { this.db.deleteUserByAccount(u).then(() => { this.cargarUsuarios() }) }
 
-	async debounceSearch(e: any) {
+	protected async debounceSearch(e: any) {
 		clearTimeout(this.debounceTimer)
 		this.debounceTimer = setTimeout(() => { this.filtrarUsuarios() }, 500)
 	}
 
-	async filtrarUsuarios() {
+	private async filtrarUsuarios() {
 		const lowerText = this.usuarioBusqueda.toLowerCase()
 		this.usuariosFiltrados = this.users.filter(u => (u.nombre + " " + u.apellido).toLowerCase().includes(lowerText) || u.cuenta.toLowerCase().includes(lowerText))
 	}
 
-	async aplicarFiltro() {
+	private async aplicarFiltro() {
 		const roles = this.rolesSeleccionados.map(rol => Number(rol))
 		if (roles.length > 0) {
 			this.usuariosFiltrados = this.users.filter(u => roles.includes(u.rol))
@@ -82,16 +82,16 @@ export class UsuariosComponent implements OnInit, OnDestroy {
 		})
 	}
 
-	async abrirFiltros(e: Event) { this.poppy.event = e; this.poppy.present() }
+	protected async abrirFiltros(e: Event) { this.poppy.event = e; this.poppy.present() }
 
-	async aplicarFiltroPopover() {
+	protected async aplicarFiltroPopover() {
 		this.rolesSeleccionados = []
 		if (this.filtroAdmin) this.rolesSeleccionados.push(1)
 		if (this.filtroUsuario) this.rolesSeleccionados.push(0)
 		this.aplicarFiltro()
 	}
 
-	async confirmDeleteUser(cuenta: string) {
+	protected async confirmDeleteUser(cuenta: string) {
 		if (this.confirmDelete === cuenta) {
 			this.toast.showMsg(`Se eliminó al usuario ${cuenta}.`, 2500, "success")
 			await this.deleteUser(cuenta)
